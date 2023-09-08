@@ -1,6 +1,15 @@
+using DashBoardGr.Domain.Application.Commands;
+using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblies(typeof(SolicitarAnaliseCommandHandler).Assembly);
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -7,38 +7,38 @@ namespace Api.Controllers
     [ApiController]
     public class RelatorioController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("buscar-analise-por-periodo")]
         public string BuscarAnalisePorPeriodo()
         {
             return "teste";
         }
 
-        [HttpGet]
+        [HttpGet("buscar-analise-por-cliente")]
         public string BuscarAnalisesPorCliente()
         {
             return "teste";
         }
 
-        [HttpGet]
+        [HttpGet("buscar-analitico")]
         public string Analitico(object filtro)
         {
             return "teste";
         }
 
         #region Sintéticos
-        [HttpGet]
+        [HttpGet("buscar-dados-sinteticos-aprovado-reprovado-agrupado-por-semanas")]
         public string SinteticoAprovadoReprovadoAgrupadoPorSemanas(object filtro)
         {
             return "teste";
         }
 
-        [HttpGet]
+        [HttpGet("buscar-sintetico-total-reprovacoes")]
         public string SinteticoTotalReprovacoes(object filtro)
         {
             return "teste";
         }
 
-        [HttpGet]
+        [HttpGet("buscar-sintetico-status-reprovacoes")]
         public string SinteticoStatusReprovacoes(object filtro)
         {
             return "teste";

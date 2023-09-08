@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DashBoardGr.Domain.Application.Commands;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -13,25 +15,25 @@ namespace Api.Controllers
         };
 
         private readonly ILogger<AnaliseController> _logger;
+        private readonly IMediator _mediator;
 
-        public AnaliseController(ILogger<AnaliseController> logger)
+        public AnaliseController(ILogger<AnaliseController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
-        [HttpPost]
-        public string SolicitarAnalise()
+        [HttpPost("solicitar-analise")]
+        public async Task<IActionResult> SolicitarAnaliseAsync(SolicitarAnaliseCommand command)
         {
-            return "teste";
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("verificar-analise")]
         public string VerificarAnalise()
         {
             return "teste";
         }
-
-
-
     }
 }

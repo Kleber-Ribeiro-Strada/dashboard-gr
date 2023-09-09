@@ -26,6 +26,7 @@ namespace Api.Controllers
         [HttpPost("solicitar-analise")]
         public async Task<IActionResult> SolicitarAnaliseAsync(SolicitarAnaliseCommand command)
         {
+            _logger.LogInformation("123 testando");
             var result = await _mediator.Send(command);
             return Ok(result);
         }

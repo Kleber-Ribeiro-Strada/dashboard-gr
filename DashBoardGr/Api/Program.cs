@@ -1,6 +1,11 @@
 using DashBoardGr.Domain.Application.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using Serilog;
+using Strada.Template.Api.Configurations.Observability;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +16,31 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(typeof(SolicitarAnaliseCommandHandler).Assembly);
 });
 
+
+
+builder.Services.AddHealthCheck(builder.Configuration);
+builder.Services.AddHeaderPropagation(s => { s.Headers.Add("x-correlation-id"); });
+builder.Services.ConfigureSerilog();
+builder.Host.UseSerilog();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields =
+      HttpLoggingFields.RequestPropertiesAndHeaders
+    | HttpLoggingFields.RequestBody
+    | HttpLoggingFields.RequestQuery
+    | HttpLoggingFields.RequestMethod
+    | HttpLoggingFields.RequestProtocol
+    | HttpLoggingFields.RequestPath;
+
+    logging.RequestHeaders.Add("x-correlation-id");
+    logging.RequestHeaders.Add("Authorization");
+});
 
 var app = builder.Build();
 
@@ -30,5 +56,19 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseRouting();
+app.UseHttpLogging();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.UseHealthCheck();
+});
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+    RequestPath = "/wwwroot"
+});
 
 app.Run();

@@ -27,7 +27,7 @@ public static class HealthCheckExtensions
         endpoints.MapHealthChecksUI(options =>
         {
             options.UIPath = "/dashboard";
-            //options.AddCustomStylesheet(@"wwwroot/css/healthcheck-ui.css");
+            options.AddCustomStylesheet(@"wwwroot/css/healthcheck-ui.css");
         });
     }
 }

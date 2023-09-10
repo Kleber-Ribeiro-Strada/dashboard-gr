@@ -1,4 +1,5 @@
 using DashBoardGr.Domain.Application.Commands;
+using DashBoardGr.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpLogging;
@@ -27,6 +28,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMessageBus();
 
 builder.Services.AddHttpLogging(logging =>
 {

@@ -1,6 +1,12 @@
 version: '1.0'
 
 services:
+  rabbitmq:
+    image: heidiks/rabbitmq-delayed-message-exchange:latest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
     volumes:
@@ -51,7 +57,7 @@ services:
       dockerfile: Dockerfile
     container_name: api
     ports:
-      - "5223:80"      
+      - "5223:80"
 
 networks:
   elastic:

@@ -29,7 +29,7 @@ public static class LoggerExtensions
             .Enrich.WithMachineName()
             .Enrich.WithEnvironmentUserName()
             .Enrich.WithClientIp()
-            //.Enrich.WithClientAgent()
+            .Enrich.WithRequestHeader("x-correlation-id")
             .Enrich.WithCorrelationIdHeader("x-correlation-id")
             .Filter.ByExcluding(Matching.FromSource("Microsoft.AspNetCore.StaticFiles"))
             .Filter.ByExcluding(c => c.Properties.Any(p => p.Value.ToString().Contains("/healthcheck")))

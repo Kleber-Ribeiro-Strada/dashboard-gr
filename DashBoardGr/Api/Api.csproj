@@ -17,6 +17,7 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" Version="6.0.21" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.1" />
     <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
@@ -29,10 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DashBoardGr.Domain.Application\DashBoardGr.Domain.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\DashBoardGr.Infrastructure\DashBoardGr.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

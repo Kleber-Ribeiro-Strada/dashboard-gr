@@ -8,6 +8,6 @@ namespace DashBoardGr.Infrastructure.Messaging
 {
     public interface IMessageBusService
     {
-        Task Publish(object data, string routingKey);
+        Task Publish<T>(T data, string routingKey);
     }
 }

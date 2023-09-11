@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,44 +13,42 @@ namespace DashBoardGr.Infrastructure.Messaging
 {
     public class RabbitMqService : IMessageBusService
     {
-        //private IConnection _connection;
-        //private IModel _channel;
-        private const string _exchange = "";
-        public RabbitMqService()
+        private readonly IConnection _connection;
+        private readonly IModel _channel;
+        private const string _exchange = "solicitar-analise-exgange";
+        private IConfiguration _configuration;
+        public RabbitMqService(IConfiguration configuration)
         {
+            _configuration = configuration;
             
-        }
-
-        public Task Publish<T>(T data, string routingKey)
-        {
-
-            var connectionFactory = new ConnectionFactory
+            var factory = new ConnectionFactory
             {
-                HostName = "localhost",
-                Port = 5672,
-                UserName = "guest",
-                Password = "guest"
+                HostName = "localhost", // Endereço do servidor RabbitMQ,
+                Port = int.Parse(_configuration.GetSection("RabbitMq:Port").Value)
             };
 
-            using var _connection = connectionFactory.CreateConnection();
-            using var channel = _connection.CreateModel();
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
+        }
 
-            var _channel = _connection.CreateModel();
-
-            _channel.QueueDeclare(queue: "fila-fila",
-                             durable: false,
-                             exclusive: false,
-                             autoDelete: false,
-                             arguments: null);
-
-
-            var type = data.GetType();
+        public Task Publish<T>(T data, string? routingKey = null)
+        {
+            var type = data?.GetType();
             var payload = JsonSerializer.Serialize(data);
             var byteArray = Encoding.UTF8.GetBytes(payload);
 
-            Console.WriteLine($"{type.Name} Published");
-            _channel.BasicPublish(_exchange, "fila-fila", null, byteArray);
+            if (string.IsNullOrEmpty(routingKey))
+            {
+                switch (type?.Name)
+                {
+                    case "SolicitarAnaliseCommand":
+                        routingKey = "solicitar-analise.*";
+                        break;
+                }
+            }
 
+            _channel.BasicPublish(_exchange, routingKey, null, byteArray);
+            Console.WriteLine($"{type?.Name} Published");
             return Task.CompletedTask;
         }
     }

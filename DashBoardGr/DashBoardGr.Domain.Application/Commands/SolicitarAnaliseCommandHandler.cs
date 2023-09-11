@@ -21,7 +21,7 @@ namespace DashBoardGr.Domain.Application.Commands
         {
             Console.WriteLine("Kleber Ribeiro");
 
-            _messageBusService.Publish(request, "fila-fila");
+            _messageBusService.Publish(request);
 
             return Task.FromResult(Unit.Value);
         }

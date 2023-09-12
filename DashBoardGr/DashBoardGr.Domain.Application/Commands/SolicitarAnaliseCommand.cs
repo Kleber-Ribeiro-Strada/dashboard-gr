@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Commands
@@ -10,7 +11,9 @@ namespace DashBoardGr.Domain.Application.Commands
     public class SolicitarAnaliseCommand : IRequest<Unit>
     {
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
+
+        [JsonIgnore]
         public DateTime DataRequisicao { get; set; } = DateTime.Now;
         public MotoristaCommand Motorista { get; set; } = new();
         public List<VeiculoCommand> Veiculos { get; set; } = new();

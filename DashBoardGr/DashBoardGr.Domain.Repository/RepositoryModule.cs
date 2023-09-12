@@ -13,7 +13,7 @@ namespace DashBoardGr.Domain.Repository
     {
         public static IServiceCollection AddRepositoryContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<StradaDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
 
             return services;
         }

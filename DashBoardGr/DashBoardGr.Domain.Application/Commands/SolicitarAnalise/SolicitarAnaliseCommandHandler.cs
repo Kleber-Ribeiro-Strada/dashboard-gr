@@ -32,9 +32,6 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
             await _messageBusService.Publish(request);
             return Unit.Value;
-
-
-
         }
     }
 }

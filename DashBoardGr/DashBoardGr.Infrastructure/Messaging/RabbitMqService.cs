@@ -1,13 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Infrastructure.Messaging
 {
@@ -15,19 +8,10 @@ namespace DashBoardGr.Infrastructure.Messaging
     {
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        private const string _exchange = "solicitar-analise-exgange";
-        private IConfiguration _configuration;
-        public RabbitMqService(IConfiguration configuration)
+        private const string _exchange = "analise-exchange";
+        public RabbitMqService(IRabbitMQConfiguration rabbitMQConfig)
         {
-            _configuration = configuration;
-            
-            var factory = new ConnectionFactory
-            {
-                HostName = _configuration.GetSection("RabbitMq:HostName").Value, // Endereço do servidor RabbitMQ,
-                Port = int.Parse(_configuration.GetSection("RabbitMq:Port").Value)
-            };
-
-            _connection = factory.CreateConnection();
+            _connection = rabbitMQConfig.GetConnectionFactory().CreateConnection();
             _channel = _connection.CreateModel();
         }
 

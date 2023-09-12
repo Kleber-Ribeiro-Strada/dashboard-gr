@@ -12,6 +12,7 @@ namespace DashBoardGr.Infrastructure
     {
         public static IServiceCollection AddMessageBus(this IServiceCollection services)
         {
+            services.AddScoped<IRabbitMQConfiguration, RabbitMQConfiguration>();
             services.AddScoped<IMessageBusService, RabbitMqService>();
 
             return services;

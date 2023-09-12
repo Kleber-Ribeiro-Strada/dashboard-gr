@@ -1,10 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
@@ -36,7 +31,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
             public string Genero { get; set; } = string.Empty;
             public DateTime DataNascimento { get; set; }
             public string Cpf { get; set; } = string.Empty;
-            public string Rg { get; set; }
+            public string Rg { get; set; } = string.Empty;
             public string? EstadoEmissao { get; set; }
             public DateTime DataEmissao { get; set; }
             public CnhCommand Cnh { get; set; } = new();

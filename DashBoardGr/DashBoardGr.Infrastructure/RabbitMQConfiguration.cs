@@ -1,4 +1,6 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,34 +9,61 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Infrastructure
 {
-    public class RabbitMQConfiguration
+    public interface IRabbitMQConfiguration
+    {
+        ConnectionFactory GetConnectionFactory();
+    }
+
+    public class RabbitMQConfiguration : IRabbitMQConfiguration
     {
         private readonly ConnectionFactory _factory;
-        public RabbitMQConfiguration(string hostName, string userName, string password)
+        private readonly IConfiguration _configuration;
+        public RabbitMQConfiguration(IConfiguration configuraion)
         {
+            _configuration = configuraion;
+
+            var rabbitParameter = _configuration.GetSection("RabbitMq").Get<RabbitParameter>();
+            if (rabbitParameter == null)
+            {
+                return;
+            }
             _factory = new ConnectionFactory
             {
-                HostName = hostName,
-                UserName = userName,
-                Password = password
+                HostName = rabbitParameter.HostName, // Endereço do servidor RabbitMQ,
+                Port = rabbitParameter.Port
             };
 
             // Configurar e criar elementos necessários (filas, exchanges, topics) aqui
             using (var connection = _factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                // Criar uma fila
-                channel.QueueDeclare(queue: "minha_fila", durable: false, exclusive: false, autoDelete: false, arguments: null);
+                if (rabbitParameter.Exchanges == null)
+                {
+                    return;
+                }
 
-                // Criar uma exchange
-                channel.ExchangeDeclare(exchange: "minha_exchange", type: ExchangeType.Direct);
+                foreach (var exchange in rabbitParameter.Exchanges)
+                {
+                    channel.ExchangeDeclare(exchange: exchange.ExchangeName, type: ExchangeType.Topic);
 
-                // Vincular a fila à exchange
-                channel.QueueBind(queue: "minha_fila", exchange: "minha_exchange", routingKey: "minha_routing_key");
+
+                    foreach (var queue in exchange.Queues)
+                    {
+                        var queueName = queue.Split(',')[0].Trim();
+                        var routingKeyName = queue.Split(',')[1].Trim();
+
+                        channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                        channel.QueueBind(queue: queueName, exchange: exchange.ExchangeName, routingKey: routingKeyName);
+
+                    }
+                }
             }
         }
 
-        // Métodos para criar outras configurações RabbitMQ, se necessário
-    }
+        public ConnectionFactory GetConnectionFactory()
+        {
+            return _factory;
 
+        }
+    }
 }

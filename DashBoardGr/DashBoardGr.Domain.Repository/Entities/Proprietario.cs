@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DashBoardGr.Domain.Repository.Entities
+﻿namespace DashBoardGr.Domain.Repository.Entities
 {
     public class Proprietario
     {
@@ -21,6 +15,6 @@ namespace DashBoardGr.Domain.Repository.Entities
         public string? Estado { get; private set; }
         public string Telefone { get; private set; } = string.Empty;
 
-        public ICollection<Veiculo> Veiculos { get; set; }
+        public ICollection<Veiculo> Veiculos { get; set; }=new HashSet<Veiculo>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using DashBoardGr.Domain.Application.Commands;
+﻿using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,13 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using FluentValidation;
+using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 
 namespace DashBoardGr.Domain.Application
 {
-    public class ApplicationModule
+    public static class ApplicationModule
     {
 
+        public static IServiceCollection AddMediatRs(this IServiceCollection services)
+        {
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(typeof(SolicitarAnaliseCommandHandler).Assembly);
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection AddFluentValidations(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<SolicitarAnaliseCommandValidator>();
+
+            return services;
+        }
     }
 }

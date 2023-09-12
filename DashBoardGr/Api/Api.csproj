@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DashBoardGr.Domain.Application\DashBoardGr.Domain.Application.csproj" />
+    <ProjectReference Include="..\DashBoardGr.Domain.Repository\DashBoardGr.Domain.Repository.csproj" />
     <ProjectReference Include="..\DashBoardGr.Infrastructure\DashBoardGr.Infrastructure.csproj" />
   </ItemGroup>
 

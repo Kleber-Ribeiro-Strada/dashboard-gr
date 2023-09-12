@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace DashBoardGr.Domain.Application.Commands
+namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
     public class SolicitarAnaliseCommand : IRequest<Unit>
     {
@@ -37,7 +37,7 @@ namespace DashBoardGr.Domain.Application.Commands
             public DateTime DataNascimento { get; set; }
             public string Cpf { get; set; } = string.Empty;
             public string Rg { get; set; }
-            public string? EstadoEmissao { get; set; } 
+            public string? EstadoEmissao { get; set; }
             public DateTime DataEmissao { get; set; }
             public CnhCommand Cnh { get; set; } = new();
             public string NomeMae { get; set; } = string.Empty;

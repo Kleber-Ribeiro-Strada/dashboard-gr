@@ -23,7 +23,7 @@ namespace DashBoardGr.Infrastructure.Messaging
             
             var factory = new ConnectionFactory
             {
-                HostName = "localhost", // Endereço do servidor RabbitMQ,
+                HostName = _configuration.GetSection("RabbitMq:HostName").Value, // Endereço do servidor RabbitMQ,
                 Port = int.Parse(_configuration.GetSection("RabbitMq:Port").Value)
             };
 

@@ -1,4 +1,5 @@
-using DashBoardGr.Domain.Application.Commands;
+using DashBoardGr.Domain.Application;
+using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 using DashBoardGr.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -8,15 +9,13 @@ using Microsoft.Extensions.FileProviders;
 using Serilog;
 using Strada.Template.Api.Configurations.Observability;
 using System.Reflection;
+using DashBoardGr.Domain.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssemblies(typeof(SolicitarAnaliseCommandHandler).Assembly);
-});
-
+builder.Services.AddMediatRs();
+builder.Services.AddRepositoryContext(builder.Configuration);
 
 
 builder.Services.AddHealthCheck(builder.Configuration);
@@ -25,7 +24,7 @@ builder.Services.ConfigureSerilog();
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
-
+builder.Services.AddFluentValidations();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

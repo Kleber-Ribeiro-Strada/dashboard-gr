@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DashBoardGr.Domain.Application.Commands
+namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
     public class SolicitarAnaliseCommandValidator : AbstractValidator<SolicitarAnaliseCommand>
     {

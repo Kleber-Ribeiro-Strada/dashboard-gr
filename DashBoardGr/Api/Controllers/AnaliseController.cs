@@ -24,8 +24,11 @@ namespace Api.Controllers
         }
 
         [HttpPost("solicitar-analise")]
-        public async Task<IActionResult> SolicitarAnaliseAsync(SolicitarAnaliseCommand command)
+        public async Task<IActionResult> SolicitarAnaliseAsync([FromBody]SolicitarAnaliseCommand command)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            
             _logger.LogInformation("123 testando");
             var result = await _mediator.Send(command);
             return Ok(result);

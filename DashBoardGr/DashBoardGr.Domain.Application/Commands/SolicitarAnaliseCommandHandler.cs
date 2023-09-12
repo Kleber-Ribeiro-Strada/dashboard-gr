@@ -19,8 +19,6 @@ namespace DashBoardGr.Domain.Application.Commands
 
         public Task<Unit> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
-            Console.WriteLine("Kleber Ribeiro");
-
             _messageBusService.Publish(request);
 
             return Task.FromResult(Unit.Value);

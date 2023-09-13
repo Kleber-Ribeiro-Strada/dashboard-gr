@@ -4,12 +4,15 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-DashboardGr.WebJobs.Consumer-75dee520-f90f-45c7-97fd-4e7cba38ba81</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>dotnet-DashBoardGr.Infrastructure.Consumer-2bb10389-20a8-48b5-8401-6d83f8770c84</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DashBoardGr.Infrastructure\DashBoardGr.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

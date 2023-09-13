@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DashBoardGr.Domain.Repository.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 
@@ -6,7 +7,11 @@ namespace DashBoardGr.Domain.Repository
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options)
+        public DbSet<Cnh> Cnh { get; set; }
+        public DbSet<Motorista> Motorista { get; set; }
+        public DbSet<Proprietario> Proprietario { get; set; }
+        public DbSet<Veiculo> Veiculo { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             
         }

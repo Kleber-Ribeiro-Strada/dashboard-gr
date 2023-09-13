@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DashBoardGr.Domain.Repository\DashBoardGr.Domain.Repository.csproj" />
     <ProjectReference Include="..\DashBoardGr.Infrastructure\DashBoardGr.Infrastructure.csproj" />
   </ItemGroup>
 

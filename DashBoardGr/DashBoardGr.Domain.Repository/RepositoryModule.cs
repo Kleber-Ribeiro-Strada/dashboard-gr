@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DashBoardGr.Domain.Repository.Repositories.Implementation;
+using DashBoardGr.Domain.Repository.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,8 +15,10 @@ namespace DashBoardGr.Domain.Repository
     {
         public static IServiceCollection AddRepositoryContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
+            //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer"), x => x.MigrationsAssembly("DashBoardGr.Domain.Repository")));
 
+            services.AddTransient<IMotoristaRepository, MotoristaRepository>();
             return services;
         }
     }

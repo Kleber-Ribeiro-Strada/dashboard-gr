@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DashboardGr.WebJobs.Consumer": {
+    "DashBoardGr.Infrastructure.Consumer": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"

@@ -1,15 +1,11 @@
 using DashBoardGr.Domain.Application;
-using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 using DashBoardGr.Infrastructure;
-using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
 using Strada.Template.Api.Configurations.Observability;
-using System.Reflection;
 using DashBoardGr.Domain.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

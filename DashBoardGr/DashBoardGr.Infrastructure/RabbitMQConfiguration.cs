@@ -1,12 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DashBoardGr.Infrastructure
 {
     public interface IRabbitMQConfiguration
@@ -16,7 +10,7 @@ namespace DashBoardGr.Infrastructure
 
     public class RabbitMQConfiguration : IRabbitMQConfiguration
     {
-        private readonly ConnectionFactory _factory;
+        private readonly ConnectionFactory? _factory;
         private readonly IConfiguration _configuration;
         public RabbitMQConfiguration(IConfiguration configuraion)
         {
@@ -60,10 +54,6 @@ namespace DashBoardGr.Infrastructure
             }
         }
 
-        public ConnectionFactory GetConnectionFactory()
-        {
-            return _factory;
-
-        }
+        public ConnectionFactory GetConnectionFactory() => _factory;
     }
 }

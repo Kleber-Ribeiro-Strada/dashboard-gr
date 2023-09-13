@@ -1,4 +1,4 @@
-namespace DashboardGr.WebJobs.Consumer
+namespace DashBoardGr.Infrastructure.Consumer
 {
     public class Worker : BackgroundService
     {

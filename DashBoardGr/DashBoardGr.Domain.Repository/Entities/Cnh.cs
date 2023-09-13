@@ -13,6 +13,6 @@
         public string? Imagem { get; private set; }
 
         public Guid MotoristaId { get; set; }
-        public Motorista Motorista { get; set; } = new();
+        public Motorista Motorista { get; set; } 
     }
 }

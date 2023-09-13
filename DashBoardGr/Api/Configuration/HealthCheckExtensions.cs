@@ -8,7 +8,7 @@ namespace Strada.Template.Api.Configurations.Observability;
 
 public static class HealthCheckExtensions
 {
-    public static void AddHealthCheck(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddHealthCheck(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHealthChecks()
             .AddElasticsearch(configuration["ElasticConfiguration:Uri"]);
@@ -19,6 +19,8 @@ public static class HealthCheckExtensions
             options.SetEvaluationTimeInSeconds(30);
             options.MaximumHistoryEntriesPerEndpoint(60);
         }).AddInMemoryStorage();
+
+        return services;
     }
 
     public static void UseHealthCheck(this IEndpointRouteBuilder endpoints)

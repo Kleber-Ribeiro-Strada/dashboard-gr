@@ -8,21 +8,21 @@
             , DateTime dataNascimento
             , string cpf
             , string rg
-            , string estadoEmissao
+            , string? estadoEmissao
             , DateTime dataEmissao
             , string nomeMae
-            , string nomePai
+            , string? nomePai
             , string telefone
             , string email
-            , string nomeReferencia
-            , string telefoneReferencia
+            , string? nomeReferencia
+            , string? telefoneReferencia
             , string cep
             , string codigoCidade
-            , string nomeCidade
-            , string rua
-            , string complemento
-            , string estado
-            , string bairro
+            , string? nomeCidade
+            , string? rua
+            , string? complemento
+            , string? estado
+            , string? bairro
             , string numero)
         {
             Id = Guid.NewGuid();

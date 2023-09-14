@@ -25,8 +25,8 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            await _mediator.Send(command);
-            return Ok(Accepted());
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }

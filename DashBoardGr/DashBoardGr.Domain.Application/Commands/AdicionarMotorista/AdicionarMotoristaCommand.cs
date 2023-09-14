@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DashBoardGr.Domain.Shared.Commands.Request;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using static DashBoardGr.Domain.Application.Commands.SolicitarAnalise.SolicitarA
 
 namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
 {
-    public class AdicionarMotoristaCommand: IRequest<Unit>
+    public class AdicionarMotoristaCommand: CommandRequest
     {
         public string Nome { get; set; } = string.Empty;
         public string Genero { get; set; } = string.Empty;

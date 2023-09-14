@@ -1,4 +1,5 @@
 ﻿using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
+using DashBoardGr.Domain.Shared.Validator;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 .WithMessage("Campo gênero tem que ser Masculino ou Feminino");
 
             RuleFor(analise => analise.DataNascimento)
-                .Must(EhMaiorDe18Anos)
+                .Must(SharedValidators.EhMaiorDe18Anos)
                 .WithMessage("Só é permitiro motoristas maiores de 18 anos");
 
             RuleFor(analise => analise.Cpf)
@@ -53,12 +54,6 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 .WithMessage("Capmo Número Residência é obrigatório");
         }
 
-        private bool EhMaiorDe18Anos(DateTime dataNascimento)
-        {
-            var idade = DateTime.Today.Year - dataNascimento.Year;
-            if (dataNascimento.Date > DateTime.Today.AddYears(-idade)) idade--;
 
-            return idade >= 18;
-        } 
     }
 }

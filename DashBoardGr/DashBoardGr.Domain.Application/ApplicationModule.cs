@@ -1,11 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
+using DashBoardGr.Domain.Application.Profiles;
 
 namespace DashBoardGr.Domain.Application
 {
     public static class ApplicationModule
     {
+
+        public static IServiceCollection AddMappers(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(MotoristaProfile));
+            return services;
+        }
 
         public static IServiceCollection AddMediatRs(this IServiceCollection services)
         {

@@ -13,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMediatRs();
 builder.Services.AddRepositoryContext(builder.Configuration);
 
-
 builder.Services.AddHealthCheck(builder.Configuration);
 builder.Services.AddHeaderPropagation(s => { s.Headers.Add("x-correlation-id"); });
 builder.Services.ConfigureSerilog();
@@ -25,6 +24,7 @@ builder.Services.AddFluentValidations();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMessageBus();
+builder.Services.AddMappers();
 
 builder.Services.AddHttpLogging(logging =>
 {

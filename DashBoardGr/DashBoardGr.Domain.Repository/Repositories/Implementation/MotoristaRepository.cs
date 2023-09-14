@@ -1,10 +1,5 @@
 ﻿using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 {
@@ -23,6 +18,18 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             await _appDbContext.AddAsync(motorista);
             await _appDbContext.AddAsync(cnh);
             await _appDbContext.SaveChangesAsync();
+        }
+
+        public async Task AddVeiculo(Proprietario proprietario, Veiculo veiculo)
+        {
+            await _appDbContext.AddAsync(proprietario);
+            await _appDbContext.AddAsync(veiculo);
+            await _appDbContext.SaveChangesAsync();
+        }
+
+        public Task<Motorista> Get(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

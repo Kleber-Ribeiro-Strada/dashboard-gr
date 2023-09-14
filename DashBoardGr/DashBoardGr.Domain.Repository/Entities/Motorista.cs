@@ -2,52 +2,9 @@
 {
     public class Motorista
     {
-        public Motorista(
-            string nome
-            , string genero
-            , DateTime dataNascimento
-            , string cpf
-            , string rg
-            , string? estadoEmissao
-            , DateTime dataEmissao
-            , string nomeMae
-            , string? nomePai
-            , string telefone
-            , string email
-            , string? nomeReferencia
-            , string? telefoneReferencia
-            , string cep
-            , string codigoCidade
-            , string? nomeCidade
-            , string? rua
-            , string? complemento
-            , string? estado
-            , string? bairro
-            , string numero)
+        public Motorista()
         {
             Id = Guid.NewGuid();
-            Nome = nome;
-            Genero = genero;
-            DataNascimento = dataNascimento;
-            Cpf = cpf;
-            Rg = rg;
-            EstadoEmissao = estadoEmissao;
-            DataEmissao = dataEmissao;
-            NomeMae = nomeMae;
-            NomePai = nomePai;
-            Telefone = telefone;
-            Email = email;
-            NomeReferencia = nomeReferencia;
-            TelefoneReferencia = telefoneReferencia;
-            Cep = cep;
-            CodigoCidade = codigoCidade;
-            NomeCidade = nomeCidade;
-            Rua = rua;
-            Complemento = complemento;
-            Estado = estado;
-            Bairro = bairro;
-            Numero = numero;
-            
         }
         public Guid Id { get; private set; }
 
@@ -75,6 +32,6 @@
 
 
 
-        public virtual ICollection<Cnh> Cnhs { get; private set; } = new HashSet<Cnh>();
+        public virtual ICollection<Cnh> Cnhs { get; private set; } = null!;
     }
 }

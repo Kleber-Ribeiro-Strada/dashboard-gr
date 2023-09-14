@@ -16,7 +16,7 @@ namespace DashBoardGr.Domain.Repository
         public static IServiceCollection AddRepositoryContext(this IServiceCollection services, IConfiguration configuration)
         {
             //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer"), x => x.MigrationsAssembly("DashBoardGr.Domain.Repository")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer"), x => x.MigrationsAssembly("Api")));
 
             services.AddTransient<IMotoristaRepository, MotoristaRepository>();
             return services;

@@ -1,6 +1,6 @@
 ﻿using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
+using DashBoardGr.Domain.Application.Queries.AnaliseQueries.BuscarAnalise;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -9,11 +9,6 @@ namespace Api.Controllers
     [ApiController]
     public class AnaliseController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<AnaliseController> _logger;
         private readonly IMediator _mediator;
 
@@ -35,9 +30,11 @@ namespace Api.Controllers
         }
 
         [HttpGet("verificar-analise")]
-        public string VerificarAnalise()
+        public async Task<IActionResult> VerificarAnalise(Guid Id)
         {
-            return "teste";
+            var buscarAnaliseQuery = new BuscarAnaliseQuery();
+
+            return Ok(Task.FromResult(new { }));
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using DashBoardGr.Domain.Application.Commands.AdicionarMotorista;
-using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
+using DashBoardGr.Domain.Application.Commands.AdicionarVeiculo;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MotoristaController : ControllerBase
     {
@@ -24,6 +23,18 @@ namespace Api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest();
+
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost("adicionar-veiculo/{motoristaId}")]
+        public async Task<IActionResult> AdicionarVeiculo(Guid motoristaId, [FromBody] AdicionarVeiculoCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            command.MotoristaId = motoristaId;
 
             var result = await _mediator.Send(command);
             return Ok(result);

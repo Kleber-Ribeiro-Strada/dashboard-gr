@@ -9,6 +9,6 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
 {
     public interface IMotoristaRepository
     {
-        Task AddAsync(Motorista motorista);
+        Task AddAsync(Motorista motorista, Cnh cnh);
     }
 }

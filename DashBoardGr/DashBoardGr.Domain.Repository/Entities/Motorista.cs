@@ -47,6 +47,7 @@
             Estado = estado;
             Bairro = bairro;
             Numero = numero;
+            
         }
         public Guid Id { get; private set; }
 

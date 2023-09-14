@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DashBoardGr.Domain.Shared.Commands.Response
+﻿namespace DashBoardGr.Domain.Shared.Commands.Response
 {
     public class CommandResponse
     {
@@ -23,7 +17,7 @@ namespace DashBoardGr.Domain.Shared.Commands.Response
         }
 
         public int StatusCode { get; set; }
-        public string Message { get; set; } 
+        public string Message { get; set; } = string.Empty;
         public DateTime Date { get; private set; }
         public object Data { get; set; }
     }

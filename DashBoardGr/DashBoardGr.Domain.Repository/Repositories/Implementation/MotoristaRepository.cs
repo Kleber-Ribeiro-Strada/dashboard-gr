@@ -18,9 +18,10 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             _appDbContext = appDbContext;
         }
 
-        public async Task AddAsync(Motorista motorista)
+        public async Task AddAsync(Motorista motorista, Cnh cnh)
         {
             await _appDbContext.AddAsync(motorista);
+            await _appDbContext.AddAsync(cnh);
             await _appDbContext.SaveChangesAsync();
         }
     }

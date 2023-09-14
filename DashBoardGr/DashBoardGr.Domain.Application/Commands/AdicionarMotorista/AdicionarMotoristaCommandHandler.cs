@@ -33,7 +33,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
             var result = await _validator.ValidateAsync(request, cancellationToken);
             if (!result.IsValid)
                 return new CommandResponse(400, "Requisição inválida", result.Errors);
-            
+
             var motorista = new Motorista(
                 request.Nome
                 , request.Genero
@@ -57,7 +57,20 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 , request.Bairro
                 , request.Numero);
 
-            await _motoristaRepository.AddAsync(motorista);
+            var cnh = new Cnh(
+                motorista.Id,
+                request.Cnh.Numero
+                , request.Cnh.EstadoEmissao
+                , request.Cnh.DataVencimento
+                , request.Cnh.Categoria
+                , request.Cnh.CodigoCidade
+                , request.Cnh.CodigoSeguranca
+                , request.Cnh.DataPrimeiraHabilitacao
+                , request.Cnh.Imagem);
+
+            
+
+            await _motoristaRepository.AddAsync(motorista, cnh);
 
             await _mediator.Publish(new MotoristaAdicionadoEvent
             {

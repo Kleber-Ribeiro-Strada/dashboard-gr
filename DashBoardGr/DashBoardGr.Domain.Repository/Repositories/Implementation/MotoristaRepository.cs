@@ -36,7 +36,6 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
         public bool MotoristaExistente(string cpf)
         {
             return _appDbContext.Motorista.Any(m => m.Cpf == cpf);
-            
         }
     }
 }

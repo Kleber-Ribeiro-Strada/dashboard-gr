@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AnaliseController : ControllerBase
     {
@@ -35,6 +35,12 @@ namespace Api.Controllers
             var buscarAnaliseQuery = new BuscarAnaliseQuery();
 
             return Ok(Task.FromResult(new { }));
+        }
+
+        [HttpGet("teste")]
+        public IActionResult Teste()
+        {
+            return Ok(new { result = "teste" });
         }
     }
 }

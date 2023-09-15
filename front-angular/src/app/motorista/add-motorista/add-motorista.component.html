@@ -1,0 +1,129 @@
+<form>
+    <div class="row g-3 text-start">
+        <h2>Motorista</h2>
+        <hr/>
+
+        <div class="col-md-6">
+            <label for="inputNome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputNome">
+        </div>
+        <div class="col-md-2">
+            <label for="inputGenero" class="form-label">Gênero</label>
+            <select id="inputGenero" class="form-select">
+                <option selected>Choose...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="inputDataNascimento" class="form-label">Data Nascimento</label>
+            <input type="date" class="form-control" id="inputDataNascimento">
+        </div>
+
+        <div class="col-md-2">
+            <label for="inputCpf" class="form-label">Cpf</label>
+            <input type="text" class="form-control" id="inputCpf" placeholder="00000000000">
+        </div>
+
+        <div class="col-md-2">
+            <label for="inputRg" class="form-label">Rg</label>
+            <input type="text" class="form-control" id="inputRg" placeholder="00.000.000-x">
+        </div>
+
+        <div class="col-md-2">
+            <label for="inputEstadoEmissao" class="form-label">Estado Emissão</label>
+            <select id="inputGenero" class="form-select">
+                <option selected>Choose...</option>
+                <option value="SP">SP</option>
+                <option value="RJ">RJ</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label for="inputDataEmissao" class="form-label">Data Emissão</label>
+            <input type="date" class="form-control" id="inputDataEmissao">
+        </div>
+
+        <div class="col-md-5">
+            <label for="inputNomeMae" class="form-label">Nome da Mâe</label>
+            <input type="text" class="form-control" id="inputNomeMae">
+        </div>
+
+        <div class="col-md-5">
+            <label for="inputNomePai" class="form-label">Nome do Pai</label>
+            <input type="text" class="form-control" id="inputNomePai">
+        </div>
+
+        <div class="col-2">
+            <label for="inputTelefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" id="inputTelefone" placeholder="(99) 999999999">
+        </div>
+
+        <div class="col-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="text" class="form-control" id="inputEmail" placeholder="Email@email.com">
+        </div>
+
+        <div class="col-5">
+            <label for="inputNomeReferencia" class="form-label">Nome Referencia</label>
+            <input type="text" class="form-control" id="inputNomeReferencia" placeholder="Nome Referência">
+        </div>
+
+        <div class="col-2">
+            <label for="inputTelefoneReferencia" class="form-label">Telefone Referência</label>
+            <input type="text" class="form-control" id="inputTelefoneReferencia" placeholder="(99) 999999999">
+        </div>
+
+        <div class="col-12">
+            <h1>&nbsp;</h1>
+        </div>
+
+    </div>
+
+
+    <div class="row g-3 text-start">
+
+        <h2>Endereço</h2>
+        <hr/>
+        <div class="col-2">
+            <label for="inputCep" class="form-label">CEP: </label>
+            <input type="text" class="form-control" id="inputCep" placeholder="00000000" >
+        </div>
+
+        <div class="col-1">
+            <label for="inputNumero" class="form-label">Número: </label>
+            <input type="text" class="form-control" id="inputNumero" placeholder="00000">
+        </div> 
+        <div class="col-9"></div>
+
+        <div class="col-3">
+            <label for="inputRua" class="form-label">Rua</label>
+            <input type="text" class="form-control" id="inputRua" disabled>
+        </div>
+
+        <div class="col-3">
+            <label for="inputBairro" class="form-label">Bairro</label>
+            <input type="text" class="form-control" id="inputBairro" disabled>
+        </div>        
+
+        <div class="col-3">
+            <label for="inputCidade" class="form-label">Cidade</label>
+            <input type="text" class="form-control" id="inputCidade" disabled>
+        </div>
+        <div class="col-md-2">
+            <label for="inputEstado" class="form-label">Estado</label>
+            <select id="inputEstado" class="form-select" disabled>
+                <option selected>Selecione...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="inputComplemento" class="form-label">Complemento</label>
+            <input type="text" class="form-control" id="inputComplemento" disabled>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary" (click)="testarApi($event); ">Sign in</button>
+        </div>
+    </div>
+</form>

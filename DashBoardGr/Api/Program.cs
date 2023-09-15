@@ -19,6 +19,13 @@ builder.Services.ConfigureSerilog();
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", b =>
+{
+    b.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
+
 builder.Services.AddFluentValidations();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -49,6 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Enable Cors
+app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

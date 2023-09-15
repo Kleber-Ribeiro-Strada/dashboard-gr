@@ -43,6 +43,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
 
     public class AdicionarCnhMotoristaCommand
     {
+        public Guid MotoristaId { get; set; }
 
         public string Numero { get; set; } = string.Empty;
         public string? EstadoEmissao { get; set; }

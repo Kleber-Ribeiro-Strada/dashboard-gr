@@ -1,5 +1,6 @@
 ﻿using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 {
@@ -30,6 +31,12 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
         public Task<Motorista> Get(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public bool MotoristaExistente(string cpf)
+        {
+            return _appDbContext.Motorista.Any(m => m.Cpf == cpf);
+            
         }
     }
 }

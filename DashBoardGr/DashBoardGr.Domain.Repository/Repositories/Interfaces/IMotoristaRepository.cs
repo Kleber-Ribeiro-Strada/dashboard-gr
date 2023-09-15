@@ -7,6 +7,9 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
         Task AddAsync(Motorista motorista, Cnh cnh);
 
         Task AddVeiculo(Proprietario proprietario, Veiculo veiculo);
+        
         Task<Motorista> Get(Guid id);
+
+        bool MotoristaExistente(string cpf);
     }
 }

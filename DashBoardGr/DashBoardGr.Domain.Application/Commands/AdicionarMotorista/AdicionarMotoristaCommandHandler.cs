@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
 using DashBoardGr.Domain.Shared.Commands.Response;
@@ -51,19 +50,9 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
             request.Bairro = endereco.Bairro;
 
             var motorista = _mapper.Map<Motorista>(request);
+            request.Cnh.MotoristaId = motorista.Id;
 
-            var cnh = new Cnh(
-                motorista.Id,
-                request.Cnh.Numero
-                , request.Cnh.EstadoEmissao
-                , request.Cnh.DataVencimento
-                , request.Cnh.Categoria
-                , endereco.Gia
-                , request.Cnh.CodigoSeguranca
-                , request.Cnh.DataPrimeiraHabilitacao
-                , request.Cnh.Imagem);
-
-            
+            var cnh = _mapper.Map<Cnh>(request.Cnh);            
 
             await _motoristaRepository.AddAsync(motorista, cnh);
 
@@ -73,7 +62,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 Cpf = request.Cpf,
                 Email = request.Email,
                 Telefone = request.Telefone,
-            });
+            }, cancellationToken);
 
             return new CommandResponse(motorista);
         }

@@ -1,4 +1,5 @@
 ﻿using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
+using DashBoardGr.Domain.Repository.Repositories.Interfaces;
 using DashBoardGr.Domain.Shared.Validator;
 using FluentValidation;
 using System;
@@ -11,8 +12,11 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
 {
     public class MotoristaValidator : AbstractValidator<AdicionarMotoristaCommand>
     {
-        public MotoristaValidator()
+        private readonly IMotoristaRepository _motoristaRepository;
+        public MotoristaValidator(IMotoristaRepository motoristaRepository)
         {
+            _motoristaRepository = motoristaRepository;
+
             RuleFor(analise => analise.Nome)
                 .NotNull()
                 .NotEmpty()
@@ -34,7 +38,9 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 .NotEmpty()
                 .WithMessage("Campo CPF é obrigatório")
                 .IsValidCPF()
-                .WithMessage("Campo CPF inválido");
+                .WithMessage("Campo CPF inválido")
+                .Must(EhNovoCpf)
+                .WithMessage("CPF já cadastrado na base");
 
             RuleFor(analise => analise.NomeMae)
                 .NotEmpty()
@@ -54,6 +60,9 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 .WithMessage("Capmo Número Residência é obrigatório");
         }
 
-
+        private bool EhNovoCpf(string cpf)
+        {
+            return !_motoristaRepository.MotoristaExistente(cpf);
+        }
     }
 }

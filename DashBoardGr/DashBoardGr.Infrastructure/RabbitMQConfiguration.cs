@@ -23,33 +23,28 @@ namespace DashBoardGr.Infrastructure
             }
             _factory = new ConnectionFactory
             {
-                HostName = rabbitParameter.HostName, // Endereço do servidor RabbitMQ,
+                HostName = rabbitParameter.HostName, 
                 Port = rabbitParameter.Port
             };
 
             // Configurar e criar elementos necessários (filas, exchanges, topics) aqui
-            using (var connection = _factory.CreateConnection())
-            using (var channel = connection.CreateModel())
+            using var connection = _factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+            if (rabbitParameter.Exchanges == null)
+                return;
+
+            foreach (var exchange in rabbitParameter.Exchanges)
             {
-                if (rabbitParameter.Exchanges == null)
+                channel.ExchangeDeclare(exchange: exchange.ExchangeName, type: ExchangeType.Topic);
+
+                foreach (var queue in exchange.Queues)
                 {
-                    return;
-                }
+                    var queueName = queue.Split(',')[0].Trim();
+                    var routingKeyName = queue.Split(',')[1].Trim();
 
-                foreach (var exchange in rabbitParameter.Exchanges)
-                {
-                    channel.ExchangeDeclare(exchange: exchange.ExchangeName, type: ExchangeType.Topic);
-
-
-                    foreach (var queue in exchange.Queues)
-                    {
-                        var queueName = queue.Split(',')[0].Trim();
-                        var routingKeyName = queue.Split(',')[1].Trim();
-
-                        channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-                        channel.QueueBind(queue: queueName, exchange: exchange.ExchangeName, routingKey: routingKeyName);
-
-                    }
+                    channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                    channel.QueueBind(queue: queueName, exchange: exchange.ExchangeName, routingKey: routingKeyName);
                 }
             }
         }

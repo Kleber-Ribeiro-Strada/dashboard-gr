@@ -14,6 +14,8 @@ namespace DashBoardGr.Domain.Application.Profiles
         public MotoristaProfile() 
         {
             CreateMap<AdicionarMotoristaCommand, Motorista>();
+
+            CreateMap<AdicionarCnhMotoristaCommand, Cnh>();
         }
 
     }

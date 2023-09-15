@@ -28,7 +28,15 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarVeiculo
                 return new CommandResponse(400, "Requisição inválida", result.Errors);
 
             var endereco = await _buscarEnderecoService.BuscarEndereco(request.Proprietario.Cep);
+            if (endereco == null)
+            {
+                return new CommandResponse(400, "Requisição inválida", "CEP não encontrado");
+            }
 
+            request.Proprietario.CodigoCidade = endereco.Gia;
+            request.Proprietario.Rua = endereco.Logradouro;
+            request.Proprietario.Bairro = endereco.Bairro;
+            request.Proprietario.Estado = endereco.Uf;
             var proprietario = new Proprietario();
             //request.Proprietario.CpfCnpj
             //, request.Proprietario.Nome

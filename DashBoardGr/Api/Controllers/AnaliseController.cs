@@ -40,6 +40,8 @@ namespace Api.Controllers
         [HttpGet("teste")]
         public IActionResult Teste()
         {
+            _logger.LogInformation("123 testando");
+
             return Ok(new { result = "teste" });
         }
     }

@@ -10,9 +10,9 @@
         <div class="col-md-2">
             <label for="inputGenero" class="form-label">Gênero</label>
             <select id="inputGenero" class="form-select">
-                <option selected>Choose...</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
+                <option selected>Selecione...</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
             </select>
         </div>
         <div class="col-md-2">
@@ -87,7 +87,8 @@
         <hr/>
         <div class="col-2">
             <label for="inputCep" class="form-label">CEP: </label>
-            <input type="text" class="form-control" id="inputCep" placeholder="00000000" >
+            <input type="text" class="form-control" [(ngModel)]="model.cep" (change)="buscarEndereco()" name="inputCep"  id="inputCep" placeholder="00000000" >
+            {{model.cep}}
         </div>
 
         <div class="col-1">
@@ -98,28 +99,26 @@
 
         <div class="col-3">
             <label for="inputRua" class="form-label">Rua</label>
-            <input type="text" class="form-control" id="inputRua" disabled>
+            <input type="text" class="form-control" [(ngModel)]="endereco.logradouro" name="idRua" id="inputRua" disabled>
         </div>
 
         <div class="col-3">
             <label for="inputBairro" class="form-label">Bairro</label>
-            <input type="text" class="form-control" id="inputBairro" disabled>
+            <input type="text" class="form-control" [(ngModel)]="endereco.bairro" name="inputBairro" id="inputBairro" disabled>
         </div>        
 
         <div class="col-3">
             <label for="inputCidade" class="form-label">Cidade</label>
-            <input type="text" class="form-control" id="inputCidade" disabled>
+            <input type="text" class="form-control"  [(ngModel)]="endereco.localidade" name="inputCidade" id="inputCidade" disabled>
         </div>
         <div class="col-md-2">
             <label for="inputEstado" class="form-label">Estado</label>
-            <select id="inputEstado" class="form-select" disabled>
-                <option selected>Selecione...</option>
-                <option>...</option>
-            </select>
+            <input type="text" class="form-control"  [(ngModel)]="endereco.uf" name="inputuf" id="inputCidade" disabled>
+
         </div>
         <div class="col-md-3">
             <label for="inputComplemento" class="form-label">Complemento</label>
-            <input type="text" class="form-control" id="inputComplemento" disabled>
+            <input type="text" class="form-control" id="inputComplemento" [(ngModel)]="model.complemento">
         </div>
 
         <div class="col-12">

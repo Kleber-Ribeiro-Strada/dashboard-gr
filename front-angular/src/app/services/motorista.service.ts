@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { EnderecoResultModel } from '../models/EnderecoResultModel';
 
 
 @Injectable({
@@ -13,6 +14,10 @@ export class MotoristaService {
   }
 
   teste():Observable<string> {
-    return this._http.get<string>(`${this.urlBase}analise/teste`);
+    return this._http.get<string>(`/api/`);
+  }
+
+  BuscarEndereco(cep:string):Observable<EnderecoResultModel>{
+    return this._http.get<EnderecoResultModel>(`${this.urlBase}Endereco/${cep}/buscar-endereco`);
   }
 }

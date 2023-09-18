@@ -6,6 +6,7 @@ using Serilog;
 using Strada.Template.Api.Configurations.Observability;
 using DashBoardGr.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
+using Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseRouting();
 app.UseHttpLogging();
+//app.UseMiddleware<GlobalErrorHandlingMiddleware>();
+app.UseMiddleware<TraceMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

@@ -1,30 +1,30 @@
-export class MotoristaCommandModel {
-    nome: string | undefined
-    genero: string | undefined
-    dataNascimento: string | undefined
-    cpf: string | undefined
-    rg: string | undefined
-    estadoEmissao: string | undefined
-    dataEmissao: string | undefined
-    nomeMae: string | undefined
-    nomePai: string | undefined
-    telefone: string | undefined
-    email: string | undefined
-    nomeReferencia: string | undefined
-    telefoneReferencia: string | undefined
-    cep: string | undefined
-    numero: string | undefined
-    complemento: string | undefined
-    cnh: Cnh | undefined
+export default class MotoristaCommandModel {
+    nome!: string 
+    genero!: string 
+    dataNascimento!: string 
+    cpf!: string 
+    rg!: string 
+    estadoEmissao!: string 
+    dataEmissao!: string 
+    nomeMae!: string 
+    nomePai!: string 
+    telefone!: string 
+    email!: string 
+    nomeReferencia!: string 
+    telefoneReferencia!: string 
+    cep!: string
+    numero!: string 
+    complemento!: string 
+    cnh!: Cnh 
 }
 
 export class Cnh {
-    motoristaId: string | undefined
-    numero: string | undefined
-    estadoEmissao: string | undefined
-    dataVencimento: string | undefined
-    categoria: string | undefined
-    codigoSeguranca: string | undefined
-    dataPrimeiraHabilitacao: string | undefined
-    imagem: string | undefined
+    motoristaId!: string 
+    numero!: string 
+    estadoEmissao!: string 
+    dataVencimento!: string 
+    categoria!: string 
+    codigoSeguranca!: string 
+    dataPrimeiraHabilitacao!: string 
+    imagem!: string 
 }

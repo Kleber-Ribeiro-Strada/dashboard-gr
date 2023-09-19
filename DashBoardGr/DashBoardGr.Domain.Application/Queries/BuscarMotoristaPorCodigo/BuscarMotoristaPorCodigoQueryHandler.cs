@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo
 {
-    public class BuscarMotoristaQueryHandler : IRequestHandler<BuscarMotoristaQuery, BuscarMotoristaViewModel>
+    public class BuscarMotoristaPorCodigoQueryHandler : IRequestHandler<BuscarMotoristaPorCodigoQuery, BuscarMotoristasViewModel>
     {
         private readonly IMotoristaRepository _motoristaRepository;
 
-        public BuscarMotoristaQueryHandler(IMotoristaRepository motoristaRepository)
+        public BuscarMotoristaPorCodigoQueryHandler(IMotoristaRepository motoristaRepository)
         {
             _motoristaRepository = motoristaRepository;
         }
 
 
 
-        public async Task<BuscarMotoristaViewModel> Handle(BuscarMotoristaQuery request, CancellationToken cancellationToken)
+        public async Task<BuscarMotoristasViewModel> Handle(BuscarMotoristaPorCodigoQuery request, CancellationToken cancellationToken)
         {
             var motorista = await _motoristaRepository.Get(request.Id);
 
-            return new BuscarMotoristaViewModel();
+            return new BuscarMotoristasViewModel();
         }
     }
 }

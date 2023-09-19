@@ -1,0 +1,22 @@
+<div class="row g-3 text-start">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cpf</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Data de Nascimento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let motorista of motoristas">
+                <th scope="row">{{motorista.id.split('-')[0]}}</th>
+                <td>{{motorista.nome}}</td>
+                <td>{{motorista.cpf}}</td>
+                <td>{{motorista.telefone}}</td>
+                <td>{{motorista.dataNascimento}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

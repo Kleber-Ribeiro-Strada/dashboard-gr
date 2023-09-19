@@ -1,15 +1,16 @@
 <form>
     <div class="row g-3 text-start">
         <h2>Motorista</h2>
-        <hr/>
+        <hr />
 
         <div class="col-md-6">
             <label for="inputNome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="inputNome">
+            <input type="text" class="form-control" [(ngModel)]="model.nome" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="col-md-2">
             <label for="inputGenero" class="form-label">Gênero</label>
-            <select id="inputGenero" class="form-select">
+            <select id="inputGenero" class="form-select" [(ngModel)]="model.genero"
+                [ngModelOptions]="{standalone: true}">
                 <option selected>Selecione...</option>
                 <option value="M">Masculino</option>
                 <option value="F">Feminino</option>
@@ -17,22 +18,26 @@
         </div>
         <div class="col-md-2">
             <label for="inputDataNascimento" class="form-label">Data Nascimento</label>
-            <input type="date" class="form-control" id="inputDataNascimento">
+            <input type="date" class="form-control" [(ngModel)]="model.dataNascimento"
+                [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-md-2">
             <label for="inputCpf" class="form-label">Cpf</label>
-            <input type="text" class="form-control" id="inputCpf" placeholder="00000000000">
+            <input type="text" class="form-control" [(ngModel)]="model.cpf" [ngModelOptions]="{standalone: true}"
+                placeholder="00000000000">
         </div>
 
         <div class="col-md-2">
             <label for="inputRg" class="form-label">Rg</label>
-            <input type="text" class="form-control" id="inputRg" placeholder="00.000.000-x">
+            <input type="text" class="form-control" [(ngModel)]="model.rg" [ngModelOptions]="{standalone: true}"
+                placeholder="00.000.000-x">
         </div>
 
         <div class="col-md-2">
             <label for="inputEstadoEmissao" class="form-label">Estado Emissão</label>
-            <select id="inputGenero" class="form-select">
+            <select id="inputGenero" class="form-select" [(ngModel)]="model.estadoEmissao"
+                [ngModelOptions]="{standalone: true}">
                 <option selected>Choose...</option>
                 <option value="SP">SP</option>
                 <option value="RJ">RJ</option>
@@ -41,37 +46,42 @@
 
         <div class="col-md-2">
             <label for="inputDataEmissao" class="form-label">Data Emissão</label>
-            <input type="date" class="form-control" id="inputDataEmissao">
+            <input type="date" class="form-control" [(ngModel)]="model.dataEmissao"
+                [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-md-5">
             <label for="inputNomeMae" class="form-label">Nome da Mâe</label>
-            <input type="text" class="form-control" id="inputNomeMae">
+            <input type="text" class="form-control" [(ngModel)]="model.nomeMae" [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-md-5">
             <label for="inputNomePai" class="form-label">Nome do Pai</label>
-            <input type="text" class="form-control" id="inputNomePai">
+            <input type="text" class="form-control" [(ngModel)]="model.nomePai" [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-2">
             <label for="inputTelefone" class="form-label">Telefone</label>
-            <input type="text" class="form-control" id="inputTelefone" placeholder="(99) 999999999">
+            <input type="text" class="form-control" [(ngModel)]="model.telefone" [ngModelOptions]="{standalone: true}"
+                placeholder="(99) 999999999">
         </div>
 
         <div class="col-3">
             <label for="inputEmail" class="form-label">Email</label>
-            <input type="text" class="form-control" id="inputEmail" placeholder="Email@email.com">
+            <input type="text" class="form-control" [(ngModel)]="model.email" [ngModelOptions]="{standalone: true}"
+                placeholder="Email@email.com">
         </div>
 
         <div class="col-5">
             <label for="inputNomeReferencia" class="form-label">Nome Referencia</label>
-            <input type="text" class="form-control" id="inputNomeReferencia" placeholder="Nome Referência">
+            <input type="text" class="form-control" [(ngModel)]="model.nomeReferencia"
+                [ngModelOptions]="{standalone: true}" placeholder="Nome Referência">
         </div>
 
         <div class="col-2">
             <label for="inputTelefoneReferencia" class="form-label">Telefone Referência</label>
-            <input type="text" class="form-control" id="inputTelefoneReferencia" placeholder="(99) 999999999">
+            <input type="text" class="form-control" [(ngModel)]="model.telefoneReferencia"
+                [ngModelOptions]="{standalone: true}" placeholder="(99) 999999999">
         </div>
 
         <div class="col-12">
@@ -84,45 +94,120 @@
     <div class="row g-3 text-start">
 
         <h2>Endereço</h2>
-        <hr/>
+        <hr />
         <div class="col-2">
             <label for="inputCep" class="form-label">CEP: </label>
-            <input type="text" class="form-control" [(ngModel)]="model.cep" (change)="buscarEndereco()" name="inputCep"  id="inputCep" placeholder="00000000" >
-            {{model.cep}}
+            <input type="text" class="form-control" [(ngModel)]="model.cep" (change)="buscarEndereco()"
+                [ngModelOptions]="{standalone: true}" placeholder="00000000">
+
         </div>
 
         <div class="col-1">
             <label for="inputNumero" class="form-label">Número: </label>
-            <input type="text" class="form-control" id="inputNumero" placeholder="00000">
-        </div> 
+            <input type="text" class="form-control" [(ngModel)]="model.numero" [ngModelOptions]="{standalone: true}"
+                placeholder="00000">
+        </div>
         <div class="col-9"></div>
 
         <div class="col-3">
             <label for="inputRua" class="form-label">Rua</label>
-            <input type="text" class="form-control" [(ngModel)]="endereco.logradouro" name="idRua" id="inputRua" disabled>
+            <input type="text" class="form-control" [(ngModel)]="endereco.logradouro"
+                [ngModelOptions]="{standalone: true}" disabled>
         </div>
 
         <div class="col-3">
             <label for="inputBairro" class="form-label">Bairro</label>
-            <input type="text" class="form-control" [(ngModel)]="endereco.bairro" name="inputBairro" id="inputBairro" disabled>
-        </div>        
+            <input type="text" class="form-control" [(ngModel)]="endereco.bairro" [ngModelOptions]="{standalone: true}"
+                disabled>
+        </div>
 
         <div class="col-3">
             <label for="inputCidade" class="form-label">Cidade</label>
-            <input type="text" class="form-control"  [(ngModel)]="endereco.localidade" name="inputCidade" id="inputCidade" disabled>
+            <input type="text" class="form-control" [(ngModel)]="endereco.localidade"
+                [ngModelOptions]="{standalone: true}" disabled>
         </div>
         <div class="col-md-2">
             <label for="inputEstado" class="form-label">Estado</label>
-            <input type="text" class="form-control"  [(ngModel)]="endereco.uf" name="inputuf" id="inputCidade" disabled>
+            <input type="text" class="form-control" [(ngModel)]="endereco.uf" [ngModelOptions]="{standalone: true}"
+                disabled>
 
         </div>
         <div class="col-md-3">
             <label for="inputComplemento" class="form-label">Complemento</label>
-            <input type="text" class="form-control" id="inputComplemento" [(ngModel)]="model.complemento">
+            <input type="text" class="form-control" [(ngModel)]="model.complemento"
+                [ngModelOptions]="{standalone: true}" [(ngModel)]="model.complemento">
+        </div>
+
+
+        <div class="col-12">
+            <h1>&nbsp;</h1>
+        </div>
+    </div>
+
+    <div class="row g-3 text-start">
+
+        <h2>Cnh</h2>
+        <hr />
+        <div class="col-2">
+            <label for="inputCep" class="form-label">Numero: </label>
+            <input type="text" class="form-control" [(ngModel)]="model.cnh.numero" (change)="buscarEndereco()"
+                name="inputNumeroCnh" id="inputNumeroCnh" placeholder="00000000">
+
+        </div>
+
+        <div class="col-2">
+            <label for="inputCep" class="form-label">EstadoEmissão: </label>
+            <input type="text" class="form-control" [(ngModel)]="model.cnh.estadoEmissao" (change)="buscarEndereco()"
+                name="inputEstadoEmissaoCnh" id="inputEstadoEmissaoCnh" placeholder="00000000">
+
+        </div>
+
+        <div class="col-2">
+            <label for="inputCep" class="form-label">Data Vencimento: </label>
+            <input type="date" class="form-control" [(ngModel)]="model.cnh.dataVencimento" (change)="buscarEndereco()"
+                name="inputDataVencimentoCnh" id="inputDataVencimentoCnh" placeholder="00000000">
+
+        </div>
+
+        <div class="col-2">
+            <label for="inputCep" class="form-label">Categoria: </label>
+            <input type="text" class="form-control" [(ngModel)]="model.cnh.categoria" (change)="buscarEndereco()"
+                name="inputCategoriaCnh" id="inputCategoriaCnh" placeholder="AB">
+
+        </div>
+
+        <div class="col-2">
+            <label for="inputCep" class="form-label">Código Segurança: </label>
+            <input type="text" class="form-control" [(ngModel)]="model.cnh.codigoSeguranca" (change)="buscarEndereco()"
+                name="inputCodigoSegurancaCnh" id="inputCodigoSegurancaCnh" placeholder="00000000">
+
+        </div>
+
+        <div class="col-2">
+            <label for="inputCep" class="form-label">Data 1ª Habilitação: </label>
+            <input type="date" class="form-control" [(ngModel)]="model.cnh.dataPrimeiraHabilitacao"
+                (change)="buscarEndereco()" name="inputDataPrimeiraHabilitacaoCnh" id="inputDataPrimeiraHabilitacaoCnh"
+                placeholder="00000000">
+
+        </div>
+
+        <div class="col-2">
+            <label for="inputCep" class="form-label">Imagem: </label>
+            <input type="text" class="form-control" [(ngModel)]="model.cnh.imagem" (change)="buscarEndereco()"
+                name="inputImagemCnh" id="inputImagemCnh" placeholder="00000000">
+
         </div>
 
         <div class="col-12">
-            <button type="submit" class="btn btn-primary" (click)="testarApi($event); ">Sign in</button>
+            <button type="button" class="btn btn-primary" (click)="add()">Adicionar</button>
+        </div>
+        <div class="col-12">
+
         </div>
     </div>
 </form>
+
+<ul>
+    <li *ngFor="let erro of error.data">{{erro.errorMessage}}</li>
+</ul>
+<!-- <app-modal></app-modal> -->

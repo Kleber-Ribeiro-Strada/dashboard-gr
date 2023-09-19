@@ -7,12 +7,16 @@ import { HomeComponent } from './home/home.component';
 import { AddMotoristaComponent } from './motorista/add-motorista/add-motorista.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './componentes/modal/modal.component';
+import { ListMotoristaComponent } from './motorista/list-motorista/list-motorista.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddMotoristaComponent
+    AddMotoristaComponent,
+    ModalComponent,
+    ListMotoristaComponent
   ],
   imports: [
     BrowserModule,

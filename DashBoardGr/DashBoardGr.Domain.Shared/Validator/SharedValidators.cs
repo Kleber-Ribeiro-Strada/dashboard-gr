@@ -15,5 +15,11 @@ namespace DashBoardGr.Domain.Shared.Validator
 
             return idade >= 18;
         }
+
+        public static bool ValidarGenero(string genero)
+        {
+            Console.WriteLine(genero);
+            return genero.ToUpper() == "M" || genero.ToUpper() == "F";
+        }
     }
 }

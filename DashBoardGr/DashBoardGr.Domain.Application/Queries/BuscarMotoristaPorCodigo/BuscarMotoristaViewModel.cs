@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo
 {
-    public class BuscarMotoristaViewModel
+    public class BuscarMotoristasViewModel
     {
     }
 }

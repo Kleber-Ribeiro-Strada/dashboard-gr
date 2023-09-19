@@ -1,11 +1,11 @@
 export default class MotoristaCommandModel {
     nome!: string 
     genero!: string 
-    dataNascimento!: string 
+    dataNascimento!: Date 
     cpf!: string 
     rg!: string 
     estadoEmissao!: string 
-    dataEmissao!: string 
+    dataEmissao!: Date 
     nomeMae!: string 
     nomePai!: string 
     telefone!: string 
@@ -15,16 +15,16 @@ export default class MotoristaCommandModel {
     cep!: string
     numero!: string 
     complemento!: string 
-    cnh!: Cnh 
+    cnh: CnhCommandModel = new CnhCommandModel()
 }
 
-export class Cnh {
+export class CnhCommandModel {
     motoristaId!: string 
     numero!: string 
     estadoEmissao!: string 
-    dataVencimento!: string 
+    dataVencimento!: Date 
     categoria!: string 
     codigoSeguranca!: string 
-    dataPrimeiraHabilitacao!: string 
+    dataPrimeiraHabilitacao!: Date 
     imagem!: string 
 }

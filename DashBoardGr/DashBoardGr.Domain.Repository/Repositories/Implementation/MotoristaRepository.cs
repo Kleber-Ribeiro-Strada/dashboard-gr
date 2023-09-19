@@ -28,13 +28,21 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             await _appDbContext.SaveChangesAsync();
         }
 
+        
+
         public Task<Motorista> Get(Guid id)
         {
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<Motorista>> GetAll()
+        {
+            return Task.FromResult(_appDbContext.Motorista.AsEnumerable());
+        }
+
         public bool MotoristaExistente(string cpf)
         {
+            Console.WriteLine("anlisando cpf", cpf);
             return _appDbContext.Motorista.Any(m => m.Cpf == cpf);
         }
     }

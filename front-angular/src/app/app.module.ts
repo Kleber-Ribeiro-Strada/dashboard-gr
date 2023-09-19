@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './componentes/modal/modal.component';
 import { ListMotoristaComponent } from './motorista/list-motorista/list-motorista.component';
+import { SolicitarAnaliseComponent } from './solicitar-analise/solicitar-analise.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ListMotoristaComponent } from './motorista/list-motorista/list-motorist
     HomeComponent,
     AddMotoristaComponent,
     ModalComponent,
-    ListMotoristaComponent
+    ListMotoristaComponent,
+    SolicitarAnaliseComponent
   ],
   imports: [
     BrowserModule,

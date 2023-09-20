@@ -1,1 +1,136 @@
-<p>solicitar-analise works!</p>
+<div class="row ">
+    <div class="col-12">
+        <h1>Solicitar Análise</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 text-start ">
+        <h3>Usuário</h3>
+        <hr>
+        <input type="text" placeholder="Nome usuário" class="form-control" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="motorista" [disabled]="!novoMotorista" />
+    </div>
+</div>
+
+<div class="row text-start mt-5">
+    <h3>Proprietário</h3>
+    <hr>
+    <div class="row">
+        <div class="col-3">
+            <label for="inputNome" class="form-label">Nome</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-2">
+            <label for="inputCpf" class="form-label">CPF - CNPJ</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-2">
+            <label for="inputTelefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h3>Endereço Proprietário</h3>
+        <hr>
+        <div class="col-2">
+            <label for="inputCepProprietario" class="form-label">Cep</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-2">
+            <label for="inputNumeroProprietario" class="form-label">Número</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-8"></div>
+
+        <div class="col-3">
+            <label for="inputRua" class="form-label">Rua</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}"
+                disabled>
+        </div>
+
+        <div class="col-3">
+            <label for="inputBairro" class="form-label">Bairro</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}"
+                disabled>
+        </div>
+
+        <div class="col-3">
+            <label for="inputCidade" class="form-label">Cidade</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}"
+                disabled>
+        </div>
+        <div class="col-md-2">
+            <label for="inputEstado" class="form-label">Estado</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}"
+                disabled>
+
+        </div>
+        <div class="col-md-3 mb-5">
+            <label for="inputComplemento" class="form-label">Complemento</label>
+            <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+        </div>
+    </div>
+</div>
+
+<div class="row text-start mt-5">
+    <h3>Veículo</h3>
+    <hr>
+    <div class="col-2">
+        <label for="inputTipoVeiculo" class="form-label">Tipo</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputPlacaVeiculo" class="form-label">Placa</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+    
+    <div class="col-3">
+        <label for="inputChassiVeiculo" class="form-label">Chassi</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-3">
+        <label for="inputRenavamVeiculo" class="form-label">Renavam</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputDataLicenciamentoVeiculo" class="form-label">Data Licenciamento</label>
+        <input type="date" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputCorVeiculo" class="form-label">Cor</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputMarcaVeiculo" class="form-label">Marca</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputModeloVeiculo" class="form-label">Modelo</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+    
+    <div class="col-2">
+        <label for="inputAnoFabricacaoVeiculo" class="form-label">Ano Fabricação</label>
+        <input type="number" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputAnoModeloVeiculo" class="form-label">Ano Modelo</label>
+        <input type="number" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="col-2">
+        <label for="inputEstadoVeiculo" class="form-label">Estado</label>
+        <input type="text" class="form-control" [(ngModel)]="motorista" [ngModelOptions]="{standalone: true}">
+    </div>
+</div>

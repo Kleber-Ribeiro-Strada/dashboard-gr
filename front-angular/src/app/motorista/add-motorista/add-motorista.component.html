@@ -78,16 +78,11 @@
                 [ngModelOptions]="{standalone: true}" placeholder="Nome Referência">
         </div>
 
-        <div class="col-2">
+        <div class="col-2 mb-5">
             <label for="inputTelefoneReferencia" class="form-label">Telefone Referência</label>
             <input type="text" class="form-control" [(ngModel)]="model.telefoneReferencia"
                 [ngModelOptions]="{standalone: true}" placeholder="(99) 999999999">
         </div>
-
-        <div class="col-12">
-            <h1>&nbsp;</h1>
-        </div>
-
     </div>
 
 
@@ -132,15 +127,10 @@
                 disabled>
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-5">
             <label for="inputComplemento" class="form-label">Complemento</label>
             <input type="text" class="form-control" [(ngModel)]="model.complemento"
-                [ngModelOptions]="{standalone: true}" [(ngModel)]="model.complemento">
-        </div>
-
-
-        <div class="col-12">
-            <h1>&nbsp;</h1>
+                [ngModelOptions]="{standalone: true}">
         </div>
     </div>
 

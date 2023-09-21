@@ -11,6 +11,7 @@
           <a class="nav-link" [routerLink]="['/add-motorista']">Adicionar Motorista</a>
           <a class="nav-link" [routerLink]="['/list-motorista']">Listar Motorista</a>
           <a class="nav-link" [routerLink]="'/00000000-0000-0000-0000-000000000000/solicitar-analise'">Solicitar Análise</a>
+          <a class="nav-link" [routerLink]="['/list-analise']">Listar Análise</a>
         </li>
       </ul>
     </div>
@@ -28,7 +29,7 @@
   <div class="container">
     <div class="row">
       <div class="col-2 link-light">
-        
+
         <div *ngFor="let notification of notifications">teste: {{ notification.data }} {{ notification.key2 }}</div>
 
       </div>
@@ -42,6 +43,7 @@
           <a class="nav-link" [routerLink]="['/add-motorista']">Adicionar Motorista</a>
           <a class="nav-link" [routerLink]="['/list-motorista']">Listar Motorista</a>
           <a class="nav-link" [routerLink]="'/00000000-0000-0000-0000-000000000000/solicitar-analise'">Solicitar Análise</a>
+          <a class="nav-link" [routerLink]="['/list-analise']">Listar Análise</a>
         </li>
       </ul>
     </div>

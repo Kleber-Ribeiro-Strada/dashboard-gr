@@ -13,5 +13,6 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
         bool MotoristaExistente(string cpf);
 
         Task<IEnumerable<Motorista>> GetAll();
+        Task<Cnh?> BuscarCnh(Guid motoristaId);
     }
 }

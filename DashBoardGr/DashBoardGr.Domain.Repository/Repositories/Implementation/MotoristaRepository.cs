@@ -28,7 +28,12 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             await _appDbContext.SaveChangesAsync();
         }
 
-        
+        public Task<Cnh?> BuscarCnh(Guid motoristaId)
+        {
+            return _appDbContext.Cnh.Where(cnh => cnh.MotoristaId == motoristaId)
+                                    .OrderByDescending(cnh => cnh.DataVencimento)
+                                    .LastOrDefaultAsync();
+        }
 
         public Task<Motorista> Get(Guid id)
         {

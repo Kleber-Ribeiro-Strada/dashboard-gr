@@ -1,6 +1,7 @@
 ﻿using DashBoardGr.Domain.Application.Enums;
 using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
+using DashBoardGr.Infrastructure.BuscarCep.ExternalServices;
 using DashBoardGr.Infrastructure.Messaging;
 using FluentValidation;
 using FluentValidation.Results;
@@ -20,22 +21,30 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
         private readonly IValidator<SolicitarAnaliseCommand> _validator;
         private readonly IMotoristaRepository _motoristaRepository;
         private readonly IAnaliseRiscoRepository _analiseRiscoRepository;
+        private readonly BuscarEnderecoService _buscarEnderecoService;
         public SolicitarAnaliseCommandHandler(
             IMessageBusService messageBusService,
             IValidator<SolicitarAnaliseCommand> validator,
             IAnaliseRiscoRepository analiseRiscoRepository,
-            IMotoristaRepository motoristaRepository)
+            IMotoristaRepository motoristaRepository,
+            BuscarEnderecoService buscarEnderecoService)
         {
             _messageBusService = messageBusService;
             _validator = validator;
             _motoristaRepository = motoristaRepository;
             _analiseRiscoRepository = analiseRiscoRepository;
+            _buscarEnderecoService = buscarEnderecoService;
         }
 
 
         public async Task<Unit> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
-            var cnhId = Guid.Empty;
+            AdicioarEnderecoAoProprietario(ref request);
+            var cnh = await _motoristaRepository.BuscarCnh(request.MotoristaId);
+            if (cnh == null)
+                throw new ArgumentException("CNH não encontrada para o motorista");
+           
+            var cnhId = cnh.Id;
             var proprietario = new Proprietario(
                 request.Proprietario.CpfCnpj,
                 request.Proprietario.Nome,
@@ -83,6 +92,30 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
             await _messageBusService.Publish(request);
             return Unit.Value;
+        }
+
+        private void AdicioarEnderecoAoProprietario(ref SolicitarAnaliseCommand request)
+        {
+            if (request is null)
+                throw new ArgumentNullException(nameof(request));
+            
+            var endereco = _buscarEnderecoService.BuscarEndereco(request.Proprietario.Cep).Result;
+            if (endereco is null)
+                throw new ArgumentNullException(nameof(endereco));
+            
+            request.Proprietario.Rua = endereco.Logradouro;
+            request.Proprietario.Bairro = endereco.Bairro;
+            request.Proprietario.CodigoCidade = endereco.Gia;
+            request.Proprietario.Estado = endereco.Uf;
+            request.Proprietario.NomeCidade = endereco.Localidade;
+
+            foreach (var item in request.Veiculos)
+            {
+                item.CodigoCidade = endereco.Gia;
+                item.ImagemCrlv = "teste";
+                item.Rntrc = "0";
+            }
+
         }
     }
 }

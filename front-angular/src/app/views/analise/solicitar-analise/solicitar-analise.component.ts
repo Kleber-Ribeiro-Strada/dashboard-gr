@@ -5,6 +5,7 @@ import { EnderecoResultModel } from 'src/app/models/Results/EnderecoResultModel'
 import MotoristaResultModel from 'src/app/models/Results/MotoristaResultModel';
 import SolicitarAnaliseCommandModel, { VeiculoSolicitarAnaliseCommandModel } from 'src/app/models/SolicitarAnaliseCommandModel';
 import { MotoristaService } from 'src/app/services/motorista.service';
+import { SolicitarAnaliseService } from 'src/app/services/solicitar-analise.service';
 
 
 @Component({
@@ -20,10 +21,10 @@ export class SolicitarAnaliseComponent {
   solicitarAnaliseCommandModel: SolicitarAnaliseCommandModel = new SolicitarAnaliseCommandModel();
 
   veiculo: VeiculoSolicitarAnaliseCommandModel = new VeiculoSolicitarAnaliseCommandModel();
-  veiculos: VeiculoSolicitarAnaliseCommandModel[] = [];
   constructor(
     private router: ActivatedRoute,
-    private motoristaService: MotoristaService) {
+    private motoristaService: MotoristaService,
+    private service: SolicitarAnaliseService) {
     this.motorista = {} as MotoristaResultModel;
 
   }
@@ -46,7 +47,7 @@ export class SolicitarAnaliseComponent {
   }
 
   adicionarVeiculo(): void {
-    this.veiculos.push(this.veiculo);
+    this.solicitarAnaliseCommandModel.veiculos.push(this.veiculo);
 
     this.veiculo = new VeiculoSolicitarAnaliseCommandModel();
   }
@@ -61,6 +62,20 @@ export class SolicitarAnaliseComponent {
           this.solicitarAnaliseCommandModel.proprietario.rua = result.logradouro;
         }
       });
+  }
+
+  solicitarAnalise(): void {
+    this.service.adicionar(this.solicitarAnaliseCommandModel)
+    .subscribe({
+      next: (result)=>{
+
+      },
+      error: (e) => {
+        console.log('error', e.error);
+
+      },
+      complete: () => console.log('done'),
+    })
   }
 
 }

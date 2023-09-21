@@ -34,7 +34,26 @@ namespace DashBoardGr.Infrastructure
             if (rabbitParameter.Exchanges == null)
                 return;
 
-            foreach (var exchange in rabbitParameter.Exchanges)
+            var exchangeAnaliseRisco = rabbitParameter.Exchanges.First(x => x.ExchangeName == "analise-exchange");
+
+            channel.ExchangeDeclare(exchangeAnaliseRisco.ExchangeName, "x-delayed-message", true, false, new Dictionary<string, object>
+            {
+                { "x-delayed-type", "direct" } // Substitua "topic" pelo tipo de troca que você deseja usar como base
+            });
+
+            foreach (var queue in exchangeAnaliseRisco.Queues)
+            {
+                var queueName = queue.Split(',')[0].Trim();
+                var routingKeyName = queue.Split(',')[1].Trim();
+
+                channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+                channel.QueueBind(queue: queueName, exchange: exchangeAnaliseRisco.ExchangeName, routingKey: routingKeyName);
+            }
+            
+
+
+
+            foreach (var exchange in rabbitParameter.Exchanges.Where(x=>x.ExchangeName!= "analise-exchange"))
             {
                 channel.ExchangeDeclare(exchange: exchange.ExchangeName, type: ExchangeType.Topic);
 

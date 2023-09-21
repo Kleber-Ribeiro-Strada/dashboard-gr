@@ -23,5 +23,8 @@ namespace DashBoardGr.Domain.Repository.Entities
         public Guid ProprietarioId { get; set; }
         public virtual Proprietario Proprietario { get; set; } = null!;
 
+        public virtual ICollection<AnaliseRiscoVeiculo> AnaliseRiscoVeiculos { get; set; } = null!;
+
+
     }
 }

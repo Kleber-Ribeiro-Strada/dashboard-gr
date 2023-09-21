@@ -20,5 +20,7 @@ namespace DashBoardGr.Infrastructure
         public string ExchangeName { get; set; } = string.Empty;
 
         public List<string> Queues { get; set; } = new();
+
+        public int Xdelay { get; set; }
     }
 }

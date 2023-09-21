@@ -33,7 +33,7 @@ namespace Api.Controllers
         public async Task<IActionResult> VerificarAnalise(Guid Id)
         {
             var buscarAnaliseQuery = new BuscarAnaliseQuery();
-
+            await Task.Delay(1000);
             return Ok(Task.FromResult(new { }));
         }
 

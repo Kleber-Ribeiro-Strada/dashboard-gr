@@ -12,11 +12,15 @@ namespace DashBoardGr.Infrastructure
 {
     public static class InfrastructureModule
     {
+        public static IServiceCollection AddExternalServices(this IServiceCollection services)
+        {
+            services.AddHttpClient<BuscarEnderecoService>(c => c.BaseAddress = new Uri("https://viacep.com.br/ws/"));
+            return services;
+        }
         public static IServiceCollection AddMessageBus(this IServiceCollection services)
         {
-            services.AddScoped<IRabbitMQConfiguration, RabbitMQConfiguration>();
-            services.AddScoped<IMessageBusService, RabbitMqService>();
-            services.AddHttpClient<BuscarEnderecoService>(c => c.BaseAddress = new Uri("https://viacep.com.br/ws/"));
+            services.AddSingleton<IRabbitMQConfiguration, RabbitMQConfiguration>();
+            services.AddSingleton<IMessageBusService, RabbitMqService>();
 
             return services;
         }

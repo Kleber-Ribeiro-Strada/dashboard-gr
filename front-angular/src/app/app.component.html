@@ -24,12 +24,17 @@
   <router-outlet></router-outlet>
 </main>
 
-<header class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+<header class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark --bs-light-text-emphasis mt-5">
   <div class="container">
+    <div class="row">
+      <div class="col-2 link-light">
+        
+        <div *ngFor="let notification of notifications">teste: {{ notification.data }} {{ notification.key2 }}</div>
 
-    <a class="navbar-brand" href="#">
-      <img src="caminho-da-logo.png" alt="Logo" height="30">
-    </a>
+      </div>
+    </div>
+
+
 
     <div class="collapse navbar-collapse flex-row-reverse mt-3 mb-3 " id="navbarNav">
       <ul class="navbar-nav ml-auto ">

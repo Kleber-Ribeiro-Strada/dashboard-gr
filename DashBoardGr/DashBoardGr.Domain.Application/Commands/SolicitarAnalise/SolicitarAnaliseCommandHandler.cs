@@ -25,10 +25,10 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
         {
             var result = await _validator.ValidateAsync(request, cancellationToken);
 
-            if (!result.IsValid)
-            {
-                return Unit.Value;
-            }
+            //if (!result.IsValid)
+            //{
+            //    return Unit.Value;
+            //}
 
             await _messageBusService.Publish(request);
             return Unit.Value;

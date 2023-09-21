@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashBoardGr.Domain.Reposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashBoardGr.Infrastructure.Consumer", "DashBoardGr.Infrastructure.Consumer\DashBoardGr.Infrastructure.Consumer.csproj", "{33BDEE97-6712-432F-8C77-B2F9AFB9AEBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashBoardGr.Domain.Shared", "DashBoardGr.Domain.Shared\DashBoardGr.Domain.Shared.csproj", "{1A184579-44D1-4769-964B-90004D2CB95B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashBoardGr.Domain.Shared", "DashBoardGr.Domain.Shared\DashBoardGr.Domain.Shared.csproj", "{1A184579-44D1-4769-964B-90004D2CB95B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashBoardGr.Infrastructure.ConsumerGr", "DashBoardGr.Infrastructure.ConsumerGr\DashBoardGr.Infrastructure.ConsumerGr.csproj", "{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{1A184579-44D1-4769-964B-90004D2CB95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A184579-44D1-4769-964B-90004D2CB95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A184579-44D1-4769-964B-90004D2CB95B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

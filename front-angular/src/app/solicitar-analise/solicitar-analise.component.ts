@@ -29,4 +29,8 @@ export class SolicitarAnaliseComponent {
     console.log(this.idMotorista);
   }
 
+  adicionarVeiculo():void{
+    console.log("clicou")
+  }
+
 }

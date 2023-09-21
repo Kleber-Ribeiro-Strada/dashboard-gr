@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { EnderecoResultModel } from '../models/Results/EnderecoResultModel';
 import MotoristaCommandModel from '../models/MotoristaCommandModel';
 import MotoristaResultModel from '../models/Results/MotoristaResultModel';
+import { Guid } from "guid-typescript";
+
 
 
 @Injectable({
@@ -29,5 +31,10 @@ export class MotoristaService {
 
   buscarMotoristas(): Observable<MotoristaResultModel[]> {
     return this._http.get<MotoristaResultModel[]>(`${this.urlBase}motorista/`);
+  }
+
+  buscarMotorista(id: Guid):Observable<MotoristaResultModel>{
+    return this._http.get<MotoristaResultModel>(`${this.urlBase}motorista/buscar-motorista/${id}`);
+
   }
 }

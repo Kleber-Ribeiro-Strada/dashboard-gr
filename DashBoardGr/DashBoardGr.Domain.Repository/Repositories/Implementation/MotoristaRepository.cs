@@ -21,10 +21,10 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task AddVeiculo(Proprietario proprietario, Veiculo veiculo)
+        public async Task AddVeiculo(Proprietario proprietario, List<Veiculo> veiculos)
         {
             await _appDbContext.AddAsync(proprietario);
-            await _appDbContext.AddAsync(veiculo);
+            await _appDbContext.AddRangeAsync(veiculos);
             await _appDbContext.SaveChangesAsync();
         }
 
@@ -32,7 +32,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
         public Task<Motorista> Get(Guid id)
         {
-            throw new NotImplementedException();
+            return _appDbContext.Motorista.SingleAsync(m=>m.Id == id);
         }
 
         public Task<IEnumerable<Motorista>> GetAll()

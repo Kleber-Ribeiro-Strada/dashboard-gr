@@ -1,4 +1,5 @@
-﻿using DashBoardGr.Domain.Application.Queries.AnaliseQueries.BuscarAnalise;
+﻿using AutoMapper;
+using DashBoardGr.Domain.Application.Queries.AnaliseQueries.BuscarAnalise;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
 using MediatR;
 using System;
@@ -9,22 +10,24 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo
 {
-    public class BuscarMotoristaPorCodigoQueryHandler : IRequestHandler<BuscarMotoristaPorCodigoQuery, BuscarMotoristasViewModel>
+    public class BuscarMotoristaPorCodigoQueryHandler : IRequestHandler<BuscarMotoristaPorCodigoQuery, BuscarMotoristaViewModel>
     {
         private readonly IMotoristaRepository _motoristaRepository;
+        private readonly IMapper _mapper;
 
-        public BuscarMotoristaPorCodigoQueryHandler(IMotoristaRepository motoristaRepository)
+        public BuscarMotoristaPorCodigoQueryHandler(IMotoristaRepository motoristaRepository, IMapper mapper)
         {
             _motoristaRepository = motoristaRepository;
+            _mapper = mapper;
         }
 
 
 
-        public async Task<BuscarMotoristasViewModel> Handle(BuscarMotoristaPorCodigoQuery request, CancellationToken cancellationToken)
+        public async Task<BuscarMotoristaViewModel> Handle(BuscarMotoristaPorCodigoQuery request, CancellationToken cancellationToken)
         {
             var motorista = await _motoristaRepository.Get(request.Id);
 
-            return new BuscarMotoristasViewModel();
+            return _mapper.Map<BuscarMotoristaViewModel>(motorista);
         }
     }
 }

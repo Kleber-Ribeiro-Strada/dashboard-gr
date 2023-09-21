@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo
 {
-    public class BuscarMotoristasViewModel
+    public class BuscarMotoristaViewModel
     {
+        public Guid Id { get; set; }
+
+        public string Nome { get; set; } = string.Empty;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DashBoardGr.Domain.Application.Commands.AdicionarMotorista;
 using DashBoardGr.Domain.Application.Commands.AdicionarVeiculo;
+using DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo;
 using DashBoardGr.Domain.Application.Queries.BuscarMotoristas;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,14 @@ namespace Api.Controllers
         public async Task<IActionResult> BuscarMotoristas()
         {
             var result = await _mediator.Send(new BuscarMotoristasQuery { });
+
+            return Ok(result);
+        }
+
+        [HttpGet("buscar-motorista/{id}")]
+        public async Task<IActionResult> BuscarMotorista(Guid id)
+        {
+            var result = await _mediator.Send(new BuscarMotoristaPorCodigoQuery { Id = id });
 
             return Ok(result);
         }

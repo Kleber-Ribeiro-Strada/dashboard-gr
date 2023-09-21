@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DashBoardGr.Domain.Application.Commands.AdicionarMotorista;
+using DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo;
 using DashBoardGr.Domain.Application.Queries.BuscarMotoristas;
 using DashBoardGr.Domain.Repository.Entities;
 using System;
@@ -19,6 +20,8 @@ namespace DashBoardGr.Domain.Application.Profiles
             CreateMap<AdicionarCnhMotoristaCommand, Cnh>();
 
             CreateMap<Motorista, BuscarMotoristasViewModel>();
+
+            CreateMap<Motorista, BuscarMotoristaViewModel>();
         }
 
     }

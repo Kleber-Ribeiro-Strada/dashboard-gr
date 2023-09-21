@@ -2,8 +2,29 @@
 {
     public class Proprietario
     {
-        public Proprietario()
+        public Proprietario(
+            string cpfCnpj,
+            string nome, 
+            string cep,
+            string codigoCidade, 
+            string nomeCidade, 
+            string rua,
+            string complemento,
+            string bairro, 
+            string estado,
+            string telefone)
         {
+            Id = Guid.NewGuid();
+            CpfCnpj = cpfCnpj;
+            Nome = nome;
+            Cep = cep;
+            CodigoCidade = codigoCidade;
+            NomeCidade = nomeCidade;
+            Rua = rua;
+            Complemento = complemento;
+            Bairro = bairro;
+            Estado = estado;
+            Telefone = telefone;
 
         }
 

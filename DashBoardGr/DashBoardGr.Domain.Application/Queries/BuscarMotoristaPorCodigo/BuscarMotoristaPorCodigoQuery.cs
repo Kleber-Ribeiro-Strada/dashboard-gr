@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo
 {
-    public class BuscarMotoristaPorCodigoQuery : IRequest<BuscarMotoristasViewModel>
+    public class BuscarMotoristaPorCodigoQuery : IRequest<BuscarMotoristaViewModel>
     {
         public Guid Id{ get; set; }
     }

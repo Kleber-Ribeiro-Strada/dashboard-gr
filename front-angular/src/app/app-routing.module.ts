@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AddMotoristaComponent } from './motorista/add-motorista/add-motorista.component';
-import { ListMotoristaComponent } from './motorista/list-motorista/list-motorista.component';
-import { SolicitarAnaliseComponent } from './solicitar-analise/solicitar-analise.component';
+import { HomeComponent } from './views/home/home.component';
+import { AddMotoristaComponent } from './views/motorista/add-motorista/add-motorista.component';
+import { ListMotoristaComponent } from './views/motorista/list-motorista/list-motorista.component';
+import { SolicitarAnaliseComponent } from './views/solicitar-analise/solicitar-analise.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

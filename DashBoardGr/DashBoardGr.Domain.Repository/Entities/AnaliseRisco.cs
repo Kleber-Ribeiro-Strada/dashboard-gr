@@ -8,6 +8,18 @@ namespace DashBoardGr.Domain.Repository.Entities
 {
     public class AnaliseRisco
     {
+        public AnaliseRisco(
+            string status,
+            Guid motoristaId, 
+            Guid cnhId)
+        {
+            Id = Guid.NewGuid();
+            DataSolicitacaoAnalise = DateTime.Now;
+            DataAvaliacao = null;
+            Status = status;
+            Observacao = null;
+        }
+
         public Guid Id { get; private set; }
 
         public DateTime DataSolicitacaoAnalise { get; private set; }

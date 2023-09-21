@@ -37,7 +37,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarVeiculo
             request.Proprietario.Rua = endereco.Logradouro;
             request.Proprietario.Bairro = endereco.Bairro;
             request.Proprietario.Estado = endereco.Uf;
-            var proprietario = new Proprietario();
+            //var proprietario = new Proprietario();
             //request.Proprietario.CpfCnpj
             //, request.Proprietario.Nome
             //, request.Proprietario.Cep
@@ -50,7 +50,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarVeiculo
             //, endereco.Uf
             //, request.Proprietario.Telefone);
 
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
                 //proprietario.Id
                 //, request.Tipo
                 //, request.Placa
@@ -67,7 +67,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarVeiculo
                 //, endereco.Gia
                 //, request.ImagemCrlv);
 
-            await _motoristaRepository.AddVeiculo(proprietario, veiculo);
+            //await _motoristaRepository.AddVeiculo(proprietario, veiculo);
 
             return new CommandResponse(new { });
         }

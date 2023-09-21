@@ -112,7 +112,7 @@ app.Use(async (context, next) =>
 
                 await webSocket.SendAsync(data, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
 
-                await Task.Delay(1000);
+                await Task.Delay(10000);
             }
 
         }

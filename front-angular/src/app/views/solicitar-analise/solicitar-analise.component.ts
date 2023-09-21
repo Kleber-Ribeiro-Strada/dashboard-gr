@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guid } from "guid-typescript";
-import ProprietarioCommandModel from 'src/app/models/ProprietarioCommandModel';
 import { EnderecoResultModel } from 'src/app/models/Results/EnderecoResultModel';
 import MotoristaResultModel from 'src/app/models/Results/MotoristaResultModel';
-import SolicitarAnaliseCommandModel from 'src/app/models/SolicitarAnaliseCommandModel';
-import VeiculoCommand from 'src/app/models/VeiculoCommandModel';
+import SolicitarAnaliseCommandModel, { VeiculoSolicitarAnaliseCommandModel } from 'src/app/models/SolicitarAnaliseCommandModel';
 import { MotoristaService } from 'src/app/services/motorista.service';
 
 
@@ -19,11 +17,10 @@ export class SolicitarAnaliseComponent {
   novoMotorista: boolean = true;
   nomeMotorista: string;
   motorista: MotoristaResultModel;
-  proprietario: ProprietarioCommandModel = new ProprietarioCommandModel();
   solicitarAnaliseCommandModel: SolicitarAnaliseCommandModel = new SolicitarAnaliseCommandModel();
 
-  veiculo: VeiculoCommand = new VeiculoCommand();
-  veiculos: VeiculoCommand[] = [];
+  veiculo: VeiculoSolicitarAnaliseCommandModel = new VeiculoSolicitarAnaliseCommandModel();
+  veiculos: VeiculoSolicitarAnaliseCommandModel[] = [];
   constructor(
     private router: ActivatedRoute,
     private motoristaService: MotoristaService) {
@@ -49,20 +46,19 @@ export class SolicitarAnaliseComponent {
   }
 
   adicionarVeiculo(): void {
-    this.veiculo.id = Guid.createEmpty();
     this.veiculos.push(this.veiculo);
 
-    this.veiculo = new VeiculoCommand();
+    this.veiculo = new VeiculoSolicitarAnaliseCommandModel();
   }
 
   buscarEndereco(): void {
-    this.motoristaService.BuscarEndereco(this.proprietario.cep)
+    this.motoristaService.BuscarEndereco(this.solicitarAnaliseCommandModel.proprietario.cep)
       .subscribe({
         next: (result) => {
-          this.proprietario.bairro = result.bairro;
-          this.proprietario.cidade = result.localidade;
-          this.proprietario.estado = result.uf;
-          this.proprietario.rua = result.logradouro;
+          this.solicitarAnaliseCommandModel.proprietario.bairro = result.bairro;
+          this.solicitarAnaliseCommandModel.proprietario.nomeCidade = result.localidade;
+          this.solicitarAnaliseCommandModel.proprietario.estado = result.uf;
+          this.solicitarAnaliseCommandModel.proprietario.rua = result.logradouro;
         }
       });
   }

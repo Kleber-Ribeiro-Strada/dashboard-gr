@@ -11,6 +11,9 @@ namespace DashBoardGr.Domain.Repository
         public DbSet<Motorista> Motorista { get; set; }
         public DbSet<Proprietario> Proprietario { get; set; }
         public DbSet<Veiculo> Veiculo { get; set; }
+        public DbSet<AnaliseRisco> AnaliseRisco { get; set; }
+        public DbSet<AnaliseRiscoVeiculo> AnaliseRiscoVeiculo { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             

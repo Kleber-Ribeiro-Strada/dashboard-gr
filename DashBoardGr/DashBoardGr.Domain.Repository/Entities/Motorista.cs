@@ -33,5 +33,6 @@
 
 
         public virtual ICollection<Cnh> Cnhs { get; private set; } = null!;
+        public virtual ICollection<AnaliseRisco> Analises { get; private set; } = null!;
     }
 }

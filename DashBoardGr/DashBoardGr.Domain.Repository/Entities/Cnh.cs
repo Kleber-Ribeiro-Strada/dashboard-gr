@@ -14,5 +14,7 @@
 
         public Guid MotoristaId { get; set; }
         public virtual Motorista Motorista { get; set; } = null!;
+
+        public virtual ICollection<AnaliseRisco> Analises { get; set; }
     }
 }

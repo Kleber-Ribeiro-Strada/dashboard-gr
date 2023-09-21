@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Repository.Mapping
 {
-    public class CnhMap : IEntityTypeConfiguration<Cnh>
+    public class AnaliseRiscoMap : IEntityTypeConfiguration<AnaliseRisco>
     {
-        public void Configure(EntityTypeBuilder<Cnh> builder)
+        public void Configure(EntityTypeBuilder<AnaliseRisco> builder)
         {
-            builder.HasMany(cnh => cnh.Analises)
-                .WithOne(a => a.Cnh)
-                .HasForeignKey(a => a.CnhId);
+            builder.HasMany(ar => ar.AnaliseRiscoVeiculos)
+                .WithOne(arv => arv.AnaliseRisco)
+                .HasForeignKey(arv => arv.AnaliseRiscoId);
         }
     }
 }

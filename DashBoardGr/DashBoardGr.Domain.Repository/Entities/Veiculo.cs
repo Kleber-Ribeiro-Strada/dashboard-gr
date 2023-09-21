@@ -18,7 +18,7 @@ namespace DashBoardGr.Domain.Repository.Entities
             int anoModelo,
             string estado,
             string codigoCidade,
-            string imagem, 
+            string imagemCrlv, 
             Guid proprietarioId)
         {
             Id = Guid.NewGuid();
@@ -35,7 +35,7 @@ namespace DashBoardGr.Domain.Repository.Entities
             AnoModelo = anoModelo;
             Estado = estado;
             CodigoCidade = codigoCidade;
-            ImagemCrlv = imagem;
+            ImagemCrlv = imagemCrlv;
             ProprietarioId = proprietarioId;
         }
 

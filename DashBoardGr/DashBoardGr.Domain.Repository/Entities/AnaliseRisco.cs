@@ -14,6 +14,8 @@ namespace DashBoardGr.Domain.Repository.Entities
             Guid cnhId)
         {
             Id = Guid.NewGuid();
+            MotoristaId = motoristaId;
+            CnhId = cnhId;
             DataSolicitacaoAnalise = DateTime.Now;
             DataAvaliacao = null;
             Status = status;

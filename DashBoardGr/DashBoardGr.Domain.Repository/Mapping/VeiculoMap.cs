@@ -13,7 +13,9 @@ namespace DashBoardGr.Domain.Repository.Mapping
     {
         public void Configure(EntityTypeBuilder<Veiculo> builder)
         {
-            
+            builder.HasMany(v => v.AnaliseRiscoVeiculos)
+                .WithOne(arv => arv.Veiculo)
+                .HasForeignKey(arv => arv.VeiculoId);
         }
     }
 }

@@ -33,17 +33,17 @@
   <div class="row">
     <div class="col-3">
       <label for="inputNomeProprietario" class="form-label">Nome</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.nome" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.nome" [ngModelOptions]="{standalone: true}">
     </div>
 
     <div class="col-2">
       <label for="inputCpf" class="form-label">CPF - CNPJ</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.cpfCnpj" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.cpfCnpj" [ngModelOptions]="{standalone: true}">
     </div>
 
     <div class="col-2">
       <label for="inputTelefone" class="form-label">Telefone</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.telefone" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.telefone" [ngModelOptions]="{standalone: true}">
     </div>
   </div>
   <div class="row mt-5">
@@ -51,37 +51,37 @@
     <hr>
     <div class="col-2">
       <label for="inputCepProprietario" class="form-label">Cep</label>
-      <input type="text" class="form-control" (change)="buscarEndereco()" [(ngModel)]="proprietario.cep" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" (change)="buscarEndereco()" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.cep" [ngModelOptions]="{standalone: true}">
     </div>
 
     <div class="col-2">
       <label for="inputNumeroProprietario" class="form-label">Número</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.numero" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.numero" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="col-8"></div>
 
     <div class="col-3">
       <label for="inputRua" class="form-label">Rua</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.rua" [ngModelOptions]="{standalone: true}" disabled>
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.rua" [ngModelOptions]="{standalone: true}" disabled>
     </div>
 
     <div class="col-3">
       <label for="inputBairro" class="form-label">Bairro</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.bairro" [ngModelOptions]="{standalone: true}" disabled>
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.bairro" [ngModelOptions]="{standalone: true}" disabled>
     </div>
 
     <div class="col-3">
       <label for="inputCidade" class="form-label">Cidade</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.cidade" [ngModelOptions]="{standalone: true}" disabled>
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.nomeCidade" [ngModelOptions]="{standalone: true}" disabled>
     </div>
     <div class="col-md-2">
       <label for="inputEstado" class="form-label">Estado</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.estado" [ngModelOptions]="{standalone: true}" disabled>
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.estado" [ngModelOptions]="{standalone: true}" disabled>
 
     </div>
     <div class="col-md-3 mb-5">
       <label for="inputComplemento" class="form-label">Complemento</label>
-      <input type="text" class="form-control" [(ngModel)]="proprietario.complemento" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" [(ngModel)]="solicitarAnaliseCommandModel.proprietario.complemento" [ngModelOptions]="{standalone: true}">
     </div>
   </div>
 </div>

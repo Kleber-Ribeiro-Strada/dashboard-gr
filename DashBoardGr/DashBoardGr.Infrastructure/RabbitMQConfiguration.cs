@@ -49,7 +49,7 @@ namespace DashBoardGr.Infrastructure
                 channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
                 channel.QueueBind(queue: queueName, exchange: exchangeAnaliseRisco.ExchangeName, routingKey: routingKeyName);
             }
-            
+
 
 
 

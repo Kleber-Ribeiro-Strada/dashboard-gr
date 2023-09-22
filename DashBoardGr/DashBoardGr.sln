@@ -19,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashBoardGr.Infrastructure.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashBoardGr.Domain.Shared", "DashBoardGr.Domain.Shared\DashBoardGr.Domain.Shared.csproj", "{1A184579-44D1-4769-964B-90004D2CB95B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashBoardGr.Infrastructure.ConsumerGr", "DashBoardGr.Infrastructure.ConsumerGr\DashBoardGr.Infrastructure.ConsumerGr.csproj", "{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashBoardGr.Infrastructure.ConsumerGr", "DashBoardGr.Infrastructure.ConsumerGr\DashBoardGr.Infrastructure.ConsumerGr.csproj", "{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6C6872ED-1F0D-4015-89A9-78696D9FB627}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashBoardGr.Carga", "DashBoardGr.Carga\DashBoardGr.Carga.csproj", "{042EE6FA-8724-4157-AEB5-15B62CE2AFDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44EC0601-D2EB-411C-B8ED-5AA8B1DDF877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042EE6FA-8724-4157-AEB5-15B62CE2AFDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042EE6FA-8724-4157-AEB5-15B62CE2AFDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042EE6FA-8724-4157-AEB5-15B62CE2AFDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042EE6FA-8724-4157-AEB5-15B62CE2AFDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{D497DCD2-48AA-4ADD-9BD4-2CB56265288A} = {2E80A4CA-91AB-4894-8BA2-0B018F845453}
 		{33BDEE97-6712-432F-8C77-B2F9AFB9AEBC} = {2E80A4CA-91AB-4894-8BA2-0B018F845453}
 		{1A184579-44D1-4769-964B-90004D2CB95B} = {2E80A4CA-91AB-4894-8BA2-0B018F845453}
+		{042EE6FA-8724-4157-AEB5-15B62CE2AFDD} = {6C6872ED-1F0D-4015-89A9-78696D9FB627}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87DD155E-6C5D-4680-BA9D-F9274D475B4A}

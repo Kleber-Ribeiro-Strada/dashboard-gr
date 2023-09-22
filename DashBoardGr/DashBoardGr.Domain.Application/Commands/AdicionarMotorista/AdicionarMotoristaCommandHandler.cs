@@ -58,7 +58,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 Telefone = request.Telefone,
             }, cancellationToken);
 
-            return new CommandResponse(motorista);
+            return new CommandResponse(motorista.Id);
         }
     }
 }

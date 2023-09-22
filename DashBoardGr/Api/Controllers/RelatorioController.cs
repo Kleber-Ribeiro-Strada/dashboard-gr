@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoBarras;
+using DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoPizza;
+using DashBoardGr.Domain.Application.Queries.BuscarAnalisesRelatorio;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -7,43 +11,35 @@ namespace Api.Controllers
     [ApiController]
     public class RelatorioController : ControllerBase
     {
-        [HttpGet("buscar-analise-por-periodo")]
-        public string BuscarAnalisePorPeriodo()
+        private readonly IMediator _mediator;
+        public RelatorioController(IMediator mediator)
         {
-            return "teste";
+            _mediator = mediator;
         }
 
-        [HttpGet("buscar-analise-por-cliente")]
-        public string BuscarAnalisesPorCliente()
+        [HttpGet]
+        public async Task<IActionResult> BuscarRelatorioFiltro([FromQuery]BuscarAnalisesRelatorioQuery query)
         {
-            return "teste";
+            return Ok(await _mediator.Send(query));
         }
 
-        [HttpGet("buscar-analitico")]
-        public string Analitico(object filtro)
+        [HttpGet("buscar-grafico-barras-semanas")]
+        public async Task<IActionResult> BuscarGraficoBarras([FromQuery] BuscarAnalisesGraficoBarrasQuery query)
         {
-            return "teste";
+            return Ok(await _mediator.Send(query));
         }
 
-        #region Sintéticos
-        [HttpGet("buscar-dados-sinteticos-aprovado-reprovado-agrupado-por-semanas")]
-        public string SinteticoAprovadoReprovadoAgrupadoPorSemanas(object filtro)
+
+        [HttpGet("buscar-grafico-pizza")]
+        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnalisesGraficoPizzaQuery query)
         {
-            return "teste";
+            return Ok(await _mediator.Send(query));
         }
 
-        [HttpGet("buscar-sintetico-total-reprovacoes")]
-        public string SinteticoTotalReprovacoes(object filtro)
+        [HttpGet("buscar-grafico-linha-horas")]
+        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnaliseGraficoLinhaQuery query)
         {
-            return "teste";
+            return Ok(await _mediator.Send(query));
         }
-
-        [HttpGet("buscar-sintetico-status-reprovacoes")]
-        public string SinteticoStatusReprovacoes(object filtro)
-        {
-            return "teste";
-        }
-        #endregion
-
     }
 }

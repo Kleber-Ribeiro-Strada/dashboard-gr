@@ -11,6 +11,8 @@ import { ModalComponent } from './componentes/modal/modal.component';
 import { ListMotoristaComponent } from './views/motorista/list-motorista/list-motorista.component';
 import { SolicitarAnaliseComponent } from './views/analise/solicitar-analise/solicitar-analise.component';
 import { ListAnaliseComponent } from './views/analise/list-analise/list-analise.component';
+import { DashboardComponent } from './views/analise/dashboard/dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -21,13 +23,15 @@ import { ListAnaliseComponent } from './views/analise/list-analise/list-analise.
     ModalComponent,
     ListMotoristaComponent,
     SolicitarAnaliseComponent,
-    ListAnaliseComponent
+    ListAnaliseComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

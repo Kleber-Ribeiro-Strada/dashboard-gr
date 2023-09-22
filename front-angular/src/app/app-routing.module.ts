@@ -5,6 +5,7 @@ import { AddMotoristaComponent } from './views/motorista/add-motorista/add-motor
 import { ListMotoristaComponent } from './views/motorista/list-motorista/list-motorista.component';
 import { SolicitarAnaliseComponent } from './views/analise/solicitar-analise/solicitar-analise.component';
 import { ListAnaliseComponent } from './views/analise/list-analise/list-analise.component';
+import { DashboardComponent } from './views/analise/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'list-motorista', component: ListMotoristaComponent },
   { path: ':idmotorista/solicitar-analise', component: SolicitarAnaliseComponent },
   { path: 'list-analise', component: ListAnaliseComponent },
+  { path: 'dashboard', component: DashboardComponent },
 
 
 ];

@@ -1,4 +1,5 @@
-﻿using DashBoardGr.Domain.Repository.Entities;
+﻿using DashBoardGr.Domain.Repository.Dtos;
+using DashBoardGr.Domain.Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,15 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
     public interface IAnaliseRiscoRepository
     {
         Task SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos);
+
+        Task<IEnumerable<AnaliseRisco>> BuscarAnalisesAnalisesRisco(
+            DateTime? dataSolicitacaoDe,
+            DateTime? dataSolicitacaoAte,
+            string? cpf,
+            string? status);
+
+        Task<GraficoGeralDto> BuscarGraficoPorSemana(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
+        Task<GraficoGeralDto> BuscarGraficoPorDia(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
+        Task<GraficoGeralDto> BuscarGraficoPorHora(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
     }
 }

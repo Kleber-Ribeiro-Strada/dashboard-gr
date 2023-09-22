@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header">Análises</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{analiseRiscoRelatorioPrincipal.length}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header">Análises Pendentes</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{pendentes}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header">Análises Aprovadas</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{aprovados}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header">Análises Reprovadas</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{reprovados}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header ">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            Filtro
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body text-start">
+            <div class="row">
+              <div class="col-2 ">
+                <label class="form-label">Data de </label>
+                <input class="form-control" type="date" [(ngModel)]="filter.dataSolicitacaoDe" [ngModelOptions]="{standalone: true}">
+              </div>
+
+              <div class="col-2 ">
+                <label class="form-label">Até </label>
+                <input class="form-control" type="date" [(ngModel)]="filter.dataSolicitacaoAte" [ngModelOptions]="{standalone: true}">
+              </div>
+
+              <div class="col-2 ">
+                <label class="form-label">Cpf </label>
+                <input class="form-control" type="text" [(ngModel)]="filter.cpf" [ngModelOptions]="{standalone: true}">
+              </div>
+
+              <div class="col-2 ">
+                <label class="form-label">Status </label>
+                <select class="form-select" [(ngModel)]="filter.status" [ngModelOptions]="{standalone: true}">
+                  <option selected>Todos</option>
+                  <option value="Pendente">Pendente</option>
+                  <option value="Aprovado">Aprovado</option>
+                  <option value="Reprovado">Reprovado</option>
+                </select>
+              </div>
+
+              <div class="col-2">
+                <label class="form-label">&nbsp; </label>
+
+                <button type="button" class="btn btn-primary form-control">
+                  Filtrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row text-start">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Cpf</th>
+            <th scope="col">Cavalo</th>
+            <th scope="col">Data Análise</th>
+            <th scope="col">Status</th>
+            <th scope="col">Análise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let analise of analiseRiscoRelatorioPrincipal">
+            <th scope="row">{{analise.id.split('-')[0]}}</th>
+            <td>Mark</td>
+            <td>32576251897</td>
+            <td>DEF 1378</td>
+            <td>22/09/2023 10:08</td>
+            <td>Pendente</td>
+            <td>Inválido Situação cadastral pendente.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <canvas baseChart [data]="graficoBarra" [options]="barChartOptions" [legend]="barChartLegend" type="bar"></canvas>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <canvas baseChart [data]="graficoPizza" [options]="barChartOptions" [legend]="barChartLegend"
+          type="doughnut"></canvas>
+      </div>
+
+      <div class="col-6">
+        <canvas baseChart [data]="graficoVelocimetro" [options]="barChartOptions" [legend]="barChartLegend"
+          type="line"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

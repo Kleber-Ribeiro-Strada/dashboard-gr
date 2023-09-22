@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guid } from "guid-typescript";
-import { EnderecoResultModel } from 'src/app/models/Results/EnderecoResultModel';
 import MotoristaResultModel from 'src/app/models/Results/MotoristaResultModel';
 import SolicitarAnaliseCommandModel, { VeiculoSolicitarAnaliseCommandModel } from 'src/app/models/SolicitarAnaliseCommandModel';
 import { MotoristaService } from 'src/app/services/motorista.service';

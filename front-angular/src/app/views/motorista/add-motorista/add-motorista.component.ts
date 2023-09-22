@@ -14,8 +14,8 @@ export class AddMotoristaComponent {
   model: MotoristaCommandModel = new MotoristaCommandModel();
   endereco!: EnderecoResultModel;
   error: ErrorResultModel;
-  
-  @ViewChild('staticBackdrop') 
+
+  @ViewChild('staticBackdrop')
   private meuModal: ElementRef;
 
   constructor(private _service: MotoristaService, private renderer: Renderer2) {

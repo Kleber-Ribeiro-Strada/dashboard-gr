@@ -35,6 +35,11 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
                                     .LastOrDefaultAsync();
         }
 
+        public Task<IEnumerable<Motorista>> BuscarMotoristasComUltimaAnalise()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Motorista> Get(Guid id)
         {
             return _appDbContext.Motorista.SingleAsync(m=>m.Id == id);

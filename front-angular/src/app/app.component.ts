@@ -9,7 +9,7 @@ import { WebSocketService } from './services/WebSocketService';
 })
 export class AppComponent {
   title = 'front-angular';
-  
+
   notifications: any[] = [];
 
   constructor(private webSocketService: WebSocketService) {}

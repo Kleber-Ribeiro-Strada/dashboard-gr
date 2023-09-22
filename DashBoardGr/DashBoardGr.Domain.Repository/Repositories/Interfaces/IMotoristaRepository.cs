@@ -14,5 +14,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
 
         Task<IEnumerable<Motorista>> GetAll();
         Task<Cnh?> BuscarCnh(Guid motoristaId);
+
+        Task<IEnumerable<Motorista>> BuscarMotoristasComUltimaAnalise();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using DashBoardGr.Domain.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection;
+using System.Reflection.Emit;
 
 
 namespace DashBoardGr.Domain.Repository
@@ -16,12 +18,20 @@ namespace DashBoardGr.Domain.Repository
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLazyLoadingProxies();
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
 
             // Escaneia o assembly em busca de classes que implementam IEntityTypeConfiguration<>
             var types = Assembly.GetExecutingAssembly()

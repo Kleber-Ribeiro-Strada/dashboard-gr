@@ -4,14 +4,7 @@ using DashBoardGr.Domain.Repository.Repositories.Interfaces;
 using DashBoardGr.Infrastructure.BuscarCep.ExternalServices;
 using DashBoardGr.Infrastructure.Messaging;
 using FluentValidation;
-using FluentValidation.Results;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
@@ -40,6 +33,13 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
         public async Task<Unit> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
             AdicioarEnderecoAoProprietario(ref request);
+            var result = await _validator.ValidateAsync(request, cancellationToken);
+
+            if (!result.IsValid)
+            {
+                return Unit.Value;
+            }
+
             var cnh = await _motoristaRepository.BuscarCnh(request.MotoristaId);
             if (cnh == null)
                 throw new ArgumentException("CNH não encontrada para o motorista");
@@ -83,12 +83,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                 request.MotoristaId,
                 cnhId), veiculos);
 
-            var result = await _validator.ValidateAsync(request, cancellationToken);
 
-            //if (!result.IsValid)
-            //{
-            //    return Unit.Value;
-            //}
 
             await _messageBusService.Publish(request);
             return Unit.Value;

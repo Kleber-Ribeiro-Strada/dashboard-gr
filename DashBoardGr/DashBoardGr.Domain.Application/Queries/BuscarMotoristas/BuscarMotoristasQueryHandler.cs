@@ -24,7 +24,9 @@ namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristas
 
         public async Task<List<BuscarMotoristasViewModel>> Handle(BuscarMotoristasQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<List<BuscarMotoristasViewModel>>(await _repository.GetAll());
+            var motoristas = await _repository.GetAll();
+                
+            return _mapper.Map<List<BuscarMotoristasViewModel>>(motoristas.ToList());
         }
     }
 }

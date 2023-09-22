@@ -95,7 +95,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             return Task.FromResult(result);
         }
 
-        public Task<GraficoGeralDto> BuscarGraficoPorDia(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
+        public Task<GraficoGeralDto> BuscarGraficoPorPeriodo(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
         {
             var analisesFiltradas = _appDbContext.AnaliseRisco
              .Where(a => a.Status == "Pendente" || a.Status == "Reprovado")

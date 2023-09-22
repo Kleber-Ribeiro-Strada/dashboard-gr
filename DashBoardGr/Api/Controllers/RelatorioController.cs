@@ -31,13 +31,13 @@ namespace Api.Controllers
 
 
         [HttpGet("buscar-grafico-pizza")]
-        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnalisesGraficoPizzaQuery query)
+        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnalisesGraficoLinhaQuery query)
         {
             return Ok(await _mediator.Send(query));
         }
 
         [HttpGet("buscar-grafico-linha-horas")]
-        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnaliseGraficoLinhaQuery query)
+        public async Task<IActionResult> BuscarGraficoLinha([FromQuery] BuscarAnalisesGraficoLinhaQuery query)
         {
             return Ok(await _mediator.Send(query));
         }

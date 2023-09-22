@@ -21,7 +21,7 @@ namespace DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoPizza
         }
         public async Task<BuscarAnalisesGraficoPizzaViewModel> Handle(BuscarAnalisesGraficoPizzaQuery request, CancellationToken cancellationToken)
         {
-            var result = await _repository.BuscarGraficoBarra(request.DataSolicitacaoDe, request.DataSolicitacaoAte);
+            var result = await _repository.BuscarGraficoPorPeriodo(request.DataSolicitacaoDe, request.DataSolicitacaoAte);
             if (result == null)
             {
                 return new BuscarAnalisesGraficoPizzaViewModel();

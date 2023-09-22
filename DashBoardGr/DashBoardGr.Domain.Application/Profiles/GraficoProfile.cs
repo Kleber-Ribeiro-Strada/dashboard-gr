@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoBarras;
+using DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoLinha;
+using DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoPizza;
 using DashBoardGr.Domain.Repository.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Profiles
 {
@@ -14,8 +11,13 @@ namespace DashBoardGr.Domain.Application.Profiles
         public GraficoProfile()
         {
             CreateMap<GraficoGeralDto, BuscarAnalisesGraficoPizzaViewModel>();
-
             CreateMap<GraficoGeralDto.DadosGraficosDto, BuscarAnalisesGraficoPizzaViewModel.DadosGraficos>();
+
+            CreateMap<GraficoGeralDto, BuscarAnalisesGraficoLinhaViewModel>();
+            CreateMap<GraficoGeralDto.DadosGraficosDto, BuscarAnalisesGraficoLinhaViewModel.DadosGraficos>();
+
+            CreateMap<GraficoGeralDto, BuscarAnalisesGraficoBarrasViewModel>();
+            CreateMap<GraficoGeralDto.DadosGraficosDto, BuscarAnalisesGraficoBarrasViewModel.DadosGraficos>();
         }
     }
 }

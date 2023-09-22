@@ -19,7 +19,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
             string? status);
 
         Task<GraficoGeralDto> BuscarGraficoPorSemana(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
-        Task<GraficoGeralDto> BuscarGraficoPorDia(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
+        Task<GraficoGeralDto> BuscarGraficoPorPeriodo(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
         Task<GraficoGeralDto> BuscarGraficoPorHora(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
     }
 }

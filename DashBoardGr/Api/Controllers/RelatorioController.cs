@@ -31,7 +31,7 @@ namespace Api.Controllers
 
 
         [HttpGet("buscar-grafico-pizza")]
-        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnalisesGraficoLinhaQuery query)
+        public async Task<IActionResult> BuscarGraficoPizza([FromQuery] BuscarAnalisesGraficoPizzaQuery query)
         {
             return Ok(await _mediator.Send(query));
         }

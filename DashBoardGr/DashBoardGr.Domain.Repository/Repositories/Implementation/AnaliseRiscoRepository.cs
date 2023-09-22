@@ -23,12 +23,12 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             var query = _appDbContext.AnaliseRisco.AsQueryable();
             if (dataSolicitacaoDe.HasValue)
             {
-                query = query.Where(ar=>ar.DataSolicitacaoAnalise >= dataSolicitacaoDe.Value);
+                query = query.Where(ar => ar.DataSolicitacaoAnalise >= dataSolicitacaoDe.Value);
             }
 
             if (dataSolicitacaoAte.HasValue)
             {
-                query = query.Where(ar=>ar.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(26.9d));
+                query = query.Where(ar => ar.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(26.9d));
             }
 
             if (!string.IsNullOrEmpty(cpf))
@@ -59,11 +59,14 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
         public Task<GraficoGeralDto> BuscarGraficoPorSemana(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
         {
-            var analisesFiltradas = _appDbContext.AnaliseRisco
-             .Where(a => a.Status == "Pendente" || a.Status == "Reprovado")
-             .ToList(); // Carrega os dados do banco de dados em memória
+            var analisesFiltradas = _appDbContext.AnaliseRisco.AsQueryable();
+            if (dataSolicitacaoDe != null)
+                analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise >= dataSolicitacaoDe);
 
-            var analises = analisesFiltradas
+            if (dataSolicitacaoAte != null)
+                analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(23.9d));
+
+            var analises = analisesFiltradas.ToList()
                 .GroupBy(a => new
                 {
                     Semana = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(a.DataSolicitacaoAnalise, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
@@ -78,10 +81,10 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
                 .OrderBy(g => g.Parameter);
 
             GraficoGeralDto result = new();
-            result.Labels = analises.Select(a => a.Parameter.ToString()).ToList();
+            result.Labels = analises.Select(a => $"Semana: {a.Parameter.ToString()}" ).ToList();
             result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
             {
-                Data = analises.Where(x=>x.Status=="Pendente").Select(x=>x.Quantidade).ToList(),
+                Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
                 Label = "Pendente" //mudar para reprovado
             });
 
@@ -90,6 +93,13 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Aprovado" //mudar para reprovado
             });
+
+            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            {
+                Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
+                Label = "Reprovado" //mudar para reprovado
+            });
+
 
 
             return Task.FromResult(result);
@@ -97,56 +107,20 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
         public Task<GraficoGeralDto> BuscarGraficoPorPeriodo(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
         {
-            var analisesFiltradas = _appDbContext.AnaliseRisco
-             .Where(a => a.Status == "Pendente" || a.Status == "Reprovado")
-             .ToList(); // Carrega os dados do banco de dados em memória
+            var analisesFiltradas = _appDbContext.AnaliseRisco.AsQueryable();
+            if (dataSolicitacaoDe != null)
+                analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise >= dataSolicitacaoDe);
 
-            var analises = analisesFiltradas
+            if (dataSolicitacaoAte != null)
+                analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(23.9d));
+
+            var analises = analisesFiltradas.ToList()
                 .GroupBy(a => new
                 {
                     Status = a.Status
                 })
                 .Select(g => new Teste
                 {
-                    Status = g.Key.Status,
-                    Quantidade = g.Count()
-                })
-                .OrderBy(g => g.Parameter);
-
-            GraficoGeralDto result = new();
-            result.Labels = analises.Select(a => a.Parameter.ToString()).ToList();
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
-            {
-                Data = analises.Where(x=>x.Status=="Pendente").Select(x=>x.Quantidade).ToList(),
-                Label = "Pendente" //mudar para reprovado
-            });
-
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
-            {
-                Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" //mudar para reprovado
-            });
-
-
-            return Task.FromResult(result);
-        }
-
-        public Task<GraficoGeralDto> BuscarGraficoPorHora(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
-        {
-
-            var analisesFiltradas = _appDbContext.AnaliseRisco
-             .Where(a => a.Status == "Pendente" || a.Status == "Reprovado")
-             .ToList(); // Carrega os dados do banco de dados em memória
-
-            var analises = analisesFiltradas
-                .GroupBy(a => new
-                {
-                    Hora = CultureInfo.CurrentCulture.Calendar.GetHour(a.DataSolicitacaoAnalise),
-                    Status = a.Status
-                })
-                .Select(g => new Teste
-                {
-                    Parameter = g.Key.Hora,
                     Status = g.Key.Status,
                     Quantidade = g.Count()
                 })
@@ -165,6 +139,61 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Aprovado" //mudar para reprovado
             });
+
+            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            {
+                Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
+                Label = "Reprovado" //mudar para reprovado
+            });
+
+
+            return Task.FromResult(result);
+        }
+
+        public Task<GraficoGeralDto> BuscarGraficoPorHora(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
+        {
+
+            var analisesFiltradas = _appDbContext.AnaliseRisco.AsQueryable();
+            if (dataSolicitacaoDe != null)
+                analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise >= dataSolicitacaoDe);
+
+            if (dataSolicitacaoAte != null)
+                analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(23.9d));
+
+            var analises = analisesFiltradas.ToList()
+                .GroupBy(a => new
+                {
+                    Hora = CultureInfo.CurrentCulture.Calendar.GetHour(a.DataSolicitacaoAnalise),
+                    Status = a.Status
+                })
+                .Select(g => new Teste
+                {
+                    Parameter = g.Key.Hora,
+                    Status = g.Key.Status,
+                    Quantidade = g.Count()
+                })
+                .OrderBy(g => g.Parameter);
+
+            GraficoGeralDto result = new();
+            result.Labels = analises.Select(a => $"{a.Parameter}:00").ToList();
+            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            {
+                Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
+                Label = "Pendente" //mudar para reprovado
+            });
+
+            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            {
+                Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
+                Label = "Aprovado" //mudar para reprovado
+            });
+
+            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            {
+                Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
+                Label = "Reprovado" //mudar para reprovado
+            });
+
 
             return Task.FromResult(result);
         }

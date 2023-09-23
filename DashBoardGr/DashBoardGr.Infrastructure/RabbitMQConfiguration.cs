@@ -23,8 +23,7 @@ namespace DashBoardGr.Infrastructure
             }
             _factory = new ConnectionFactory
             {
-                HostName = rabbitParameter.HostName, 
-                Port = rabbitParameter.Port
+                HostName = rabbitParameter.HostName//, Port = rabbitParameter.Port
             };
 
             // Configurar e criar elementos necessários (filas, exchanges, topics) aqui
@@ -35,10 +34,10 @@ namespace DashBoardGr.Infrastructure
                 return;
 
             var exchangeAnaliseRisco = rabbitParameter.Exchanges.First(x => x.ExchangeName == "analise-exchange");
-            //channel.ExchangeDeclare(exchangeAnaliseRisco.ExchangeName, "x-delayed-message", true, false, new Dictionary<string, object>
-            //{
-            //    { "x-delayed-type", "direct" } // Substitua "topic" pelo tipo de troca que você deseja usar como base
-            //});
+            channel.ExchangeDeclare(exchangeAnaliseRisco.ExchangeName, "x-delayed-message", true, false, new Dictionary<string, object>
+            {
+                { "x-delayed-type", "direct" } // Substitua "topic" pelo tipo de troca que você deseja usar como base
+            });
 
             foreach (var queue in exchangeAnaliseRisco.Queues)
             {

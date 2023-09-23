@@ -22,7 +22,7 @@ namespace DashBoardGr.Infrastructure.Messaging
             };
         }
 
-        public Task Publish<T>(T data, string? routingKey = null)
+        public Task Publish<T>(T data, string routingKey = "")
         {
             var type = data?.GetType();
             var payload = JsonSerializer.Serialize(data);
@@ -36,7 +36,7 @@ namespace DashBoardGr.Infrastructure.Messaging
                         _channel.BasicPublish(_exchange, "solicitar-analise.solicitar-analise-routing", _basicProperties, byteArray);
                         break;
                     default:
-                        _channel.BasicPublish(_exchange, routingKey, null, byteArray);
+                        _channel.BasicPublish("amq.direct", routingKey, null, byteArray);
                         break;
 
                 }

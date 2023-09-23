@@ -48,12 +48,14 @@
             <div class="row">
               <div class="col-2 ">
                 <label class="form-label">Data de </label>
-                <input class="form-control" type="date" [(ngModel)]="filter.dataSolicitacaoDe" [ngModelOptions]="{standalone: true}">
+                <input class="form-control" type="date" [(ngModel)]="filter.dataSolicitacaoDe"
+                  [ngModelOptions]="{standalone: true}">
               </div>
 
               <div class="col-2 ">
                 <label class="form-label">Até </label>
-                <input class="form-control" type="date" [(ngModel)]="filter.dataSolicitacaoAte" [ngModelOptions]="{standalone: true}">
+                <input class="form-control" type="date" [(ngModel)]="filter.dataSolicitacaoAte"
+                  [ngModelOptions]="{standalone: true}">
               </div>
 
               <div class="col-2 ">
@@ -74,7 +76,7 @@
               <div class="col-2">
                 <label class="form-label">&nbsp; </label>
 
-                <button type="button" class="btn btn-primary form-control">
+                <button type="button" class="btn btn-primary form-control" (click)="buscarRelatorios()">
                   Filtrar
                 </button>
               </div>
@@ -86,32 +88,37 @@
 
   </div>
 
-  <div class="row text-start">
+  <div class="row text-start " >
     <div class="col-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Cpf</th>
-            <th scope="col">Cavalo</th>
-            <th scope="col">Data Análise</th>
-            <th scope="col">Status</th>
-            <th scope="col">Análise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let analise of analiseRiscoRelatorioPrincipal">
-            <th scope="row">{{analise.id.split('-')[0]}}</th>
-            <td>Mark</td>
-            <td>32576251897</td>
-            <td>DEF 1378</td>
-            <td>22/09/2023 10:08</td>
-            <td>Pendente</td>
-            <td>Inválido Situação cadastral pendente.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="card overflow-y-scroll" style="height: 400px;">
+        <h5 class="card-header">Análises</h5>
+        <div class="card-body">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cpf</th>
+                <!-- <th scope="col">Cavalo</th> -->
+                <th scope="col">Data Análise</th>
+                <th scope="col">Status</th>
+                <th scope="col">Análise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let analise of analiseRiscoRelatorioPrincipal">
+                <th scope="row">{{analise.id.split('-')[0]}}</th>
+                <td>{{analise.nomeMotorista}}</td>
+                <td>{{analise.cpf}}</td>
+                <!-- <td>{{analise.placa}}</td> -->
+                <td>{{analise.dataSolicitacaoAnalise | date : 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{analise.status}}</td>
+                <td>{{analise.observacao}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -121,14 +128,14 @@
       <canvas baseChart [data]="graficoBarra" [options]="barChartOptions" [legend]="barChartLegend" type="bar"></canvas>
     </div>
     <div class="row">
-      <div class="col-6">
-        <canvas baseChart [data]="graficoPizza" [options]="barChartOptions" [legend]="barChartLegend"
-          type="doughnut"></canvas>
+      <div class="col-6 border">
+        <canvas baseChart [data]="graficoPizza" [options]="barChartOptions" [legend]="barChartLegend" type="doughnut"
+          height="100"></canvas>
       </div>
 
-      <div class="col-6">
-        <canvas baseChart [data]="graficoVelocimetro" [options]="barChartOptions" [legend]="barChartLegend"
-          type="line"></canvas>
+      <div class="col-6 border">
+        <canvas baseChart [data]="graficoVelocimetro" [options]="barChartOptions" [legend]="barChartLegend" type="line"
+          height="200"></canvas>
       </div>
     </div>
   </div>

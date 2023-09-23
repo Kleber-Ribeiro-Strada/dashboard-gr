@@ -5,5 +5,6 @@ export interface AnaliseRiscoRelatorio{
     status: string
     observacao: any
     nomeMotorista: string
-
+    cpf: string
+    placa: string
 }

@@ -24,21 +24,17 @@ namespace DashBoardGr.Carga.Models
         public string? TelefoneReferencia { get; set; }
         public string Cep { get; set; } = string.Empty;
 
-        [JsonIgnore]
         public string? CodigoCidade { get; set; }
 
-        [JsonIgnore]
         public string? NomeCidade { get; set; }
 
-        [JsonIgnore]
         public string? Rua { get; set; }
         public string Numero { get; set; } = string.Empty;
         public string? Complemento { get; set; }
 
-        [JsonIgnore]
         public string? Bairro { get; set; }
 
-        [JsonIgnore]
+
         public string? Estado { get; set; }
 
         public AddCnhMotoristaCommand Cnh { get; set; } = new();

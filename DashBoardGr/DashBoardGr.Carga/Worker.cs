@@ -38,7 +38,14 @@ namespace DashBoardGr.Carga
                     .RuleFor(m => m.NomeReferencia, f => f.Person.FullName)
                     .RuleFor(m => m.TelefoneReferencia, f => f.Phone.PhoneNumber())
                     .RuleFor(m => m.Cep, f => f.Address.ZipCode())
-                    .RuleFor(m => m.Numero, f => f.Random.Number(0, 10000).ToString());
+                    .RuleFor(m => m.Numero, f => f.Random.Number(0, 10000).ToString())
+                    .RuleFor(m => m.Rua, f => f.Address.StreetAddress())
+                    .RuleFor(m => m.Bairro, f => f.Address.StreetAddress())
+                    .RuleFor(m => m.Estado, f => f.Address.StateAbbr())
+                    .RuleFor(m => m.CodigoCidade, f => f.Address.City())
+                    .RuleFor(m => m.Complemento, f => f.Address.SecondaryAddress())
+                    .RuleFor(m => m.NomeCidade, f => f.Address.StreetAddress());
+
 
                 var cnh = new Faker<AddCnhMotoristaCommand>("pt_BR")
                     .RuleFor(m => m.Numero, f => f.Person.Cpf())
@@ -46,7 +53,7 @@ namespace DashBoardGr.Carga
                     .RuleFor(m => m.Categoria, f => f.Random.ArrayElement<string>(new string[] { "A", "B", "C", "D" }))
                     .RuleFor(m => m.DataPrimeiraHabilitacao, f => f.Date.Past(10))
                     .RuleFor(m => m.Imagem, f => f.Random.AlphaNumeric(20));
-                var motoristas = addMotorista.Generate(10);
+                var motoristas = addMotorista.Generate(2);
                 foreach (var motorista in motoristas)
                 {
                     motorista.Cnh = cnh.Generate();
@@ -55,13 +62,8 @@ namespace DashBoardGr.Carga
                     await AdicionarAnalise(motoristaId);
                 }
 
-
-
-
-
-
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(10));
             }
 
 
@@ -72,14 +74,22 @@ namespace DashBoardGr.Carga
         {
             SolicitarAnaliseCommand cmd = new();
             cmd.MotoristaId = motoristaId;
+            int random = (new Random().Next(600) * -1);
+            cmd.DataRequisicao = DateTime.Now.AddDays(random);
 
             var fakerPro = new Faker<ProprietarioCommand>("pt_BR")
                 .RuleFor(p => p.CpfCnpj, f => f.Person.Cpf())
                 .RuleFor(p => p.Nome, f => f.Person.FullName)
                 .RuleFor(p => p.Cep, f => f.Address.ZipCode())
+                .RuleFor(p => p.CodigoCidade, f => f.Address.CityPrefix())
+                .RuleFor(p => p.NomeCidade, f => f.Address.City())
+                .RuleFor(p => p.Rua, f => f.Address.StreetName())
+                .RuleFor(p => p.Bairro, f => f.Address.Direction())
+                .RuleFor(p => p.Complemento, f => f.Address.SecondaryAddress())
+                .RuleFor(p => p.CodigoCidade, f => f.Address.CityPrefix())
                 .RuleFor(p => p.Numero, f => f.Random.Number(10000).ToString())
                 .RuleFor(p => p.Telefone, f => f.Phone.PhoneNumber())
-                .RuleFor(p => p.Complemento, f => f.Random.Words());
+                .RuleFor(p => p.Estado, f => f.Address.StateAbbr());
 
             cmd.Proprietario = fakerPro.Generate();
 
@@ -95,6 +105,7 @@ namespace DashBoardGr.Carga
                 .RuleFor(v => v.AnoFabricacao, f => f.Random.Int(1999, 2023))
                 .RuleFor(v => v.AnoModelo, f => f.Random.Int(1999, 2023))
                 .RuleFor(v => v.Estado, f => f.Address.StateAbbr())
+                .RuleFor(v => v.CodigoCidade, f => f.Address.CitySuffix())
                 .RuleFor(v => v.ImagemCrlv, f => f.Random.AlphaNumeric(20))
                 .RuleFor(v => v.Renavam, f => f.Company.Cnpj());
 

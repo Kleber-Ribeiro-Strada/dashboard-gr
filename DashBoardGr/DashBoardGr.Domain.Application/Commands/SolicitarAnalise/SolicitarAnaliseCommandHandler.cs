@@ -14,25 +14,21 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
         private readonly IValidator<SolicitarAnaliseCommand> _validator;
         private readonly IMotoristaRepository _motoristaRepository;
         private readonly IAnaliseRiscoRepository _analiseRiscoRepository;
-        private readonly BuscarEnderecoService _buscarEnderecoService;
         public SolicitarAnaliseCommandHandler(
             IMessageBusService messageBusService,
             IValidator<SolicitarAnaliseCommand> validator,
             IAnaliseRiscoRepository analiseRiscoRepository,
-            IMotoristaRepository motoristaRepository,
-            BuscarEnderecoService buscarEnderecoService)
+            IMotoristaRepository motoristaRepository)
         {
             _messageBusService = messageBusService;
             _validator = validator;
             _motoristaRepository = motoristaRepository;
             _analiseRiscoRepository = analiseRiscoRepository;
-            _buscarEnderecoService = buscarEnderecoService;
         }
 
 
         public async Task<Unit> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
-            AdicioarEnderecoAoProprietario(ref request);
             var result = await _validator.ValidateAsync(request, cancellationToken);
 
             if (!result.IsValid)
@@ -81,36 +77,12 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
             await _analiseRiscoRepository.SolicitarAnaliseRisco(new AnaliseRisco(
                 Enum.GetName(typeof(EStatus), value: EStatus.Pendente),
                 request.MotoristaId,
-                cnhId), veiculos);
+                cnhId, request.DataRequisicao), veiculos);
 
 
 
             await _messageBusService.Publish(request);
             return Unit.Value;
-        }
-
-        private void AdicioarEnderecoAoProprietario(ref SolicitarAnaliseCommand request)
-        {
-            if (request is null)
-                throw new ArgumentNullException(nameof(request));
-            
-            var endereco = _buscarEnderecoService.BuscarEndereco(request.Proprietario.Cep).Result;
-            if (endereco is null)
-                throw new ArgumentNullException(nameof(endereco));
-            
-            request.Proprietario.Rua = endereco.Logradouro;
-            request.Proprietario.Bairro = endereco.Bairro;
-            request.Proprietario.CodigoCidade = endereco.Gia;
-            request.Proprietario.Estado = endereco.Uf;
-            request.Proprietario.NomeCidade = endereco.Localidade;
-
-            foreach (var item in request.Veiculos)
-            {
-                item.CodigoCidade = endereco.Gia;
-                item.ImagemCrlv = "teste";
-                item.Rntrc = "0";
-            }
-
         }
     }
 }

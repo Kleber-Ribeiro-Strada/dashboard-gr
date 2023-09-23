@@ -25,9 +25,9 @@ export class DashboardComponent {
   reprovados = 0;
 
 
-  graficoBarra: DashboardResultModel;
-  graficoPizza: DashboardResultModel;
-  graficoVelocimetro: DashboardResultModel;
+  graficoBarra: any;
+  graficoPizza: any;
+  graficoVelocimetro:any;
 
   constructor(private service: DashBoardService) { }
 
@@ -51,6 +51,7 @@ export class DashboardComponent {
     this.service.buscarGraficoBarras(filterGraficos)
       .subscribe({
         next: (result: DashboardResultModel) => {
+          console.log(result)
           this.graficoBarra = result;
         }
       })
@@ -67,7 +68,7 @@ export class DashboardComponent {
         next: (result: DashboardResultModel) => {
           this.graficoPizza = result;
         }
-      })
+      });
   }
 
 }

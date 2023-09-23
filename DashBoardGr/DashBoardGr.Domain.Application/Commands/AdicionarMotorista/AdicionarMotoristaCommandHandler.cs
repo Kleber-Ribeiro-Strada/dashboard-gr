@@ -13,15 +13,13 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
         private readonly IMotoristaRepository _motoristaRepository;
         private readonly IMediator _mediator;
         private readonly IValidator<AdicionarMotoristaCommand> _validator;
-        private readonly BuscarEnderecoService _buscarEnderecoService;
         private readonly IMapper _mapper;
 
-        public AdicionarMotoristaCommandHandler(IMotoristaRepository motoristaRepository, IMediator mediator, IValidator<AdicionarMotoristaCommand> validator, BuscarEnderecoService buscarEnderecoService, IMapper mapper)
+        public AdicionarMotoristaCommandHandler(IMotoristaRepository motoristaRepository, IMediator mediator, IValidator<AdicionarMotoristaCommand> validator, IMapper mapper)
         {
             _motoristaRepository = motoristaRepository;
             _mediator = mediator;
             _validator = validator;
-            _buscarEnderecoService = buscarEnderecoService;
             _mapper = mapper;
         }
 
@@ -31,17 +29,6 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
             var result = await _validator.ValidateAsync(request, cancellationToken);
             if (!result.IsValid)
                 return new CommandResponse(400, "Requisição inválida", result.Errors);
-
-
-            var endereco = await _buscarEnderecoService.BuscarEndereco(request.Cep);
-            if (endereco == null)
-                return new CommandResponse(400, "Cep inesistente", data: new {});
-
-            request.CodigoCidade = endereco.Gia;
-            request.NomeCidade = endereco.Localidade;
-            request.Rua = endereco.Logradouro;
-            request.Estado = endereco.Uf;
-            request.Bairro = endereco.Bairro;
 
             var motorista = _mapper.Map<Motorista>(request);
             request.Cnh.MotoristaId = motorista.Id;

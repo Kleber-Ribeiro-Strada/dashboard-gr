@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,5 +20,11 @@ namespace DashBoardGr.Domain.Application.Queries.BuscarAnalisesRelatorio
         public string? Observacao { get; set; }
 
         public string NomeMotorista { get; set; } = string.Empty;
+
+        public string Cpf { get; set; } = string.Empty;
+
+        public string Placa { get; set; } = string.Empty;
+
+
     }
 }

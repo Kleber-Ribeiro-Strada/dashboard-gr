@@ -6,8 +6,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
     public class SolicitarAnaliseCommand : IRequest<Unit>
     {
 
-        [JsonIgnore]
-        public DateTime DataRequisicao { get; set; } = DateTime.Now;
+        public DateTime DataRequisicao { get; set; } 
 
         public Guid MotoristaId { get; set; }
         public ProprietarioCommand Proprietario { get; set; } = new();

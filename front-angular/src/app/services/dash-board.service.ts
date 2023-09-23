@@ -52,7 +52,7 @@ export class DashBoardService {
 
   buscarGraficoPizza(filter: FiltroDataDeAteCommandModel): Observable<DashboardResultModel> {
 
-    let url = this.urlBase + "Relatorio/buscar-grafico-barras-pizza?";
+    let url = this.urlBase + "Relatorio/buscar-grafico-pizza?";
     if (filter.dataSolicitacaoDe !== null && filter.dataSolicitacaoDe != undefined) {
       url += `DataSolicitacaoDe=${filter.dataSolicitacaoDe}&`
     }
@@ -66,7 +66,7 @@ export class DashBoardService {
 
   buscarGraficoLinha(filter: FiltroDataDeAteCommandModel): Observable<DashboardResultModel> {
 
-    let url = this.urlBase + "Relatorio/buscar-grafico-barras-linha-horas?";
+    let url = this.urlBase + "Relatorio/buscar-grafico-linha-horas?";
     if (filter.dataSolicitacaoDe !== null && filter.dataSolicitacaoDe != undefined) {
       url += `DataSolicitacaoDe=${filter.dataSolicitacaoDe}&`
     }

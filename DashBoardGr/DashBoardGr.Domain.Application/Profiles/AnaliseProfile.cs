@@ -14,7 +14,9 @@ namespace DashBoardGr.Domain.Application.Profiles
         public AnaliseProfile()
         {
             CreateMap<AnaliseRisco, BuscarAnalisesGraficoViewModel>()
-                .ForMember(vm => vm.NomeMotorista, ar => ar.MapFrom(x => x.Motorista.Nome));
+                .ForMember(vm => vm.NomeMotorista, ar => ar.MapFrom(x => x.Motorista.Nome))
+                .ForMember(vm => vm.Cpf, ar => ar.MapFrom(x => x.Motorista.Cpf));
+
         }
     }
 }

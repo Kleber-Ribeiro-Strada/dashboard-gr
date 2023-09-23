@@ -9,7 +9,6 @@ namespace DashBoardGr.Carga.Models
 {
     internal class SolicitarAnaliseCommand
     {
-        [JsonIgnore]
         public DateTime DataRequisicao { get; set; } = DateTime.Now;
 
         public Guid MotoristaId { get; set; }

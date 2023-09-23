@@ -31,7 +31,6 @@ namespace DashBoardGr.Domain.Application.Queries.BuscarAnalisesRelatorio
                 request.Status);
 
             var result = _mapper.Map<List<BuscarAnalisesGraficoViewModel>>(analises.ToList());
-            result.Count(x => x.Status == "Pendente");
             return result;
         }
 

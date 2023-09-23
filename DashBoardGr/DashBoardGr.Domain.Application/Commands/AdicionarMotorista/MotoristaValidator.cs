@@ -28,7 +28,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 .NotNull()
                 .WithMessage("Campo gênero é Obrigatório")
                 .Must(SharedValidators.ValidarGenero)
-                .WithMessage("Campo gênero tem que ser Masculino ou Feminino");
+                .WithMessage("Campo gênero tem que ser Masculino ou Feminino (M ou F)");
 
             RuleFor(analise => analise.DataNascimento)
                 .Must(SharedValidators.EhMaiorDe18Anos)
@@ -48,7 +48,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
 
             RuleFor(analise => analise.Email)
                 .NotEmpty()
-                .WithMessage("Campo E-mail é obrigatóriO")
+                .WithMessage("Campo E-mail é obrigatório")
                 .EmailAddress().WithMessage("O endereço de e-mail não é válido.");
 
             RuleFor(analise => analise.Cep)
@@ -57,7 +57,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
 
             RuleFor(analise => analise.Numero)
                 .NotEmpty()
-                .WithMessage("Capmo Número Residência é obrigatório");
+                .WithMessage("Campo Número Residência é obrigatório");
         }
 
         private bool EhNovoCpf(string cpf)

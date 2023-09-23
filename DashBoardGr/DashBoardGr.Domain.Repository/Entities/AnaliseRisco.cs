@@ -22,22 +22,6 @@ namespace DashBoardGr.Domain.Repository.Entities
             Observacao = null;
         }
 
-        //Teste
-        public AnaliseRisco(
-            string status,
-            Guid motoristaId,
-            Guid cnhId,
-            DateTime dataSolicitacao)
-        {
-            Id = Guid.NewGuid();
-            MotoristaId = motoristaId;
-            CnhId = cnhId;
-            DataSolicitacaoAnalise = dataSolicitacao;
-            DataAvaliacao = null;
-            Status = status;
-            Observacao = null;
-        }
-
         public Guid Id { get; private set; }
 
         public DateTime DataSolicitacaoAnalise { get; private set; }

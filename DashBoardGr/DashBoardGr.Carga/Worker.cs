@@ -53,13 +53,14 @@ namespace DashBoardGr.Carga
                     .RuleFor(m => m.Categoria, f => f.Random.ArrayElement<string>(new string[] { "A", "B", "C", "D" }))
                     .RuleFor(m => m.DataPrimeiraHabilitacao, f => f.Date.Past(10))
                     .RuleFor(m => m.Imagem, f => f.Random.AlphaNumeric(20));
-                var motoristas = addMotorista.Generate(2);
+                var motoristas = addMotorista.Generate(20);
                 foreach (var motorista in motoristas)
                 {
                     motorista.Cnh = cnh.Generate();
                     var motoristaId = await AdicionarMotoristaHttp(motorista);
 
                     await AdicionarAnalise(motoristaId);
+                    await Task.Delay(TimeSpan.FromMinutes(2));
                 }
 
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
@@ -94,7 +95,7 @@ namespace DashBoardGr.Carga
             cmd.Proprietario = fakerPro.Generate();
 
             var fakerV = new Faker<VeiculoCommand>()
-                .RuleFor(v => v.Tipo, f => f.Random.ArrayElement<string>(new string[] { "Bitrem", "Rodotrem", "Quinta roda", "Carreta Dolly", "bitrenzão" }))
+                .RuleFor(v => v.Tipo, f => f.Random.ArrayElement<string>(new string[] { "Bitrem", "Rodotrem", "Quinta roda", "Carreta Dolly", "bitrenzï¿½o" }))
                 .RuleFor(v => v.Placa, f => f.Random.Words())
                 .RuleFor(v => v.Chassi, f => f.Company.Cnpj())
                 .RuleFor(v => v.Rntrc, f => f.Random.Guid().ToString())
@@ -119,19 +120,19 @@ namespace DashBoardGr.Carga
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                // URL para onde você deseja enviar o POST
+                // URL para onde vocï¿½ deseja enviar o POST
                 string url = "https://localhost:5223/api/analise/solicitar-analise";
 
-                // O conteúdo que você deseja enviar no corpo da solicitação
+                // O conteï¿½do que vocï¿½ deseja enviar no corpo da solicitaï¿½ï¿½o
                 string jsonContent = JsonSerializer.Serialize(analise);
 
-                // Crie o conteúdo da solicitação com base no JSON
+                // Crie o conteï¿½do da solicitaï¿½ï¿½o com base no JSON
                 HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                // Faça a solicitação POST
+                // Faï¿½a a solicitaï¿½ï¿½o POST
                 HttpResponseMessage response = await httpClient.PostAsync(url, content);
 
-                // Verifique se a solicitação foi bem-sucedida
+                // Verifique se a solicitaï¿½ï¿½o foi bem-sucedida
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
@@ -140,7 +141,7 @@ namespace DashBoardGr.Carga
                 }
                 else
                 {
-                    Console.WriteLine($"A solicitação falhou com o status: {response.StatusCode}");
+                    Console.WriteLine($"A solicitaï¿½ï¿½o falhou com o status: {response.StatusCode}");
                     string responseContent = await response.Content.ReadAsStringAsync();
                     Console.WriteLine(responseContent);
                 }
@@ -152,19 +153,19 @@ namespace DashBoardGr.Carga
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                // URL para onde você deseja enviar o POST
+                // URL para onde vocï¿½ deseja enviar o POST
                 string url = "https://localhost:5223/api/Motorista/adicionar";
 
-                // O conteúdo que você deseja enviar no corpo da solicitação
+                // O conteï¿½do que vocï¿½ deseja enviar no corpo da solicitaï¿½ï¿½o
                 string jsonContent = JsonSerializer.Serialize(motorista);
 
-                // Crie o conteúdo da solicitação com base no JSON
+                // Crie o conteï¿½do da solicitaï¿½ï¿½o com base no JSON
                 HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                // Faça a solicitação POST
+                // Faï¿½a a solicitaï¿½ï¿½o POST
                 HttpResponseMessage response = await httpClient.PostAsync(url, content);
 
-                // Verifique se a solicitação foi bem-sucedida
+                // Verifique se a solicitaï¿½ï¿½o foi bem-sucedida
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
@@ -174,7 +175,7 @@ namespace DashBoardGr.Carga
                 }
                 else
                 {
-                    Console.WriteLine($"A solicitação falhou com o status: {response.StatusCode}");
+                    Console.WriteLine($"A solicitaï¿½ï¿½o falhou com o status: {response.StatusCode}");
                     string responseContent = await response.Content.ReadAsStringAsync();
                     Console.WriteLine(responseContent);
                 }

@@ -77,7 +77,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
             await _analiseRiscoRepository.SolicitarAnaliseRisco(new AnaliseRisco(
                 Enum.GetName(typeof(EStatus), value: EStatus.Pendente),
                 request.MotoristaId,
-                cnhId, request.DataRequisicao), veiculos);
+                cnhId), veiculos);
 
 
 

@@ -9,14 +9,18 @@ namespace Api.Controllers
     [ApiController]
     public class AnaliseController : ControllerBase
     {
+        #region Propriedades
         private readonly ILogger<AnaliseController> _logger;
         private readonly IMediator _mediator;
+        #endregion
 
+        #region Construtor
         public AnaliseController(ILogger<AnaliseController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
         }
+        #endregion
 
         [HttpPost("solicitar-analise")]
         public async Task<IActionResult> SolicitarAnaliseAsync([FromBody]SolicitarAnaliseCommand command)

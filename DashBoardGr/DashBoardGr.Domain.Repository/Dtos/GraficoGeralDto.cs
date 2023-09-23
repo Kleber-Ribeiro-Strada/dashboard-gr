@@ -10,7 +10,7 @@ namespace DashBoardGr.Domain.Repository.Dtos
     {
         public List<string> Labels { get; set; } = new();
 
-        public List<DadosGraficosDto> DastaSet { get; set; } = new();
+        public List<DadosGraficosDto> Datasets { get; set; } = new();
 
         public class DadosGraficosDto
         {

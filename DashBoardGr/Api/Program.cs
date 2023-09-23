@@ -124,46 +124,46 @@ app.Use(async (context, next) =>
 
 });
 
-//async Task Echo(HttpContext context, WebSocket webSocket)
-//{
-//    var buffer = new byte[1034 * 4];
-//    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-//    if (result != null)
-//    {
-//        while (!result.CloseStatus.HasValue)
-//        {
-//            var msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer, 0, result.Count));
+async Task Echo(HttpContext context, WebSocket webSocket)
+{
+    var buffer = new byte[1034 * 4];
+    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+    if (result != null)
+    {
+        while (!result.CloseStatus.HasValue)
+        {
+            var msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer, 0, result.Count));
 
-//            await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes($"horário> {DateTime.Now.ToString()}")), result.MessageType, result.EndOfMessage, CancellationToken.None);
+            await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes($"horário> {DateTime.Now.ToString()}")), result.MessageType, result.EndOfMessage, CancellationToken.None);
 
-//            result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-//        }
-//    }
+            result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+        }
+    }
 
-//    await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
-//}
+    await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+}
 
-//app.Map("/websocket", async context =>
-//{
-//    if (!context.WebSockets.IsWebSocketRequest)
-//    {
-//        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+app.Map("/websocket", async context =>
+{
+    if (!context.WebSockets.IsWebSocketRequest)
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-//    }
-//    else
-//    {
-//        while (true)
-//        {
-//            using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-//            var data = Encoding.UTF8.GetBytes($".net rocks => {DateTime.Now}");
+    }
+    else
+    {
+        while (true)
+        {
+            using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+            var data = Encoding.UTF8.GetBytes($".net rocks => {DateTime.Now}");
 
-//            await webSocket.SendAsync(data, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
+            await webSocket.SendAsync(data, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
 
-//            await Task.Delay(1000);
-//        }
-//    }
+            await Task.Delay(1000);
+        }
+    }
 
 
-//});
+});
 
 await app.RunAsync();

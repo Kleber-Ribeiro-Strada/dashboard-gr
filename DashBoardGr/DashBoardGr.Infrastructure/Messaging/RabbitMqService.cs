@@ -18,7 +18,7 @@ namespace DashBoardGr.Infrastructure.Messaging
             _basicProperties = _channel.CreateBasicProperties();
             _basicProperties.Headers = new Dictionary<string, object>
             {
-                { "x-delay", 1 } //300000  } // Atraso de 5 segundos
+                { "x-delay", 300000  } // Atraso de 5 segundos
             };
         }
 

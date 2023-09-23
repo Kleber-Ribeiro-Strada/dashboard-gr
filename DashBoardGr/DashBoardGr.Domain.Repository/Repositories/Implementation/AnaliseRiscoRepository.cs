@@ -82,25 +82,32 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
             GraficoGeralDto result = new();
             result.Labels = analises.Select(a => $"Semana: {a.Parameter.ToString()}" ).ToList();
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
                 Label = "Pendente" //mudar para reprovado
             });
 
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Aprovado" //mudar para reprovado
             });
 
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Reprovado" //mudar para reprovado
             });
 
 
+            foreach (var item in result.Datasets)
+            {
+                if (item.Data.Count() == 0)
+                {
+                    item.Data.Add(0);
+                }
+            }
 
             return Task.FromResult(result);
         }
@@ -128,24 +135,31 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
             GraficoGeralDto result = new();
             result.Labels = analises.Select(a => a.Parameter.ToString()).ToList();
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
                 Label = "Pendente" //mudar para reprovado
             });
 
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Aprovado" //mudar para reprovado
             });
 
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Reprovado" //mudar para reprovado
             });
 
+            foreach (var item in result.Datasets)
+            {
+                if (item.Data.Count() == 0)
+                {
+                    item.Data.Add(0);
+                }
+            }
 
             return Task.FromResult(result);
         }
@@ -176,24 +190,31 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
             GraficoGeralDto result = new();
             result.Labels = analises.Select(a => $"{a.Parameter}:00").ToList();
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
                 Label = "Pendente" //mudar para reprovado
             });
 
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Aprovado" //mudar para reprovado
             });
 
-            result.DastaSet.Add(new GraficoGeralDto.DadosGraficosDto
+            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
                 Label = "Reprovado" //mudar para reprovado
             });
 
+            foreach (var item in result.Datasets)
+            {
+                if (item.Data.Count() == 0)
+                {
+                    item.Data.Add(0);
+                }
+            }
 
             return Task.FromResult(result);
         }

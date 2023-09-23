@@ -10,7 +10,7 @@ namespace DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoLinha
     {
         public List<string> Labels { get; set; } = new();
 
-        public List<DadosGraficos> DastaSet { get; set; } = new();
+        public List<DadosGraficos> Datasets { get; set; } = new();
 
         public class DadosGraficos
         {

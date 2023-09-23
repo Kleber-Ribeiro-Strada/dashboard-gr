@@ -55,4 +55,4 @@ jobs:
           dotnet build .\DashBoardGr\Api\
           dotnet sonarscanner
           dotnet test --collect "XPlat Code Coverage"
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="ec62aa21873c761cfae020003011d4473ef02349"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="ec62aa21873c761cfae020003011d4473ef02349"

@@ -51,8 +51,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Kleber-Ribeiro-Strada_dashboard-gr" /o:"kleber-ribeiro-strada" /d:sonar.login="9ef9b3a0d9c2f79d27a1e817c68e23cceffef2fa" /d:sonar.host.url=https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Kleber-Ribeiro-Strada_dashboard-gr" /o:"kleber-ribeiro-strada" /d:sonar.login="ec62aa21873c761cfae020003011d4473ef02349" /d:sonar.host.url=https://sonarcloud.io"
           dotnet build .\DashBoardGr\Api\
           dotnet sonarscanner
           dotnet test --collect "XPlat Code Coverage"
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="9ef9b3a0d9c2f79d27a1e817c68e23cceffef2fa"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="ec62aa21873c761cfae020003011d4473ef02349"

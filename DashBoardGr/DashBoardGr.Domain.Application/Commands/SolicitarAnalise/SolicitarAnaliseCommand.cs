@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using DashBoardGr.Domain.Shared.Commands.Response;
+using MediatR;
 using System.Text.Json.Serialization;
 
 namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
-    public class SolicitarAnaliseCommand : IRequest<Unit>
+    public class SolicitarAnaliseCommand : IRequest<CommandResponse>
     {
 
         public DateTime DataRequisicao { get; set; } 

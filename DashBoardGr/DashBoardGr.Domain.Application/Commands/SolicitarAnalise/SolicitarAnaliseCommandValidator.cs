@@ -11,15 +11,42 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
     {
         public SolicitarAnaliseCommandValidator()
         {
-            
+            RuleFor(command => command.DataRequisicao)
+                .NotEmpty().WithMessage("A data de requisição é obrigatória.");
+
+            RuleFor(command => command.MotoristaId)
+                .NotEqual(Guid.Empty)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("O ID do motorista é obrigatório.");
+
+            RuleFor(command => command.Proprietario)
+                .SetValidator(new ProprietarioCommandValidator());
+
+            RuleForEach(command => command.Veiculos)
+                .SetValidator(new VeiculoCommandValidator());
         }
 
-        private bool EhMaiorDe18Anos(DateTime dataNascimento)
+        public class ProprietarioCommandValidator : AbstractValidator<SolicitarAnaliseCommand.ProprietarioCommand>
         {
-            var idade = DateTime.Today.Year - dataNascimento.Year;
-            if (dataNascimento.Date > DateTime.Today.AddYears(-idade)) idade--;
+            public ProprietarioCommandValidator()
+            {
+                RuleFor(proprietario => proprietario.CpfCnpj)
+                    .NotEmpty().WithMessage("O CPF/CNPJ do proprietário é obrigatório.");
 
-            return idade >= 18;
+            }
+        }
+
+        public class VeiculoCommandValidator : AbstractValidator<SolicitarAnaliseCommand.VeiculoCommand>
+        {
+            public VeiculoCommandValidator()
+            {
+                RuleFor(veiculo => veiculo.Tipo)
+                    .NotEmpty().WithMessage("O tipo do veículo é obrigatório.");
+
+                RuleFor(veiculo => veiculo.DataLicenciamento)
+                    .NotEmpty().WithMessage("A data de licenciamento do veículo é obrigatória.");
+            }
         }
     }
 }

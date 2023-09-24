@@ -1,14 +1,14 @@
 ﻿using DashBoardGr.Domain.Application.Enums;
 using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
-using DashBoardGr.Infrastructure.BuscarCep.ExternalServices;
+using DashBoardGr.Domain.Shared.Commands.Response;
 using DashBoardGr.Infrastructure.Messaging;
 using FluentValidation;
 using MediatR;
 
 namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
-    public class SolicitarAnaliseCommandHandler : IRequestHandler<SolicitarAnaliseCommand, Unit>
+    public class SolicitarAnaliseCommandHandler : IRequestHandler<SolicitarAnaliseCommand, CommandResponse>
     {
         private readonly IMessageBusService _messageBusService;
         private readonly IValidator<SolicitarAnaliseCommand> _validator;
@@ -27,18 +27,24 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
         }
 
 
-        public async Task<Unit> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
             var result = await _validator.ValidateAsync(request, cancellationToken);
 
             if (!result.IsValid)
             {
-                return Unit.Value;
+                return new CommandResponse(400, "Erro Solicitação análise", result.Errors.ToArray());
             }
 
             var cnh = await _motoristaRepository.BuscarCnh(request.MotoristaId);
             if (cnh == null)
-                throw new ArgumentException("CNH não encontrada para o motorista");
+            {
+                result.Errors.Add(new FluentValidation.Results.ValidationFailure
+                {
+                    ErrorMessage = " não encontrada para o motorista"
+                });
+                return new CommandResponse(400, "CNH não encontrada para o motorista", result.Errors);
+            }
            
             var cnhId = cnh.Id;
             var proprietario = new Proprietario(
@@ -82,7 +88,10 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
 
             await _messageBusService.Publish(request);
-            return Unit.Value;
+            return new CommandResponse(new
+            {
+                Mensagem = "Análise solicitada com sucesso"
+            }) ;
         }
     }
 }

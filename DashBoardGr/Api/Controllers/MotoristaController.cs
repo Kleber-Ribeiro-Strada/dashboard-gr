@@ -1,5 +1,4 @@
 ﻿using DashBoardGr.Domain.Application.Commands.AdicionarMotorista;
-using DashBoardGr.Domain.Application.Commands.AdicionarVeiculo;
 using DashBoardGr.Domain.Application.Queries.BuscarMotoristaPorCodigo;
 using DashBoardGr.Domain.Application.Queries.BuscarMotoristas;
 using MediatR;
@@ -32,18 +31,6 @@ namespace Api.Controllers
 
             return BadRequest(result);
             
-        }
-
-        [HttpPost("adicionar-veiculo/{motoristaId}")]
-        public async Task<IActionResult> AdicionarVeiculo(Guid motoristaId, [FromBody] AdicionarVeiculoCommand command)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            command.MotoristaId = motoristaId;
-
-            var result = await _mediator.Send(command);
-            return Ok(result);
         }
 
         [HttpGet]

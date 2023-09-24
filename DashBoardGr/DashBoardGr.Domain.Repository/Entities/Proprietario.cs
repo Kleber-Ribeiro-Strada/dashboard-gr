@@ -9,7 +9,7 @@
             string codigoCidade, 
             string nomeCidade, 
             string rua,
-            string complemento,
+            string? complemento,
             string bairro, 
             string estado,
             string telefone)
@@ -36,7 +36,7 @@
         public string NomeCidade { get; private set; } = string.Empty;
         public string Rua { get; private set; } = string.Empty;
         public string Numero { get; private set; } = string.Empty;
-        public string Complemento { get; private set; } = string.Empty;
+        public string? Complemento { get; private set; } 
         public string Bairro { get; private set; } = string.Empty;
         public string Estado { get; private set; } = string.Empty;
         public string Telefone { get; private set; } = string.Empty;

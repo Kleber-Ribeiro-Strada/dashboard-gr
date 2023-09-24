@@ -71,7 +71,6 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseRouting();
 app.UseHttpLogging();
-//app.UseMiddleware<GlobalErrorHandlingMiddleware>();
 app.UseMiddleware<TraceMiddleware>();
 app.UseEndpoints(endpoints =>
 {
@@ -123,25 +122,6 @@ app.Use(async (context, next) =>
     }
 
 });
-
-async Task Echo(HttpContext context, WebSocket webSocket)
-{
-    var buffer = new byte[1034 * 4];
-    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-    if (result != null)
-    {
-        while (!result.CloseStatus.HasValue)
-        {
-            var msg = Encoding.UTF8.GetString(new ArraySegment<byte>(buffer, 0, result.Count));
-
-            await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes($"horário> {DateTime.Now.ToString()}")), result.MessageType, result.EndOfMessage, CancellationToken.None);
-
-            result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-        }
-    }
-
-    await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
-}
 
 app.Map("/websocket", async context =>
 {

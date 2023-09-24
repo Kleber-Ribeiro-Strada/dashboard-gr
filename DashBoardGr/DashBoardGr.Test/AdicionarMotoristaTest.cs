@@ -14,6 +14,8 @@ using FluentAssertions;
 using MediatR;
 using FluentValidation;
 using AutoMapper;
+using DashBoardGr.Domain.Repository.Entities;
+using FluentValidation.Results;
 
 namespace DashBoardGr.Test
 {
@@ -30,24 +32,72 @@ namespace DashBoardGr.Test
         }
 
         [Fact]
-        public async Task Adicionar_Motorista_Command_Handler_Success()
+        public async Task Handle_DeveRetornarCommandResponseComId_QuandoValido()
         {
-            //Arrange
-            var validator = new MotoristaValidator(_motoristaRepositoryMock.Object);
-            var command = GerarMotoristaPreenchido();
+            // Arrange
+            var request = GerarMotoristaPreenchido();
+
+            var validatorMock = new Mock<IValidator<AdicionarMotoristaCommand>>();
+            validatorMock.Setup(v => v.ValidateAsync(request, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new FluentValidation.Results.ValidationResult()); // Simule uma validação bem-sucedida
+
+            var mapperMock = new Mock<IMapper>();
+            var motoristaRepositoryMock = new Mock<IMotoristaRepository>();
+            var mediatorMock = new Mock<IMediator>();
 
             var handler = new AdicionarMotoristaCommandHandler(
-                _motoristaRepositoryMock.Object,
-                _mediatorMock.Object,
-                validator,
-                _mapper.Object);
+                motoristaRepositoryMock.Object,
+                mediatorMock.Object,
+                validatorMock.Object,
+                mapperMock.Object);
 
-            //Act
-            var result = await handler.Handle(command, CancellationToken.None);
+            // Act
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            // Assert
+            response.Should().NotBeNull(); // Verifique se a resposta não é nula
+            response.StatusCode.Should().Be(200); // Verifique se o código de status é 200 (ou o código desejado)
+            response.Message.Should().Be("Motorista adicionado com sucesso."); // Verifique a mensagem da resposta
+            response.Data.Should().BeOfType<int>(); // Verifique se a propriedade Data é um inteiro (ID)
+
+            // Você também pode verificar outras expectativas com base na lógica do método Handle
+            motoristaRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Motorista>(), It.IsAny<Cnh>()), Times.Once);
+            mediatorMock.Verify(m => m.Publish(It.IsAny<MotoristaAdicionadoEvent>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task Handle_DeveRetornarCommandResponseComStatusCode400_QuandoInvalido()
+        {
+            // Arrange
+            var request = GerarMotoristaPreenchido();
+            request.Nome = string.Empty;
+
+            var validationResult = new FluentValidation.Results.ValidationResult();
+            validationResult.Errors.Add(new ValidationFailure("Nome", "O campo Nome é obrigatório."));
+
+            var validatorMock = new Mock<IValidator<AdicionarMotoristaCommand>>();
+            validatorMock.Setup(v => v.ValidateAsync(request, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(validationResult); // Simule uma validação malsucedida
+
+            var mapperMock = new Mock<IMapper>();
+            var motoristaRepositoryMock = new Mock<IMotoristaRepository>();
+            var mediatorMock = new Mock<IMediator>();
+
+            var handler = new AdicionarMotoristaCommandHandler(
+                motoristaRepositoryMock.Object,
+                mediatorMock.Object,
+                validatorMock.Object,
+                mapperMock.Object);
 
 
-            //Assert
-            result.IsSuccessStatusCode.Should().BeTrue();
+            // Act
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            // Assert
+            response.Should().NotBeNull(); // Verifique se a resposta não é nula
+            response.IsSuccessStatusCode.Should().BeFalse(); // Verifique se o código de status é 400
+            response.Message.Should().Be("Requisição inválida"); // Verifique a mensagem de erro da resposta
+            response.Data.Should().NotBeNull(); // Verifique se há erros na resposta
         }
 
         [Fact]

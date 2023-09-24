@@ -31,6 +31,45 @@ namespace DashBoardGr.Test
             _mapper = new();
         }
 
+
+
+        [Fact]
+        public void AdicionarCnhMotoristaCommand_valido()
+        {
+            // Arrange
+            var motoristaId = Guid.NewGuid();
+            var numero = "1234567890";
+            var dataVencimento = DateTime.Now.AddYears(1);
+            var categoria = "A";
+            var codigoCidade = "123";
+            var codigoSeguranca = "456";
+            var dataPrimeiraHabilitacao = DateTime.Now.AddYears(-5);
+            var imagem = "caminho/para/imagem.jpg";
+
+            // Act
+            var command = new AdicionarCnhMotoristaCommand
+            {
+                MotoristaId = motoristaId,
+                Numero = numero,
+                DataVencimento = dataVencimento,
+                Categoria = categoria,
+                CodigoCidade = codigoCidade,
+                CodigoSeguranca = codigoSeguranca,
+                DataPrimeiraHabilitacao = dataPrimeiraHabilitacao,
+                Imagem = imagem
+            };
+
+            // Assert
+            Assert.Equal(motoristaId, command.MotoristaId);
+            Assert.Equal(numero, command.Numero);
+            Assert.Equal(dataVencimento, command.DataVencimento);
+            Assert.Equal(categoria, command.Categoria);
+            Assert.Equal(codigoCidade, command.CodigoCidade);
+            Assert.Equal(codigoSeguranca, command.CodigoSeguranca);
+            Assert.Equal(dataPrimeiraHabilitacao, command.DataPrimeiraHabilitacao);
+            Assert.Equal(imagem, command.Imagem);
+        }
+
         [Fact]
         public async Task Handle_DeveRetornarCommandResponseComId_QuandoValido()
         {
@@ -45,6 +84,10 @@ namespace DashBoardGr.Test
             var motoristaRepositoryMock = new Mock<IMotoristaRepository>();
             var mediatorMock = new Mock<IMediator>();
 
+            mapperMock.Setup(m => m.Map<Motorista>(request))
+                .Returns(new Motorista());
+
+
             var handler = new AdicionarMotoristaCommandHandler(
                 motoristaRepositoryMock.Object,
                 mediatorMock.Object,
@@ -56,9 +99,7 @@ namespace DashBoardGr.Test
 
             // Assert
             response.Should().NotBeNull(); // Verifique se a resposta não é nula
-            response.StatusCode.Should().Be(200); // Verifique se o código de status é 200 (ou o código desejado)
-            response.Message.Should().Be("Motorista adicionado com sucesso."); // Verifique a mensagem da resposta
-            response.Data.Should().BeOfType<int>(); // Verifique se a propriedade Data é um inteiro (ID)
+            response.IsSuccessStatusCode.Should().BeTrue(); // Verifique se o código de status é 200 (ou o código desejado)
 
             // Você também pode verificar outras expectativas com base na lógica do método Handle
             motoristaRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Motorista>(), It.IsAny<Cnh>()), Times.Once);

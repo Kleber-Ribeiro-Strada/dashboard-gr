@@ -45,4 +45,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Kleber-Ribeiro-Strada_dashboard-gr" /o:"kleber-ribeiro-strada" /d:sonar.token="ec62aa21873c761cfae020003011d4473ef02349" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build .\DashBoardGr\Api\
+          dotnet test .\DashBoardGr\DashBoardGr.Test\
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="ec62aa21873c761cfae020003011d4473ef02349"

@@ -8,24 +8,24 @@
         }
         public Guid Id { get; private set; }
 
-        public string Nome { get; private set; } = string.Empty;
-        public string Genero { get; private set; } = string.Empty;
+        public string Nome { get; private set; } 
+        public string Genero { get; private set; } 
         public DateTime DataNascimento { get; private set; }
-        public string Cpf { get; private set; } = string.Empty;
-        public string Rg { get; private set; } = string.Empty;
+        public string Cpf { get; private set; } 
+        public string Rg { get; private set; } 
         public string? EstadoEmissao { get; private set; }
         public DateTime DataEmissao { get; private set; }
-        public string NomeMae { get; private set; } = string.Empty;
+        public string NomeMae { get; private set; } 
         public string? NomePai { get; private set; }
-        public string Telefone { get; private set; } = string.Empty;
-        public string Email { get; private set; } = string.Empty;
+        public string Telefone { get; private set; } 
+        public string Email { get; private set; } 
         public string? NomeReferencia { get; private set; }
         public string? TelefoneReferencia { get; private set; }
-        public string Cep { get; private set; } = string.Empty;
-        public string CodigoCidade { get; private set; } = string.Empty;
+        public string Cep { get; private set; } 
+        public string CodigoCidade { get; private set; } 
         public string? NomeCidade { get; private set; }
         public string? Rua { get; private set; }
-        public string Numero { get; private set; } = string.Empty;
+        public string Numero { get; private set; } 
         public string? Complemento { get; private set; }
         public string? Bairro { get; private set; }
         public string? Estado { get; private set; }

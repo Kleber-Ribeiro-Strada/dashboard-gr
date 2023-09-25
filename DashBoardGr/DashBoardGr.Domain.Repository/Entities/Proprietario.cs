@@ -29,17 +29,17 @@
         }
 
         public Guid Id { get; set; }
-        public string CpfCnpj { get; private set; } = string.Empty;
-        public string Nome { get; private set; } = string.Empty;
-        public string Cep { get; private set; } = string.Empty;
-        public string CodigoCidade { get; private set; } = string.Empty;
-        public string NomeCidade { get; private set; } = string.Empty;
-        public string Rua { get; private set; } = string.Empty;
-        public string Numero { get; private set; } = string.Empty;
+        public string CpfCnpj { get; private set; } 
+        public string Nome { get; private set; } 
+        public string Cep { get; private set; } 
+        public string CodigoCidade { get; private set; } 
+        public string NomeCidade { get; private set; } 
+        public string Rua { get; private set; } 
+        public string Numero { get; private set; } 
         public string? Complemento { get; private set; } 
-        public string Bairro { get; private set; } = string.Empty;
-        public string Estado { get; private set; } = string.Empty;
-        public string Telefone { get; private set; } = string.Empty;
+        public string Bairro { get; private set; } 
+        public string Estado { get; private set; } 
+        public string Telefone { get; private set; } 
 
         public virtual ICollection<Veiculo> Veiculos { get; set; } = new HashSet<Veiculo>();
     }

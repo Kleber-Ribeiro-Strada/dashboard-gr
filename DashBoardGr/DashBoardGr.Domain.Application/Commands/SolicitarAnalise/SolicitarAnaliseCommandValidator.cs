@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 {
@@ -32,7 +27,40 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
             public ProprietarioCommandValidator()
             {
                 RuleFor(proprietario => proprietario.CpfCnpj)
-                    .NotEmpty().WithMessage("O CPF/CNPJ do proprietário é obrigatório.");
+                    .NotEmpty()
+                    .WithMessage("O CPF/CNPJ do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.Nome)
+                    .NotEmpty()
+                    .WithMessage("O Nome do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.Cep)
+                    .NotEmpty()
+                    .WithMessage("O Cep do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.CodigoCidade)
+                    .NotEmpty()
+                    .WithMessage("O CodigoCidade do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.NomeCidade)
+                    .NotEmpty()
+                    .WithMessage("O NomeCidade do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.Rua)
+                    .NotEmpty()
+                    .WithMessage("O Rua do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.Bairro)
+                    .NotEmpty()
+                    .WithMessage("O Bairro do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.Estado)
+                    .NotEmpty()
+                    .WithMessage("O Estado do proprietário é obrigatório.");
+
+                RuleFor(proprietario => proprietario.Telefone)
+                    .NotEmpty()
+                    .WithMessage("O Telefone do proprietário é obrigatório.");
 
             }
         }
@@ -44,8 +72,44 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                 RuleFor(veiculo => veiculo.Tipo)
                     .NotEmpty().WithMessage("O tipo do veículo é obrigatório.");
 
+                RuleFor(veiculo => veiculo.Placa)
+                    .NotEmpty().WithMessage("A placa do veículo é obrigatório.");
+
+                RuleFor(veiculo => veiculo.Chassi)
+                    .NotEmpty().WithMessage("O Chassi do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.Renavam)
+                    .NotEmpty().WithMessage("O Renavam do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.Rntrc)
+                    .NotEmpty().WithMessage("O Rntrc do veículo é obrigatória.");
+
                 RuleFor(veiculo => veiculo.DataLicenciamento)
                     .NotEmpty().WithMessage("A data de licenciamento do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.Cor)
+                    .NotEmpty().WithMessage("A Cor do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.Marca)
+                    .NotEmpty().WithMessage("A marca do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.Modelo)
+                    .NotEmpty().WithMessage("o Modelo do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.AnoFabricacao)
+                    .NotEmpty().WithMessage("o AnoFabricacao do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.AnoModelo)
+                    .NotEmpty().WithMessage("O ano modelo do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.Estado)
+                    .NotEmpty().WithMessage("O estado do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.CodigoCidade)
+                    .NotEmpty().WithMessage("o CodigoCidade do veículo é obrigatória.");
+
+                RuleFor(veiculo => veiculo.ImagemCrlv)
+                    .NotEmpty().WithMessage("A ImagemCrlv do veículo é obrigatória.");
             }
         }
     }

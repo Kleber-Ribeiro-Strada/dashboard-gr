@@ -9,7 +9,7 @@ namespace DashBoardGr.Domain.Repository.Entities
     public class AnaliseRisco
     {
         public AnaliseRisco(
-            string? status,
+            string status,
             Guid motoristaId, 
             Guid cnhId)
         {
@@ -18,10 +18,9 @@ namespace DashBoardGr.Domain.Repository.Entities
             CnhId = cnhId;
             DataSolicitacaoAnalise = DateTime.Now;
             DataAvaliacao = null;
-            if (status == null) 
-            {
-                Status = string.Empty;
-            }
+
+            Status = status;
+            
             
             Observacao = null;
         }
@@ -34,7 +33,9 @@ namespace DashBoardGr.Domain.Repository.Entities
 
         public string Status { get; private set; } 
 
-        public string? Observacao { get; set; } 
+        public string? Observacao { get; set; }
+
+        public string? Motivo { get; set; }
 
         public Guid MotoristaId { get; private set; }
         public virtual Motorista Motorista { get; private set; } = null!;

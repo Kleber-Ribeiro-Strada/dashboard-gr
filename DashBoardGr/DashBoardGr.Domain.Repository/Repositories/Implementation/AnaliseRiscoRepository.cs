@@ -66,7 +66,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             if (dataSolicitacaoAte != null)
                 analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(23.9d));
 
-            var analises = analisesFiltradas.ToList()
+            var analises = analisesFiltradas.AsEnumerable()
                 .GroupBy(a => new
                 {
                     Semana = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(a.DataSolicitacaoAnalise, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
@@ -85,19 +85,19 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
-                Label = "Pendente" //mudar para reprovado
+                Label = "Pendente" 
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" //mudar para reprovado
+                Label = "Aprovado" 
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Reprovado" //mudar para reprovado
+                Label = "Reprovado" 
             });
 
 
@@ -121,7 +121,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             if (dataSolicitacaoAte != null)
                 analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(23.9d));
 
-            var analises = analisesFiltradas.ToList()
+            var analises = analisesFiltradas.AsEnumerable()
                 .GroupBy(a => new
                 {
                     Status = a.Status
@@ -138,19 +138,19 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
-                Label = "Pendente" //mudar para reprovado
+                Label = "Pendente" 
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" //mudar para reprovado
+                Label = "Aprovado" 
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Reprovado" //mudar para reprovado
+                Label = "Reprovado" 
             });
 
             foreach (var item in result.Datasets)
@@ -174,7 +174,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             if (dataSolicitacaoAte != null)
                 analisesFiltradas = analisesFiltradas.Where(a => a.DataSolicitacaoAnalise <= dataSolicitacaoAte.Value.AddHours(23.9d));
 
-            var analises = analisesFiltradas.ToList()
+            var analises = analisesFiltradas.AsEnumerable()
                 .GroupBy(a => new
                 {
                     Hora = CultureInfo.CurrentCulture.Calendar.GetHour(a.DataSolicitacaoAnalise),
@@ -193,19 +193,19 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
-                Label = "Pendente" //mudar para reprovado
+                Label = "Pendente" 
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" //mudar para reprovado
+                Label = "Aprovado" 
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Reprovado" //mudar para reprovado
+                Label = "Reprovado" 
             });
 
             foreach (var item in result.Datasets)

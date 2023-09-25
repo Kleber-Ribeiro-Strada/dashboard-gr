@@ -45,7 +45,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                 });
                 return new CommandResponse(400, "CNH não encontrada para o motorista", result.Errors);
             }
-           
+
             var cnhId = cnh.Id;
             var proprietario = new Proprietario(
                 request.Proprietario.CpfCnpj,
@@ -81,7 +81,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
             await _motoristaRepository.AddVeiculo(proprietario, veiculos);
 
             await _analiseRiscoRepository.SolicitarAnaliseRisco(new AnaliseRisco(
-                Enum.GetName(typeof(EStatus), value: EStatus.Pendente)??"Pendente",
+                Enum.GetName(typeof(EStatus), value: EStatus.Pendente) ?? "Pendente",
                 request.MotoristaId,
                 cnhId), veiculos);
 
@@ -91,7 +91,7 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
             return new CommandResponse(new
             {
                 Mensagem = "Análise solicitada com sucesso"
-            }) ;
+            });
         }
     }
 }

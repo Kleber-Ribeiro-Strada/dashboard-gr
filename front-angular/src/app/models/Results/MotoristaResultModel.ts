@@ -5,4 +5,8 @@ export default interface MotoristaResultModel {
     cpf: string
     telefone: string
     email: string
+    rua:string
+    estado:string
+    bairro:string
+    numero:string
 }

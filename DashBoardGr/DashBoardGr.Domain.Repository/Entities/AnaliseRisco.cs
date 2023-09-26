@@ -39,5 +39,13 @@ namespace DashBoardGr.Domain.Repository.Entities
         public virtual Cnh Cnh { get; set; } = null!;
 
         public virtual ICollection<AnaliseRiscoVeiculo> AnaliseRiscoVeiculos { get; set; } = null!;
+
+
+        public void Avaliar(string status, string motivo, string observacao)
+        {
+            Status = status;
+            Observacao = observacao;
+            Motivo = motivo;
+        }
     }
 }

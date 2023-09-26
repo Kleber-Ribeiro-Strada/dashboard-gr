@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristas
+﻿namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristas
 {
     public class BuscarMotoristasViewModel
     {
@@ -14,6 +8,10 @@ namespace DashBoardGr.Domain.Application.Queries.BuscarMotoristas
         public string Cpf { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
+        public string Rua { get; set; } = string.Empty;
+        public string Numero { get; set; } = string.Empty;
+        public string Bairro { get; set; } = string.Empty;
+        public string Estado { get; set; } = string.Empty;
 
         public BuscarMotoristasAnaliseViewModel Analise { get; set; } = new();
 

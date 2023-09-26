@@ -10,7 +10,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
 {
     public interface IAnaliseRiscoRepository
     {
-        Task SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos);
+        Task<AnaliseRisco> SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos);
 
         Task<IEnumerable<AnaliseRisco>> BuscarAnalisesAnalisesRisco(
             DateTime? dataSolicitacaoDe,
@@ -23,5 +23,6 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
         Task<GraficoGeralDto> BuscarGraficoPorSemana(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
         Task<GraficoGeralDto> BuscarGraficoPorPeriodo(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
         Task<GraficoGeralDto> BuscarGraficoPorHora(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
+        Task Avaliar(Guid id, string status, string motivo, string observação);
     }
 }

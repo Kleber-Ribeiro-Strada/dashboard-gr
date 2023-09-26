@@ -31,21 +31,21 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
         {
 
             request.DataRequisicao = DateTime.Now;
-            var result = await _validator.ValidateAsync(request, cancellationToken);
+            var resultValidator = await _validator.ValidateAsync(request, cancellationToken);
 
-            if (!result.IsValid)
+            if (!resultValidator.IsValid)
             {
-                return new CommandResponse(400, "Erro Solicitação análise", result.Errors.ToArray());
+                return new CommandResponse(400, "Erro Solicitação análise", resultValidator.Errors.ToArray());
             }
 
             var cnh = await _motoristaRepository.BuscarCnh(request.MotoristaId);
             if (cnh == null)
             {
-                result.Errors.Add(new FluentValidation.Results.ValidationFailure
+                resultValidator.Errors.Add(new FluentValidation.Results.ValidationFailure
                 {
                     ErrorMessage = " não encontrada para o motorista"
                 });
-                return new CommandResponse(400, "CNH não encontrada para o motorista", result.Errors);
+                return new CommandResponse(400, "CNH não encontrada para o motorista", resultValidator.Errors);
             }
 
             var cnhId = cnh.Id;
@@ -83,18 +83,21 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
             await _motoristaRepository.AddVeiculo(proprietario, veiculos);
 
-            await _analiseRiscoRepository.SolicitarAnaliseRisco(new AnaliseRisco(
+            var analiseResult = await _analiseRiscoRepository.SolicitarAnaliseRisco(new AnaliseRisco(
                 Enum.GetName(typeof(EStatus), value: EStatus.Pendente) ?? "Pendente",
                 request.MotoristaId,
                 cnhId), veiculos);
 
 
 
-            await _messageBusService.Publish(request);
-            return new CommandResponse(new
+            var result = new CommandResponse(new
             {
+                Id = analiseResult.Id,
                 Mensagem = "Análise solicitada com sucesso"
             });
+            await _messageBusService.Publish(result);
+            return result;
+
         }
     }
 }

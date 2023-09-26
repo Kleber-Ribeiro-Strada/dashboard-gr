@@ -25,10 +25,12 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            _logger.LogInformation($"Adicionando o motorista CPF: {command.Cpf}", command);
             var result = await _mediator.Send(command);
             if(result.IsSuccessStatusCode)
                 return Ok(result);
 
+            _logger.LogError($"Erro ao add motorista: {command.Cpf}", command);
             return BadRequest(result);
             
         }

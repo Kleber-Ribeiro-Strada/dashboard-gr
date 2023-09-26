@@ -49,7 +49,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             return Task.FromResult(query.AsEnumerable());
         }
 
-        public async Task SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos)
+        public async Task<AnaliseRisco> SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos)
         {
             await _appDbContext.AddAsync(analiseRisco);
             var analiseRiscoVeiculos = new List<AnaliseRiscoVeiculo>();
@@ -58,6 +58,8 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
             await _appDbContext.AddRangeAsync(analiseRiscoVeiculos);
             await _appDbContext.SaveChangesAsync();
+
+            return analiseRisco;
         }
 
         public Task<GraficoGeralDto> BuscarGraficoPorSemana(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte)
@@ -225,6 +227,16 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
         public Task<AnaliseRisco?> BuscarAnaliseRisco(Guid Id)
         {
             return _appDbContext.AnaliseRisco.SingleOrDefaultAsync(x => x.Id == Id);
+        }
+
+        public async Task Avaliar(Guid id, string status, string motivo, string observacao)
+        {
+            var analise = _appDbContext.AnaliseRisco.SingleOrDefault(an => an.Id == id);
+            if (analise != null)
+            {
+                analise.Avaliar(status, motivo, observacao);
+                await _appDbContext.SaveChangesAsync();
+            }
         }
     }
 }

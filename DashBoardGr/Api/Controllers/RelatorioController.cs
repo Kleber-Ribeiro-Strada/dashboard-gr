@@ -2,7 +2,6 @@
 using DashBoardGr.Domain.Application.Queries.BuscarAnalisesGraficoPizza;
 using DashBoardGr.Domain.Application.Queries.BuscarAnalisesRelatorio;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers

@@ -106,24 +106,24 @@
 
         <div class="col-3">
             <label for="inputRua" class="form-label">Rua</label>
-            <input type="text" class="form-control" [(ngModel)]="endereco.logradouro"
+            <input type="text" class="form-control" [(ngModel)]="model.rua"
                 [ngModelOptions]="{standalone: true}" disabled>
         </div>
 
         <div class="col-3">
             <label for="inputBairro" class="form-label">Bairro</label>
-            <input type="text" class="form-control" [(ngModel)]="endereco.bairro" [ngModelOptions]="{standalone: true}"
+            <input type="text" class="form-control" [(ngModel)]="model.bairro" [ngModelOptions]="{standalone: true}"
                 disabled>
         </div>
 
         <div class="col-3">
             <label for="inputCidade" class="form-label">Cidade</label>
-            <input type="text" class="form-control" [(ngModel)]="endereco.localidade"
+            <input type="text" class="form-control" [(ngModel)]="model.nomeCidade"
                 [ngModelOptions]="{standalone: true}" disabled>
         </div>
         <div class="col-md-2">
             <label for="inputEstado" class="form-label">Estado</label>
-            <input type="text" class="form-control" [(ngModel)]="endereco.uf" [ngModelOptions]="{standalone: true}"
+            <input type="text" class="form-control" [(ngModel)]="model.estado" [ngModelOptions]="{standalone: true}"
                 disabled>
 
         </div>

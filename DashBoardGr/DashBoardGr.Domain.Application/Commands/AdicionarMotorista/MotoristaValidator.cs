@@ -18,23 +18,23 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
         {
             _motoristaRepository = motoristaRepository;
             
-            RuleFor(analise => analise.Nome)
+            RuleFor(motorista => motorista.Nome)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage(analise => "Campo Nome é obrigatório");
+                .WithMessage(motorista => "Campo Nome é obrigatório");
 
-            RuleFor(analise => analise.Genero)
+            RuleFor(motorista => motorista.Genero)
                 .NotEmpty()
                 .NotNull()
                 .WithMessage("Campo gênero é Obrigatório")
                 .Must(SharedValidators.ValidarGenero)
                 .WithMessage("Campo gênero tem que ser Masculino ou Feminino (M ou F)");
 
-            RuleFor(analise => analise.DataNascimento)
+            RuleFor(motorista => motorista.DataNascimento)
                 .Must(SharedValidators.EhMaiorDe18Anos)
                 .WithMessage("Só é permitiro motoristas maiores de 18 anos");
 
-            RuleFor(analise => analise.Cpf)
+            RuleFor(motorista => motorista.Cpf)
                 .NotEmpty()
                 .WithMessage("Campo CPF é obrigatório")
                 .IsValidCPF()
@@ -42,20 +42,20 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
                 .Must(EhNovoCpf)
                 .WithMessage("CPF já cadastrado na base");
 
-            RuleFor(analise => analise.NomeMae)
+            RuleFor(motorista => motorista.NomeMae)
                 .NotEmpty()
                 .WithMessage("Campo Nome da Mãe é obrigatório");
 
-            RuleFor(analise => analise.Email)
+            RuleFor(motorista => motorista.Email)
                 .NotEmpty()
                 .WithMessage("Campo E-mail é obrigatório")
                 .EmailAddress().WithMessage("O endereço de e-mail não é válido.");
 
-            RuleFor(analise => analise.Cep)
+            RuleFor(motorista => motorista.Cep)
                 .NotEmpty()
                 .WithMessage("Campo CEP é obrigatório");
 
-            RuleFor(analise => analise.Numero)
+            RuleFor(motorista => motorista.Numero)
                 .NotEmpty()
                 .WithMessage("Campo Número Residência é obrigatório");
         }

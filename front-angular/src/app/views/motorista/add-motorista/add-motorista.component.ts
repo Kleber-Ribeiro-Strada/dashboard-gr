@@ -19,8 +19,7 @@ export class AddMotoristaComponent {
   private meuModal: ElementRef;
 
   constructor(private _service: MotoristaService, private renderer: Renderer2) {
-    // this.model.cep = '';
-    // this.meuModal = undefined;
+
     this.endereco = {} as EnderecoResultModel
     this.error = {} as ErrorResultModel;
     console.log(this.meuModal);
@@ -47,6 +46,11 @@ export class AddMotoristaComponent {
     this._service.BuscarEndereco(this.model.cep)
       .subscribe((result: EnderecoResultModel) => {
         this.endereco = result;
+        this.model.bairro = result.bairro;
+        this.model.codigoCidade = result.gia;
+        this.model.nomeCidade = result.localidade;
+        this.model.estado = result.uf;
+        this.model.rua = result.logradouro;
       })
   }
 

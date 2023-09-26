@@ -18,7 +18,11 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             _appDbContext = appDbContext;
         }
 
-        public Task<IEnumerable<AnaliseRisco>> BuscarAnalisesAnalisesRisco(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte, string? cpf, string? status)
+        public Task<IEnumerable<AnaliseRisco>> BuscarAnalisesAnalisesRisco(
+            DateTime? dataSolicitacaoDe, 
+            DateTime? dataSolicitacaoAte, 
+            string? cpf, 
+            string? status)
         {
             var query = _appDbContext.AnaliseRisco.AsQueryable();
             if (dataSolicitacaoDe.HasValue)
@@ -43,8 +47,6 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
             return Task.FromResult(query.AsEnumerable());
         }
-
-
 
         public async Task SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos)
         {

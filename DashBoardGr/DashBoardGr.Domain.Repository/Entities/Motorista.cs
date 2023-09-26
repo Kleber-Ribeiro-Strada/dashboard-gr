@@ -6,6 +6,52 @@
         {
             Id = Guid.NewGuid();
         }
+        public Motorista(
+            string nome,
+            string genero,
+            DateTime dataNascimento,
+            string cpf,
+            string rg, 
+            string? estadoEmissao,
+            DateTime dataEmissao,
+            string nomeMae,
+            string? nomePai,
+            string telefone,
+            string email,
+            string? nomeReferencia,
+            string? telefoneReferencia,
+            string cep,
+            string codigoCidade,
+            string nomeCidade,
+            string rua,
+            string numero,
+            string? complemento,
+            string bairro,
+            string estado)
+        {
+            Id = Guid.NewGuid();
+            Nome = nome;
+            Genero = genero;
+            DataNascimento = dataNascimento;
+            Cpf = cpf;
+            Rg = rg;
+            EstadoEmissao = estadoEmissao;
+            DataEmissao = dataEmissao;
+            NomeMae = nomeMae;
+            NomePai = nomePai;
+            Telefone = telefone;
+            Email = email;
+            NomeReferencia = nomeReferencia;
+            TelefoneReferencia = telefoneReferencia;
+            Cep = cep;
+            CodigoCidade = codigoCidade;
+            NomeCidade = nomeCidade;
+            Rua = rua;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            Estado = estado;
+        }
         public Guid Id { get; private set; }
 
         public string Nome { get; private set; } 

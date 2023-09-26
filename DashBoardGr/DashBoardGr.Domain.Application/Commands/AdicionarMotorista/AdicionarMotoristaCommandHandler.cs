@@ -2,7 +2,6 @@
 using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
 using DashBoardGr.Domain.Shared.Commands.Response;
-using DashBoardGr.Infrastructure.BuscarCep.ExternalServices;
 using FluentValidation;
 using MediatR;
 

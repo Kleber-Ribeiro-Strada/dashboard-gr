@@ -6,6 +6,7 @@ namespace DashBoardGr.Domain.Application.Commands.AdicionarMotorista
 {
     public class AdicionarMotoristaCommand: CommandRequest
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Nome { get; set; } = string.Empty;
         public string Genero { get; set; } = string.Empty;
         public DateTime DataNascimento { get; set; }

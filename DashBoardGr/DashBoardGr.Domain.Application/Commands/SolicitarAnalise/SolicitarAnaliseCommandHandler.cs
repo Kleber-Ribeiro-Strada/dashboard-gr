@@ -29,7 +29,6 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
         public async Task<CommandResponse> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
-
             request.DataRequisicao = DateTime.Now;
             var resultValidator = await _validator.ValidateAsync(request, cancellationToken);
 
@@ -90,13 +89,12 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
 
 
-            var result = new CommandResponse(new
+            var result = new SolicitarAnaliseCommandViewModel 
             {
                 Id = analiseResult.Id,
-                Mensagem = "Análise solicitada com sucesso"
-            });
+            };
             await _messageBusService.Publish(result);
-            return result;
+            return new CommandResponse(result);
 
         }
     }

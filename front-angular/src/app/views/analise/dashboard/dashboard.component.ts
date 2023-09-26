@@ -67,6 +67,7 @@ export class DashboardComponent {
       .subscribe({
         next: (result: DashboardResultModel) => {
           this.graficoPizza = result;
+          console.log(this.graficoPizza);
         }
       });
   }

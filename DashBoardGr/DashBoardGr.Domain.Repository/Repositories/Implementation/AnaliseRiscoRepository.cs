@@ -20,9 +20,9 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
         }
 
         public Task<IEnumerable<AnaliseRisco>> BuscarAnalisesAnalisesRisco(
-            DateTime? dataSolicitacaoDe, 
-            DateTime? dataSolicitacaoAte, 
-            string? cpf, 
+            DateTime? dataSolicitacaoDe,
+            DateTime? dataSolicitacaoAte,
+            string? cpf,
             string? status)
         {
             var query = _appDbContext.AnaliseRisco.AsQueryable();
@@ -86,23 +86,23 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
                 .OrderBy(g => g.Parameter);
 
             GraficoGeralDto result = new();
-            result.Labels = analises.Select(a => $"Semana: {a.Parameter.ToString()}" ).ToList();
+            result.Labels = analises.Select(a => $"Semana: {a.Parameter.ToString()}").ToList();
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
-                Label = "Pendente" 
+                Label = "Pendente"
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" 
+                Label = "Aprovado"
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Reprovado" 
+                Label = "Reprovado"
             });
 
 
@@ -134,37 +134,19 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
                 .Select(g => new Teste
                 {
                     Status = g.Key.Status,
-                    Quantidade = g.Count()
+                    Quantidade = (g.Count() * 100 / analisesFiltradas.Count()),
+
                 })
                 .OrderBy(g => g.Parameter);
 
             GraficoGeralDto result = new();
-            result.Labels = analises.Select(a => a.Parameter.ToString()).ToList();
+            result.Labels = analises.Select(a => a.Status.ToString()).ToList();
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
-                Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
-                Label = "Pendente" 
+                Data = analises.Select(x => x.Quantidade).ToList(),  
             });
 
-            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
-            {
-                Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" 
-            });
-
-            result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
-            {
-                Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Reprovado" 
-            });
-
-            foreach (var item in result.Datasets)
-            {
-                if (item.Data.Count() == 0)
-                {
-                    item.Data.Add(0);
-                }
-            }
+           
 
             return Task.FromResult(result);
         }
@@ -198,19 +180,19 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Pendente").Select(x => x.Quantidade).ToList(),
-                Label = "Pendente" 
+                Label = "Pendente"
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Aprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Aprovado" 
+                Label = "Aprovado"
             });
 
             result.Datasets.Add(new GraficoGeralDto.DadosGraficosDto
             {
                 Data = analises.Where(x => x.Status == "Reprovado").Select(x => x.Quantidade).ToList(),
-                Label = "Reprovado" 
+                Label = "Reprovado"
             });
 
             foreach (var item in result.Datasets)
@@ -231,11 +213,23 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
         public async Task Avaliar(Guid id, string status, string motivo, string observacao)
         {
-            var analise = _appDbContext.AnaliseRisco.SingleOrDefault(an => an.Id == id);
-            if (analise != null)
+            try
             {
-                analise.Avaliar(status, motivo, observacao);
-                await _appDbContext.SaveChangesAsync();
+
+
+                var analise = _appDbContext.AnaliseRisco.SingleOrDefault(an => an.Id == id);
+                if (analise != null)
+                {
+                    analise.Avaliar(status, motivo, observacao);
+                    _appDbContext.Update(analise);
+                    await _appDbContext.SaveChangesAsync();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

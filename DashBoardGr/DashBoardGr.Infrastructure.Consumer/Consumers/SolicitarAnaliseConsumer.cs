@@ -1,17 +1,12 @@
 ﻿using Bogus;
 using DashBoardGr.Domain.Application.Commands.AvaliarAnalise;
-using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 using DashBoardGr.Domain.Application.Enums;
 using DashBoardGr.Domain.Shared;
 using MediatR;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace DashBoardGr.Infrastructure.Consumer.Recivers
 {
@@ -20,16 +15,17 @@ namespace DashBoardGr.Infrastructure.Consumer.Recivers
         private readonly ILogger<SolicitarAnaliseConsumer> _logger;
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        private readonly IMediator _mediator;
+        private readonly IServiceProvider _serviceProvider;
+
         public SolicitarAnaliseConsumer(
             ILogger<SolicitarAnaliseConsumer> logger,
             IRabbitMQConfiguration rabbitMQConfig,
-            IMediator mediator)
+            IServiceProvider serviceProvider)
         {
             _connection = rabbitMQConfig.GetConnectionFactory().CreateConnection();
             _channel = _connection.CreateModel();
             _logger = logger;
-            _mediator = mediator;
+            _serviceProvider = serviceProvider;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -58,9 +54,13 @@ namespace DashBoardGr.Infrastructure.Consumer.Recivers
             return Task.CompletedTask;
         }
 
-        private void Avaliar(AvaliarAnaliseCommand command)
+        private async void Avaliar(AvaliarAnaliseNotification command)
         {
-            _mediator.Send(command);
+            using var scope = _serviceProvider.CreateScope();
+            var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+
+
+            await mediator.Publish(command);
         }
 
         private class Analise
@@ -71,7 +71,7 @@ namespace DashBoardGr.Infrastructure.Consumer.Recivers
 
         private void Reprovar(Guid Id)
         {
-            var fakerCmd = new Faker<AvaliarAnaliseCommand>("pt_BR")
+            var fakerCmd = new Faker<AvaliarAnaliseNotification>("pt_BR")
                 .RuleFor(a => a.Motivo, f => f.Random.Enum<EMotivo>())
                 .RuleFor(a => a.Observacao, f => f.Random.Words());
 
@@ -83,7 +83,7 @@ namespace DashBoardGr.Infrastructure.Consumer.Recivers
 
         private void Aprovar(Guid Id)
         {
-            Avaliar(new AvaliarAnaliseCommand
+            Avaliar(new AvaliarAnaliseNotification
             {
                 Id = Id,
                 Motivo = null,

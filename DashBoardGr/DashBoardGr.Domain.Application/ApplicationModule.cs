@@ -2,6 +2,8 @@
 using FluentValidation;
 using DashBoardGr.Domain.Application.Commands.SolicitarAnalise;
 using DashBoardGr.Domain.Application.Profiles;
+using DashBoardGr.Domain.Application.Commands.AvaliarAnalise;
+using DashBoardGr.Domain.Application.Queries.AnaliseQueries.BuscarAnalise;
 
 namespace DashBoardGr.Domain.Application
 {
@@ -19,6 +21,8 @@ namespace DashBoardGr.Domain.Application
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblies(typeof(SolicitarAnaliseCommandHandler).Assembly);
+                cfg.RegisterServicesFromAssemblies(typeof(AvaliarAnaliseCommandHandler).Assembly);
+                cfg.RegisterServicesFromAssemblies(typeof(BuscarAnaliseQueryHandler).Assembly);
             });
 
             return services;

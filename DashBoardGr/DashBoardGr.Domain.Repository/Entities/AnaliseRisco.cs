@@ -46,6 +46,7 @@ namespace DashBoardGr.Domain.Repository.Entities
             Status = status;
             Observacao = observacao;
             Motivo = motivo;
+            DataAvaliacao = DateTime.Now;
         }
     }
 }

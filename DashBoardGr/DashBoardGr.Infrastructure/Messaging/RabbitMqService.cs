@@ -1,7 +1,6 @@
 ﻿using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Channels;
 
 namespace DashBoardGr.Infrastructure.Messaging
 {
@@ -32,7 +31,7 @@ namespace DashBoardGr.Infrastructure.Messaging
             {
                 switch (type?.Name)
                 {
-                    case "SolicitarAnaliseCommand":
+                    case "SolicitarAnaliseCommandViewModel":
                         _channel.BasicPublish(_exchange, "solicitar-analise.solicitar-analise-routing", _basicProperties, byteArray);
                         break;
                     default:

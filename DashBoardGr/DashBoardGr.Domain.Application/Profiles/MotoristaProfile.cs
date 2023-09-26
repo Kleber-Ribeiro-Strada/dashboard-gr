@@ -13,7 +13,7 @@ namespace DashBoardGr.Domain.Application.Profiles
     {
         public MotoristaProfile() 
         {
-            CreateMap<AvaliarAnaliseCommand, Motorista>();
+            CreateMap<AdicionarMotoristaCommand, Motorista>();
 
             CreateMap<AdicionarCnhMotoristaCommand, Cnh>();
 

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+
 namespace DashBoardGr.Infrastructure.ConsumerGr
 {
     public class Worker : BackgroundService
@@ -15,6 +17,9 @@ namespace DashBoardGr.Infrastructure.ConsumerGr
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);
+
+                // No método Main do Worker Service
+         
             }
         }
     }

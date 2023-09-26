@@ -60,11 +60,11 @@ namespace DashBoardGr.Carga
                     var motoristaId = await AdicionarMotoristaHttp(motorista);
 
                     await AdicionarAnalise(motoristaId);
-                    await Task.Delay(TimeSpan.FromMinutes(2));
+                    await Task.Delay(TimeSpan.FromSeconds(2));
                 }
 
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(TimeSpan.FromMinutes(10));
+                await Task.Delay(TimeSpan.FromSeconds(10));
             }
 
 
@@ -82,15 +82,14 @@ namespace DashBoardGr.Carga
                 .RuleFor(p => p.CpfCnpj, f => f.Person.Cpf())
                 .RuleFor(p => p.Nome, f => f.Person.FullName)
                 .RuleFor(p => p.Cep, f => f.Address.ZipCode())
-                .RuleFor(p => p.CodigoCidade, f => f.Address.CityPrefix())
                 .RuleFor(p => p.NomeCidade, f => f.Address.City())
                 .RuleFor(p => p.Rua, f => f.Address.StreetName())
                 .RuleFor(p => p.Bairro, f => f.Address.Direction())
                 .RuleFor(p => p.Complemento, f => f.Address.SecondaryAddress())
-                .RuleFor(p => p.CodigoCidade, f => f.Address.CityPrefix())
                 .RuleFor(p => p.Numero, f => f.Random.Number(10000).ToString())
                 .RuleFor(p => p.Telefone, f => f.Phone.PhoneNumber())
-                .RuleFor(p => p.Estado, f => f.Address.StateAbbr());
+                .RuleFor(p => p.Estado, f => f.Address.StateAbbr())
+                .RuleFor(v => v.CodigoCidade, f => f.Address.CitySuffix());
 
             cmd.Proprietario = fakerPro.Generate();
 
@@ -111,6 +110,7 @@ namespace DashBoardGr.Carga
                 .RuleFor(v => v.Renavam, f => f.Company.Cnpj());
 
             cmd.Veiculos = fakerV.Generate(3);
+            cmd.Proprietario.CodigoCidade = cmd.Veiculos.First().CodigoCidade;
 
             await SolicitarAnaliseHttp(cmd);
 

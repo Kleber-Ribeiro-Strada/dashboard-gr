@@ -4,8 +4,11 @@ namespace DashBoardGr.Domain.Shared
 {
     public static class EnumCommon
     {
-        public static string ObterDescricaoDoEnum(this Enum valorEnum)
+        public static string? ObterDescricaoDoEnum(this Enum valorEnum)
         {
+            if (valorEnum is null)
+                return null;
+            
             var tipoEnum = valorEnum.GetType();
             var membroEnum = tipoEnum.GetMember(valorEnum.ToString());
 

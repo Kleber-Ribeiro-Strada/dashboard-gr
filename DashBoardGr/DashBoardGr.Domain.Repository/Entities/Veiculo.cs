@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace DashBoardGr.Domain.Repository.Entities
+﻿namespace DashBoardGr.Domain.Repository.Entities
 {
     public class Veiculo
     {

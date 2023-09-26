@@ -12,7 +12,8 @@
             string? complemento,
             string bairro, 
             string estado,
-            string telefone)
+            string telefone,
+            string numero)
         {
             Id = Guid.NewGuid();
             CpfCnpj = cpfCnpj;
@@ -25,6 +26,7 @@
             Bairro = bairro;
             Estado = estado;
             Telefone = telefone;
+            Numero = numero;
 
         }
 

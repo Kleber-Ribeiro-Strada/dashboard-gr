@@ -59,6 +59,7 @@ export class SolicitarAnaliseComponent {
           this.solicitarAnaliseCommandModel.proprietario.nomeCidade = result.localidade;
           this.solicitarAnaliseCommandModel.proprietario.estado = result.uf;
           this.solicitarAnaliseCommandModel.proprietario.rua = result.logradouro;
+          this.solicitarAnaliseCommandModel.proprietario.codigoCidade = result.gia;
         }
       });
   }

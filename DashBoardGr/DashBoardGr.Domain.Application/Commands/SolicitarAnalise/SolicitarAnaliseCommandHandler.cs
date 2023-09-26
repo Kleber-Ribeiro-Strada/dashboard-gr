@@ -29,6 +29,8 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
 
         public async Task<CommandResponse> Handle(SolicitarAnaliseCommand request, CancellationToken cancellationToken)
         {
+
+            request.DataRequisicao = DateTime.Now;
             var result = await _validator.ValidateAsync(request, cancellationToken);
 
             if (!result.IsValid)
@@ -57,7 +59,8 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                 request.Proprietario.Complemento,
                 request.Proprietario.Bairro,
                 request.Proprietario.Estado,
-                request.Proprietario.Telefone);
+                request.Proprietario.Telefone,
+                request.Proprietario.Numero);
 
             var veiculos = new List<Veiculo>();
             request.Veiculos.ForEach(v => veiculos.Add(new Veiculo(

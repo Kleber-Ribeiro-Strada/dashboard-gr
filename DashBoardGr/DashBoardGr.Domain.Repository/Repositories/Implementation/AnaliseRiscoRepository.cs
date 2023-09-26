@@ -50,7 +50,7 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
 
         public async Task SolicitarAnaliseRisco(AnaliseRisco analiseRisco, List<Veiculo> veiculos)
         {
-            await _appDbContext.AddRangeAsync(analiseRisco);
+            await _appDbContext.AddAsync(analiseRisco);
             var analiseRiscoVeiculos = new List<AnaliseRiscoVeiculo>();
 
             veiculos.ForEach(v => analiseRiscoVeiculos.Add(new AnaliseRiscoVeiculo(analiseRisco.Id, v.Id)));

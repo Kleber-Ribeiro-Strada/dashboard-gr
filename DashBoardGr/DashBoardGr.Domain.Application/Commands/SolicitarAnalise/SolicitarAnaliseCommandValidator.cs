@@ -38,6 +38,10 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                     .NotEmpty()
                     .WithMessage("O Cep do proprietário é obrigatório.");
 
+                RuleFor(proprietario => proprietario.Numero)
+                    .NotNull()
+                    .WithMessage("O Número do proprietário é obrigatório.");
+
                 RuleFor(proprietario => proprietario.CodigoCidade)
                     .NotEmpty()
                     .WithMessage("O CodigoCidade do proprietário é obrigatório.");
@@ -81,9 +85,6 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                 RuleFor(veiculo => veiculo.Renavam)
                     .NotEmpty().WithMessage("O Renavam do veículo é obrigatória.");
 
-                RuleFor(veiculo => veiculo.Rntrc)
-                    .NotEmpty().WithMessage("O Rntrc do veículo é obrigatória.");
-
                 RuleFor(veiculo => veiculo.DataLicenciamento)
                     .NotEmpty().WithMessage("A data de licenciamento do veículo é obrigatória.");
 
@@ -105,11 +106,8 @@ namespace DashBoardGr.Domain.Application.Commands.SolicitarAnalise
                 RuleFor(veiculo => veiculo.Estado)
                     .NotEmpty().WithMessage("O estado do veículo é obrigatória.");
 
-                RuleFor(veiculo => veiculo.CodigoCidade)
-                    .NotEmpty().WithMessage("o CodigoCidade do veículo é obrigatória.");
 
-                RuleFor(veiculo => veiculo.ImagemCrlv)
-                    .NotEmpty().WithMessage("A ImagemCrlv do veículo é obrigatória.");
+
             }
         }
     }

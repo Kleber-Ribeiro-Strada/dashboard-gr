@@ -18,6 +18,8 @@ namespace DashBoardGr.Domain.Repository.Repositories.Interfaces
             string? cpf,
             string? status);
 
+        Task<AnaliseRisco> BuscarAnaliseRisco(Guid Id);
+
         Task<GraficoGeralDto> BuscarGraficoPorSemana(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
         Task<GraficoGeralDto> BuscarGraficoPorPeriodo(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);
         Task<GraficoGeralDto> BuscarGraficoPorHora(DateTime? dataSolicitacaoDe, DateTime? dataSolicitacaoAte);

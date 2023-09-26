@@ -2,6 +2,7 @@
 using DashBoardGr.Domain.Application.Queries.AnaliseQueries.BuscarAnalise;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Api.Controllers
 {
@@ -28,17 +29,22 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             
-            _logger.LogInformation("123 testando");
+            _logger.LogInformation("Solitiar Análise", command);
             var result = await _mediator.Send(command);
-            return Ok(result);
+            if (result.IsSuccessStatusCode)
+                return Ok(result);
+
+            _logger.LogError("Erro ao solicitar análise, Solitiar Análise", command);
+            return BadRequest(result);
         }
 
         [HttpGet("verificar-analise")]
-        public async Task<IActionResult> VerificarAnalise(Guid Id)
+        public async Task<IActionResult> VerificarAnalise(Guid id)
         {
-            var buscarAnaliseQuery = new BuscarAnaliseQuery();
-            await Task.Delay(1000);
-            return Ok(Task.FromResult(new { }));
+            _logger.LogInformation($"Buscar Análise MotoristaId: {id}");
+            var buscarAnaliseQuery = new BuscarAnaliseQuery { Id = id };
+            var result = await _mediator.Send(buscarAnaliseQuery);
+            return Ok(result);
         }
 
         [HttpGet("teste")]

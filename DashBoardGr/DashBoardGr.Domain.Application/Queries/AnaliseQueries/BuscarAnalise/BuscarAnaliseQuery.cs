@@ -9,5 +9,6 @@ namespace DashBoardGr.Domain.Application.Queries.AnaliseQueries.BuscarAnalise
 {
     public class BuscarAnaliseQuery : IRequest<BuscarAnaliseViewModel>
     {
+        public Guid Id { get; set; }
     }
 }

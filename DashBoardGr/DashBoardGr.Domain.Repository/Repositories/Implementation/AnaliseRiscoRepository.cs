@@ -1,6 +1,7 @@
 ﻿using DashBoardGr.Domain.Repository.Dtos;
 using DashBoardGr.Domain.Repository.Entities;
 using DashBoardGr.Domain.Repository.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -219,6 +220,11 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             }
 
             return Task.FromResult(result);
+        }
+
+        public Task<AnaliseRisco> BuscarAnaliseRisco(Guid Id)
+        {
+            return _appDbContext.AnaliseRisco.SingleAsync(x => x.Id == Id);
         }
     }
 }

@@ -41,10 +41,15 @@ namespace Api.Controllers
         [HttpGet("verificar-analise")]
         public async Task<IActionResult> VerificarAnalise(Guid id)
         {
-            _logger.LogInformation($"Buscar Análise MotoristaId: {id}");
+            _logger.LogInformation($"Buscar Análise Id: {id}");
             var buscarAnaliseQuery = new BuscarAnaliseQuery { Id = id };
             var result = await _mediator.Send(buscarAnaliseQuery);
-            return Ok(result);
+
+            if (result != null)
+                return Ok(result);
+
+            _logger.LogInformation($"Análise: {id} não encontrada");
+            return NotFound();
         }
 
         [HttpGet("teste")]

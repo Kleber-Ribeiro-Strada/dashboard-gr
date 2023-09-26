@@ -222,9 +222,9 @@ namespace DashBoardGr.Domain.Repository.Repositories.Implementation
             return Task.FromResult(result);
         }
 
-        public Task<AnaliseRisco> BuscarAnaliseRisco(Guid Id)
+        public Task<AnaliseRisco?> BuscarAnaliseRisco(Guid Id)
         {
-            return _appDbContext.AnaliseRisco.SingleAsync(x => x.Id == Id);
+            return _appDbContext.AnaliseRisco.SingleOrDefaultAsync(x => x.Id == Id);
         }
     }
 }
